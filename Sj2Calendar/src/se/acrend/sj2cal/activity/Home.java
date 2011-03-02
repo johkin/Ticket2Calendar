@@ -4,6 +4,7 @@ import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.calendar.CalendarHelper;
 import se.acrend.sj2cal.util.PrefsHelper;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 public class Home extends Activity {
   /** Called when the activity is first created. */
@@ -43,12 +45,31 @@ public class Home extends Activity {
     });
     createCalendarList();
 
-    Button closeButton = (Button) findViewById(R.id.Exit);
+    TextView msgCount = (TextView) findViewById(R.id.MessageCountText);
+    int count = PrefsHelper.getMessageCountLeft(this);
+    if (count >= 0) {
+      msgCount.setText("Du har " + count + " meddelanden kvar innan licensen går ut");
+    }
+
+    Button closeButton = (Button) findViewById(R.id.Close);
     closeButton.setOnClickListener(new View.OnClickListener() {
 
       @Override
       public void onClick(final View v) {
         Home.this.finish();
+      }
+    });
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    final AlertDialog dialog = builder.setTitle(R.string.about_header).setMessage(R.string.about_text)
+        .setCancelable(true).create();
+
+    Button aboutButton = (Button) findViewById(R.id.About);
+    aboutButton.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(final View v) {
+        dialog.show();
       }
     });
   }

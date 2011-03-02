@@ -52,9 +52,10 @@ public class SmsReceiver extends BroadcastReceiver {
     }
 
     Notification notification = new Notification();
-    notification.icon = R.drawable.sj2cal;
+    notification.icon = R.drawable.sj2cal_bw;
     notification.when = System.currentTimeMillis();
     notification.flags = Notification.FLAG_AUTO_CANCEL;
+    notification.tickerText = "Nya biljetter mottagna.";
     Intent notificationIntent = new Intent(context, Home.class);
     PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
@@ -81,6 +82,9 @@ public class SmsReceiver extends BroadcastReceiver {
 
     if (PrefsHelper.isDeleteProcessedMessages(context) && successfulParsing && successfulAddEvent) {
       abortBroadcast();
+      int messageCountLeft = PrefsHelper.getMessageCountLeft(context);
+      messageCountLeft--;
+      PrefsHelper.setMessageCountLeft(messageCountLeft, context);
     }
   }
 

@@ -15,8 +15,15 @@ public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
 
   private static final int layout = R.layout.list_entry;
 
+  private final int nameCol;
+  private final int accountCol;
+  private final int colorCol;
+
   public CalendarSpinnerAdapter(final Context context, final Cursor cursor) {
     super(context, layout, cursor, new String[] {}, new int[] {});
+    nameCol = cursor.getColumnIndex(columns[0]);
+    accountCol = cursor.getColumnIndex(columns[1]);
+    colorCol = cursor.getColumnIndex(columns[2]);
   }
 
   @Override
@@ -24,21 +31,6 @@ public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
 
     final LayoutInflater inflater = LayoutInflater.from(context);
     View v = inflater.inflate(layout, parent, false);
-
-    int nameCol = c.getColumnIndex(columns[0]);
-    String name = c.getString(nameCol);
-    int accountCol = c.getColumnIndex(columns[1]);
-    String account = c.getString(accountCol);
-    int colorCol = c.getColumnIndex(columns[2]);
-    int colorValue = c.getInt(colorCol);
-
-    TextView colorBox = (TextView) v.findViewById(R.id.colorBox);
-    colorBox.setBackgroundColor(colorValue);
-
-    TextView name_text = (TextView) v.findViewById(R.id.calendar_name);
-    name_text.setText(name);
-    TextView email_text = (TextView) v.findViewById(R.id.calendar_email);
-    email_text.setText(account);
 
     return v;
   }
@@ -49,13 +41,11 @@ public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
   }
 
   @Override
-  public void bindView(final View v, final Context context, final Cursor c) {
-    int nameCol = c.getColumnIndex(columns[0]);
-    String name = c.getString(nameCol);
-    int accountCol = c.getColumnIndex(columns[1]);
-    String account = c.getString(accountCol);
-    int colorCol = c.getColumnIndex(columns[2]);
-    int colorValue = c.getInt(colorCol);
+  public void bindView(final View v, final Context context, final Cursor cursor) {
+
+    String name = cursor.getString(nameCol);
+    String account = cursor.getString(accountCol);
+    int colorValue = cursor.getInt(colorCol);
 
     TextView colorBox = (TextView) v.findViewById(R.id.colorBox);
     colorBox.setBackgroundColor(colorValue);

@@ -28,7 +28,8 @@ public class CalendarHelper {
     String[] projection = new String[] { "_id", "name", "ownerAccount", "color" };
     Uri calendars = Uri.parse(getBaseUrl() + "calendars");
 
-    Cursor managedCursor = context.getContentResolver().query(calendars, projection, "selected=1", null, null);
+    Cursor managedCursor = context.getContentResolver().query(calendars, projection, "selected=1 and access_level=700",
+        null, null);
 
     SpinnerAdapter adapter = null;
 
@@ -59,11 +60,8 @@ public class CalendarHelper {
 
       Uri eventsUri = Uri.parse(getBaseUrl() + "events");
       context.getContentResolver().insert(eventsUri, event);
-      Toast.makeText(context, "Lade till biljett " + ticket.getCode(), Toast.LENGTH_LONG).show();
     } catch (IllegalArgumentException e) {
       Log.e("Cal Event", "Fel vid kalender.", e);
-      Toast.makeText(context, "Kunde inte lägga till biljett: " + ticket.getCode() + ". Fel: " + e.getMessage(),
-          Toast.LENGTH_LONG).show();
       return false;
     }
     return true;
