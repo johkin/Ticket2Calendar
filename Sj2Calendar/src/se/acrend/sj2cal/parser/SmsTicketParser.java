@@ -57,9 +57,12 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     ticket.setFrom(from);
     ticket.setDeparture(departure);
 
-    Calendar arival = createCalendar(date, toTime);
+    Calendar arrival = createCalendar(date, toTime);
+    if (arrival.before(departure)) {
+      arrival.add(Calendar.DAY_OF_YEAR, 1);
+    }
     ticket.setTo(to);
-    ticket.setArrival(arival);
+    ticket.setArrival(arrival);
 
     String train = findValue(message, "Tåg: (\\d*)", "tågnr");
     ticket.setTrain(Integer.parseInt(train));
@@ -71,6 +74,8 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     ticket.setSeat(Integer.parseInt(seat));
 
     ticket.setCode(findValue(message, "Bilj.nr. (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
+
+    ticket.setMessage(message);
 
     return ticket;
   }

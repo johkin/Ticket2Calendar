@@ -15,6 +15,7 @@ public class SmsTicketTest {
   @Before
   public void setUp() throws Exception {
     ticket = new SmsTicket();
+    ticket.setMessage("...Norrköping...");
     ticket.setFrom("Norrköping");
     ticket.setTo("Stockholm");
     Calendar dep = Calendar.getInstance();

@@ -1,12 +1,11 @@
 package se.acrend.sj2cal.model;
 
-import java.text.SimpleDateFormat;
-
 import android.content.ContentValues;
 
 public class SmsTicket extends EventBase {
 
   private int train;
+  private String message;
 
   @Override
   public void updateEventInformation(final ContentValues values) {
@@ -15,10 +14,7 @@ public class SmsTicket extends EventBase {
 
   @Override
   public String toString() {
-    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-    return getFrom() + " " + format.format(getDeparture().getTime()) + " - " + getTo() + " "
-        + format.format(getArrival().getTime()) + " Vagn: " + getCar() + " Plats: " + getSeat() + " Biljettkod: "
-        + getCode();
+    return message;
   }
 
   public int getTrain() {
@@ -29,4 +25,11 @@ public class SmsTicket extends EventBase {
     this.train = train;
   }
 
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(final String message) {
+    this.message = message;
+  }
 }

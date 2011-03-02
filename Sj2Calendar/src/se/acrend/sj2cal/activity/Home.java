@@ -13,7 +13,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 
 public class Home extends Activity {
   /** Called when the activity is first created. */
@@ -45,12 +44,6 @@ public class Home extends Activity {
     });
     createCalendarList();
 
-    TextView msgCount = (TextView) findViewById(R.id.MessageCountText);
-    int count = PrefsHelper.getMessageCountLeft(this);
-    if (count >= 0) {
-      msgCount.setText("Du har " + count + " meddelanden kvar innan licensen går ut");
-    }
-
     Button closeButton = (Button) findViewById(R.id.Close);
     closeButton.setOnClickListener(new View.OnClickListener() {
 
@@ -62,7 +55,7 @@ public class Home extends Activity {
 
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
     final AlertDialog dialog = builder.setTitle(R.string.about_header).setMessage(R.string.about_text)
-        .setCancelable(true).create();
+        .setCancelable(true).setIcon(R.drawable.sj2cal_bw).create();
 
     Button aboutButton = (Button) findViewById(R.id.About);
     aboutButton.setOnClickListener(new View.OnClickListener() {

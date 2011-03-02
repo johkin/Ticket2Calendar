@@ -57,6 +57,9 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
     try {
       Calendar arrival = Calendar.getInstance();
       arrival.setTime(format.parse(date + arrTime));
+      if (arrival.before(ticket.getDeparture())) {
+        arrival.add(Calendar.DAY_OF_YEAR, 1);
+      }
       ticket.setArrival(arrival);
     } catch (ParseException e) {
       throw new IllegalArgumentException("Kunde inte tolka ankomstdatum.", e);

@@ -82,9 +82,6 @@ public class SmsReceiver extends BroadcastReceiver {
 
     if (PrefsHelper.isDeleteProcessedMessages(context) && successfulParsing && successfulAddEvent) {
       abortBroadcast();
-      int messageCountLeft = PrefsHelper.getMessageCountLeft(context);
-      messageCountLeft--;
-      PrefsHelper.setMessageCountLeft(messageCountLeft, context);
     }
   }
 
