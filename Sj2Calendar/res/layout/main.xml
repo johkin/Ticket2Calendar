@@ -3,20 +3,21 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
+	<Spinner android:id="@+id/CalendarList" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+
 	<CheckBox android:id="@+id/ScanIncoming"
 		android:layout_height="wrap_content" android:text="@string/main.scanIncoming"
 		android:layout_width="wrap_content"></CheckBox>
 	<CheckBox android:id="@+id/DeleteProcessedMsgs" android:text="@string/main.deleteProcessedMsgs"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
-	<Spinner android:id="@+id/CalendarList" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" />
-	<TextView  android:id="@+id/MessageCountText"
-		android:layout_width="match_parent" android:layout_height="wrap_content"></TextView>
+
 	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="bottom">
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_gravity="bottom">
 		<Button android:text="@string/close" android:id="@+id/Close"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+			android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center|bottom"></Button>
 		<Button android:text="@string/main.about" android:id="@+id/About"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+			android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_gravity="center|bottom"></Button>
 	</LinearLayout>
 </LinearLayout>

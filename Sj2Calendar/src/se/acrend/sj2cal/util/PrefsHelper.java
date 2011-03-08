@@ -31,6 +31,13 @@ public class PrefsHelper {
     editor.commit();
   }
 
+  public static void setShowAbout(final boolean show, final Context context) {
+    SharedPreferences prefs = getPrefs(context);
+    Editor editor = prefs.edit();
+    editor.putBoolean("showAbout", show);
+    editor.commit();
+  }
+
   public static boolean isDeleteProcessedMessages(final Context context) {
     SharedPreferences prefs = getPrefs(context);
     return prefs.getBoolean("deleteProcessedMessage", false);
@@ -39,6 +46,11 @@ public class PrefsHelper {
   public static boolean isProcessIncommingMessages(final Context context) {
     SharedPreferences prefs = getPrefs(context);
     return prefs.getBoolean("processIncomingMessages", false);
+  }
+
+  public static boolean isShowAbout(final Context context) {
+    SharedPreferences prefs = getPrefs(context);
+    return prefs.getBoolean("showAbout", true);
   }
 
   public static long getCalendarId(final Context context) {

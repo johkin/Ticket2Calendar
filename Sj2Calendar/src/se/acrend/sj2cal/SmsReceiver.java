@@ -3,7 +3,6 @@ package se.acrend.sj2cal;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.acrend.sj2cal.activity.Home;
 import se.acrend.sj2cal.calendar.CalendarHelper;
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.parser.ConfirmationParser;
@@ -56,7 +55,7 @@ public class SmsReceiver extends BroadcastReceiver {
     notification.when = System.currentTimeMillis();
     notification.flags = Notification.FLAG_AUTO_CANCEL;
     notification.tickerText = "Nya biljetter mottagna.";
-    Intent notificationIntent = new Intent(context, Home.class);
+    Intent notificationIntent = new Intent("se.acrend.sj2cal.OpenReceivedTickets");
     PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
     try {

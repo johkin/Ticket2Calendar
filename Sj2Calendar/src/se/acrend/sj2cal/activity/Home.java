@@ -15,14 +15,19 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 public class Home extends Activity {
+  private CheckBox scanIncoming;
+  private CheckBox deleteProcessed;
+  private Spinner calendarList;
+
   /** Called when the activity is first created. */
+
   @Override
   public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    CheckBox scanIncoming = (CheckBox) findViewById(R.id.ScanIncoming);
-    CheckBox deleteProcessed = (CheckBox) findViewById(R.id.DeleteProcessedMsgs);
+    scanIncoming = (CheckBox) findViewById(R.id.ScanIncoming);
+    deleteProcessed = (CheckBox) findViewById(R.id.DeleteProcessedMsgs);
 
     scanIncoming.setChecked(PrefsHelper.isProcessIncommingMessages(this));
     scanIncoming.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -57,6 +62,11 @@ public class Home extends Activity {
     final AlertDialog dialog = builder.setTitle(R.string.about_header).setMessage(R.string.about_text)
         .setCancelable(true).setIcon(R.drawable.sj2cal_bw).create();
 
+    if (PrefsHelper.isShowAbout(getApplicationContext())) {
+      dialog.show();
+      PrefsHelper.setShowAbout(false, getApplicationContext());
+    }
+
     Button aboutButton = (Button) findViewById(R.id.About);
     aboutButton.setOnClickListener(new View.OnClickListener() {
 
@@ -68,7 +78,7 @@ public class Home extends Activity {
   }
 
   private void createCalendarList() {
-    Spinner calendarList = (Spinner) findViewById(R.id.CalendarList);
+    calendarList = (Spinner) findViewById(R.id.CalendarList);
 
     SpinnerAdapter adapter = CalendarHelper.getCalendarList(getApplicationContext());
     calendarList.setAdapter(adapter);

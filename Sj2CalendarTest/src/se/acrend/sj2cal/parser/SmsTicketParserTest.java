@@ -25,7 +25,6 @@ public class SmsTicketParserTest {
 
   @Test
   public void testParse() throws Exception {
-
     SmsTicket ticket = parser.parse(message);
     assertEquals("Norrköping C", ticket.getFrom());
     assertEquals(Timestamp.valueOf("2011-01-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
@@ -35,6 +34,7 @@ public class SmsTicketParserTest {
     assertEquals(30, ticket.getSeat());
     assertEquals("SPG9352F0002", ticket.getCode());
     assertEquals(538, ticket.getTrain());
+    assertEquals("http://m.trafikverket.se/TAGTRAFIK/WapPages/TrainShow.aspx?train=20110111,538", ticket.getUrl());
   }
 
   @Test

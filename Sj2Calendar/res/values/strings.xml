@@ -7,7 +7,19 @@
     <string name="close">Stäng</string>
     <string name="main.about">Om...</string>
     <string name="about.header">Om Sj2Calendar</string>
-    <string name="about.text">Applikationen har ingen koppling till SJ, ställ inga frågor om den till dem!
-    
+    <string name="about.text">
+    Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    
+    Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\'.\n
+    Sj2Calendar används på egen risk, vi tar inget ansvar för försvunna eller felaktiga biljetter.\n
+    \n
+    Instruktioner\n
+    \t1. Välj vilken kalender du vill att biljetterna ska läggas i.\n
+    \t2. För att aktivera funktionen, välj "Läs inkommande SMS".\n
+    \t3. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS".\n 
+    \t\tApplikationen kommer då att ta bort meddelandet från inkorgen.\n
+    \n
+    \n
+    Vid eventuella fel, som att applikationen inte kan tyda meddelandet från SJ, kommer meddelandet att ligga 
+    kvar i inkorgen. Man kan även skicka mobilbiljetten igen från sj.se.
     </string>
 </resources>
