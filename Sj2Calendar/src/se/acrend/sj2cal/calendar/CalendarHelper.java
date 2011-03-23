@@ -1,5 +1,9 @@
 package se.acrend.sj2cal.calendar;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.util.PrefsHelper;
 import android.content.ContentValues;
@@ -67,4 +71,36 @@ public class CalendarHelper {
     return true;
   }
 
+  public static List<Long> findEvents(final String ticketCode, final Context context) {
+
+    long calendarId = PrefsHelper.getCalendarId(context);
+    if (calendarId == -1) {
+      return Collections.emptyList();
+    }
+
+    String[] projection = new String[] { "_id" };
+    Uri eventsUri = Uri.parse(getBaseUrl() + "events");
+
+    Cursor managedCursor = context.getContentResolver().query(eventsUri, projection,
+        "calendar_id = " + calendarId + " and description like '%" + ticketCode + "%'", null, null);
+
+    if (managedCursor == null) {
+      return Collections.emptyList();
+    }
+
+    List<Long> eventIds = new ArrayList<Long>();
+    int colIndex = managedCursor.getColumnIndex(projection[0]);
+    while (managedCursor.moveToNext()) {
+      eventIds.add(managedCursor.getLong(colIndex));
+    }
+
+    return eventIds;
+  }
+
+  public static boolean removeEvent(final long eventId, final Context context) {
+
+    Uri eventsUri = Uri.parse(getBaseUrl() + "events");
+    int count = context.getContentResolver().delete(eventsUri, "_id = ?", new String[] { Long.toString(eventId) });
+    return count > 0;
+  }
 }

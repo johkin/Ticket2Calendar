@@ -17,6 +17,7 @@ import android.widget.SpinnerAdapter;
 public class Home extends Activity {
   private CheckBox scanIncoming;
   private CheckBox deleteProcessed;
+  private CheckBox replaceTickets;
   private Spinner calendarList;
 
   /** Called when the activity is first created. */
@@ -28,6 +29,7 @@ public class Home extends Activity {
 
     scanIncoming = (CheckBox) findViewById(R.id.ScanIncoming);
     deleteProcessed = (CheckBox) findViewById(R.id.DeleteProcessedMsgs);
+    replaceTickets = (CheckBox) findViewById(R.id.ReplaceTickets);
 
     scanIncoming.setChecked(PrefsHelper.isProcessIncommingMessages(this));
     scanIncoming.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -44,7 +46,14 @@ public class Home extends Activity {
       @Override
       public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
         PrefsHelper.setDeleteProcessedMessages(isChecked, Home.this);
+      }
+    });
+    replaceTickets.setChecked(PrefsHelper.isReplaceTicket(this));
+    replaceTickets.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+      @Override
+      public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+        PrefsHelper.setReplaceTicket(isChecked, Home.this);
       }
     });
     createCalendarList();

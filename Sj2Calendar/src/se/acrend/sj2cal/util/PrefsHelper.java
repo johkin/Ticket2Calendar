@@ -24,6 +24,13 @@ public class PrefsHelper {
     editor.commit();
   }
 
+  public static void setReplaceTicket(final boolean replace, final Context context) {
+    SharedPreferences prefs = getPrefs(context);
+    Editor editor = prefs.edit();
+    editor.putBoolean("replaceTicket", replace);
+    editor.commit();
+  }
+
   public static void setProcessIncommingMessages(final boolean process, final Context context) {
     SharedPreferences prefs = getPrefs(context);
     Editor editor = prefs.edit();
@@ -41,6 +48,11 @@ public class PrefsHelper {
   public static boolean isDeleteProcessedMessages(final Context context) {
     SharedPreferences prefs = getPrefs(context);
     return prefs.getBoolean("deleteProcessedMessage", false);
+  }
+
+  public static boolean isReplaceTicket(final Context context) {
+    SharedPreferences prefs = getPrefs(context);
+    return prefs.getBoolean("replaceTicket", false);
   }
 
   public static boolean isProcessIncommingMessages(final Context context) {

@@ -1,6 +1,7 @@
 package se.acrend.sj2cal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import se.acrend.sj2cal.calendar.CalendarHelper;
@@ -58,9 +59,14 @@ public class SmsReceiver extends BroadcastReceiver {
     Intent notificationIntent = new Intent("se.acrend.sj2cal.OpenReceivedTickets");
     PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
+    List<Long> eventIds = Collections.emptyList();
+
     try {
       EventBase ticket = parser.parse(msgBody);
       successfulParsing = true;
+
+      eventIds = CalendarHelper.findEvents(ticket.getCode(), context);
+
       successfulAddEvent = CalendarHelper.addEvent(ticket, context);
       notification.setLatestEventInfo(context, "Lagt till biljett.",
           "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", contentIntent);
@@ -79,7 +85,13 @@ public class SmsReceiver extends BroadcastReceiver {
       Log.e("Notification", "Kunde inte lägga till notifiering", e);
     }
 
-    if (PrefsHelper.isDeleteProcessedMessages(context) && successfulParsing && successfulAddEvent) {
+    if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
+      for (Long id : eventIds) {
+        CalendarHelper.removeEvent(id, context);
+      }
+    }
+
+    if (PrefsHelper.isDeleteProcessedMessages(context) && successfulAddEvent) {
       abortBroadcast();
     }
   }

@@ -15,11 +15,14 @@
     Instruktioner\n
     \t1. Välj vilken kalender du vill att biljetterna ska läggas i.\n
     \t2. För att aktivera funktionen, välj "Läs inkommande SMS".\n
-    \t3. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS".\n 
+    \t3. I vissa fall får man både en bekräftelse på sin beställning och senare en mobilbiljett.\n 
+    \t\tFör att inte få dubletter av kalenderposter, välj "Ersätt kalenderposter för samma biljettnummer".\n
+    \t4. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS".\n 
     \t\tApplikationen kommer då att ta bort meddelandet från inkorgen.\n
     \n
     \n
     Vid eventuella fel, som att applikationen inte kan tyda meddelandet från SJ, kommer meddelandet att ligga 
     kvar i inkorgen. Man kan även skicka mobilbiljetten igen från sj.se.
     </string>
+<string name="main.replaceTickets">Ersätt kalenderposter för samma biljettnummer</string>
 </resources>
