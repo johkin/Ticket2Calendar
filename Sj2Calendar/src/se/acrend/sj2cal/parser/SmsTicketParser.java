@@ -13,12 +13,12 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   // +'903765246'+
   // +'373740923'+
   // +'692092924'+
-  // ÅRSKORT GULD
+  // Ã…RSKORT GULD
   // JOHAN KINDGREN
-  // Avg. Norrköping C 16.24
+  // Avg. NorrkÃ¶ping C 16.24
   // Ank. Stockholm C 17.39
-  // Tåg: 538
-  // VU, 1 klass Kan återbetalas
+  // TÃ¥g: 538
+  // VU, 1 klass Kan ï¿½terbetalas
   // Vagn 2, plats 30
   // Personlig biljett giltig med ID
   // Internet/Bilj.nr. SPG9352F0002
@@ -48,7 +48,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     String date = findValue(message, "(\\d{1,2} \\D{3}) kl .*", "datum");
 
     String from = findValue(message, "Avg. (.*) \\d{1,2}\\.", "avreseort");
-    String fromTime = findValue(message, "Avg. .* (\\d{1,2}\\.\\d{2})", "avgångstid");
+    String fromTime = findValue(message, "Avg. .* (\\d{1,2}\\.\\d{2})", "avgÃ¥ngstid");
 
     String to = findValue(message, "Ank. (.*) \\d{1,2}\\.", "ankomstort");
     String toTime = findValue(message, "Ank. .* (\\d{1,2}\\.\\d{2})", "ankomsttid");
@@ -64,7 +64,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     ticket.setTo(to);
     ticket.setArrival(arrival);
 
-    String train = findValue(message, "Tåg: (\\d*)", "tågnr");
+    String train = findValue(message, "TÃ¥g: (\\d*)", "tÃ¥gnr");
     ticket.setTrain(Integer.parseInt(train));
 
     String car = findValue(message, "Vagn (\\d*),", "vagn");
@@ -86,7 +86,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     int currentYear = now.get(Calendar.YEAR);
     try {
       cal.setTime(format.parse(currentYear + date + time));
-      // Om biljetten utfärdades före idag har vi gjort fel, lägg på ett år
+      // Om biljetten utfÃ¤rdades fÃ¶re idag har vi gjort fel, lÃ¤gg pÃ¥ ett Ã¥r
       if (cal.before(now.getTime())) {
         cal.add(Calendar.YEAR, 1);
       }

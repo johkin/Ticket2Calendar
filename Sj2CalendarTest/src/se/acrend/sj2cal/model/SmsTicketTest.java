@@ -15,8 +15,8 @@ public class SmsTicketTest {
   @Before
   public void setUp() throws Exception {
     ticket = new SmsTicket();
-    ticket.setMessage("...Norrköping...");
-    ticket.setFrom("Norrköping");
+    ticket.setMessage("...NorrkÃ¶ping...");
+    ticket.setFrom("NorrkÃ¶ping");
     ticket.setTo("Stockholm");
     Calendar dep = Calendar.getInstance();
     dep.setTimeInMillis(Timestamp.valueOf("2011-01-11 10:00:00").getTime());
@@ -30,7 +30,7 @@ public class SmsTicketTest {
   public void testToString() {
     String string = ticket.toString();
 
-    assertEquals(true, string.contains("Norrköping"));
+    assertEquals(true, string.contains("NorrkÃ¶ping"));
   }
 
 }

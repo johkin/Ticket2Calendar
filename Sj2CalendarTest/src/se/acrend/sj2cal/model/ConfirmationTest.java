@@ -15,7 +15,7 @@ public class ConfirmationTest {
   @Before
   public void setUp() throws Exception {
     confirmation = new Confirmation();
-    confirmation.setFrom("Norrköping");
+    confirmation.setFrom("NorrkÃ¶ping");
     confirmation.setTo("Stockholm");
     Calendar dep = Calendar.getInstance();
     dep.setTimeInMillis(Timestamp.valueOf("2011-01-11 10:00:00").getTime());
@@ -29,7 +29,7 @@ public class ConfirmationTest {
   public void testToString() {
     String string = confirmation.toString();
 
-    assertEquals(true, string.contains("Norrköping"));
+    assertEquals(true, string.contains("NorrkÃ¶ping"));
   }
 
 }
