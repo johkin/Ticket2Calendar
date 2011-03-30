@@ -37,7 +37,6 @@ public class SmsReceiver extends BroadcastReceiver {
     }
     Bundle bundle = intent.getExtras();
 
-    boolean successfulParsing = false;
     boolean successfulAddEvent = false;
 
     Object messages[] = (Object[]) bundle.get("pdus");
@@ -63,7 +62,6 @@ public class SmsReceiver extends BroadcastReceiver {
 
     try {
       EventBase ticket = parser.parse(msgBody);
-      successfulParsing = true;
 
       eventIds = CalendarHelper.findEvents(ticket.getCode(), context);
 
@@ -72,7 +70,6 @@ public class SmsReceiver extends BroadcastReceiver {
           "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", contentIntent);
     } catch (IllegalArgumentException e) {
       Log.e("Text Parse", "Fel vid parsning", e);
-      successfulParsing = false;
       notification.setLatestEventInfo(context, "Fel vid mottagning av biljett.",
           "Kunde inte hantera biljett, kontrollera meddelande i inkorgen.", contentIntent);
     }
@@ -82,7 +79,7 @@ public class SmsReceiver extends BroadcastReceiver {
           .getSystemService(Context.NOTIFICATION_SERVICE);
       notificationManager.notify(1, notification);
     } catch (Exception e) {
-      Log.e("Notification", "Kunde inte l‰gga till notifiering", e);
+      Log.e("Notification", "Kunde inte l√§gga till notifiering", e);
     }
 
     if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
