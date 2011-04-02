@@ -1,0 +1,25 @@
+* Inställningar
+Hur lång tid innan avgång ska försening kontrolleras? checkDelayMinutes
+När vill man rapportera förseningar, dag i veckan och tid? Alarm?
+
+* Ta emot SMS
+Finns biljetten sedan tidigare, hitta andra kalender-events
+Lägg till i kalender
+Ta bort föregående events
+Lagra i databas, hämta id
+Registrera Alarm-Intents för avgång, från checkDelayMinutes var 5:e minut fram till avgång 
+Registrera Alarm-Intents för ankomst, 30 och 60 minuter efter utsatt tid
+
+* Kontroll av försening
+Lyssna på intent CheckDelay
+Fråga Tåg.Info
+Hämta ordinarie tidigare försenade minuter
+Om antal minuter skiljer från tidigare lagrade information, skicka Intent ChangedArrival
+Spara ny förseningstid (minuter)
+
+* Visa försening
+Lyssna på Intent ChangedArrival
+Visa aktivitet för försening
+
+* DB
+ticket: long id, String ticketCode, String text, Timestamp departure, Timestamp arrival, String from , String to, boolean notify default true, int delayedMinutes default 0, long calendarEventId
