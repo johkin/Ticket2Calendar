@@ -15,14 +15,12 @@ public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
 
   private static final String[] columns = new String[] { "name", "ownerAccount", "color" };
 
-  private static final int layout = R.layout.list_entry;
-
   private final int nameCol;
   private final int accountCol;
   private final int colorCol;
 
   public CalendarSpinnerAdapter(final Context context, final Cursor cursor) {
-    super(context, layout, cursor, new String[] {}, new int[] {});
+    super(context, 0, cursor, new String[] {}, new int[] {});
     nameCol = cursor.getColumnIndex(columns[0]);
     accountCol = cursor.getColumnIndex(columns[1]);
     colorCol = cursor.getColumnIndex(columns[2]);

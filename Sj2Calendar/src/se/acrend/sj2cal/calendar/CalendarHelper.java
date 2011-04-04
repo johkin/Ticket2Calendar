@@ -48,10 +48,12 @@ public class CalendarHelper {
   public static boolean addEvent(final EventBase ticket, final Context context) {
     try {
       long calendarId = PrefsHelper.getCalendarId(context);
-
+      if (calendarId == -1) {
+        return false;
+      }
       ContentValues event = new ContentValues();
       event.put("calendar_id", calendarId);
-      event.put("title", "Tågresa " + ticket.getCar() + ", " + ticket.getSeat());
+      event.put("title", "TÃ¥gresa " + ticket.getCar() + ", " + ticket.getSeat());
 
       event.put("description", ticket.toString());
       event.put("eventLocation", ticket.getFrom());

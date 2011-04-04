@@ -1,16 +1,34 @@
-* SJ * BKD3723G0002 Datum: 110114 Avg: Norrköping C 16.24 Ank: Stockholm C 17.39 Vagn: 2 Plats: 25 Internet ombord X2000/Dubbeldäckare Kod: BKD3723G0002
+* SJ * BKD3723G0002 Datum: 110114 Avg: NorrkÃ¶ping C 16.24 Ank: Stockholm C 17.39 Vagn: 2 Plats: 25 Internet ombord X2000/DubbeldÃ¤ckare Kod: BKD3723G0002
+
+* SJ * BKD3723G0002 Datum: 110114 Avg: Norrkoping C 16.24 Ank: Stockholm C 17.39 Vagn: 2 Plats: 25 Internet ombord X2000/Dubbeldackare Kod: BKD3723G0002
 
 11 jan kl 16:24
 +'220572436'+
 +'903765246'+
 +'373740923'+
 +'692092924'+
-ÅRSKORT GULD 
+Ã…RSKORT GULD 
 JOHAN KINDGREN
-Avg. Norrköping C 16.24
+Avg. NorrkÃ¶ping C 16.24
 Ank. Stockholm C 17.39
-Tåg: 538
-VU, 1 klass Kan återbetalas
+TÃ¥g: 538
+VU, 1 klass Kan Ã¥terbetalas
+Vagn 2, plats 30
+Personlig biljett giltig med ID
+Internet/Bilj.nr. SPG9352F0002
+010 624 472 391 895 723 215
+
+11 jan kl 16:24
++'220572436'+
++'903765246'+
++'373740923'+
++'692092924'+
+ARSKORT GULD 
+JOHAN KINDGREN
+Avg. Norrkoping C 16.24
+Ank. Stockholm C 17.39
+Tag: 538
+VU, 1 klass Kan aterbetalas
 Vagn 2, plats 30
 Personlig biljett giltig med ID
 Internet/Bilj.nr. SPG9352F0002

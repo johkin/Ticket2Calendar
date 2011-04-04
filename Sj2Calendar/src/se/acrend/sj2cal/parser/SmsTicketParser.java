@@ -64,7 +64,8 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     ticket.setTo(to);
     ticket.setArrival(arrival);
 
-    String train = findValue(message, "Tåg: (\\d*)", "tågnr");
+    // TODO Sätt tillbaka Tåg
+    String train = findValue(message, "Tag: (\\d*)", "tågnr");
     ticket.setTrain(Integer.parseInt(train));
 
     String car = findValue(message, "Vagn (\\d*),", "vagn");

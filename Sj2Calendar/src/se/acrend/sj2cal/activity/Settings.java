@@ -4,28 +4,24 @@ import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.calendar.CalendarHelper;
 import se.acrend.sj2cal.util.PrefsHelper;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-public class Home extends Activity {
+public class Settings extends Activity {
   private CheckBox scanIncoming;
   private CheckBox deleteProcessed;
   private CheckBox replaceTickets;
   private Spinner calendarList;
 
-  /** Called when the activity is first created. */
-
   @Override
   public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
+    setContentView(R.layout.settings);
 
     scanIncoming = (CheckBox) findViewById(R.id.ScanIncoming);
     deleteProcessed = (CheckBox) findViewById(R.id.DeleteProcessedMsgs);
@@ -36,7 +32,7 @@ public class Home extends Activity {
 
       @Override
       public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-        PrefsHelper.setProcessIncommingMessages(isChecked, Home.this);
+        PrefsHelper.setProcessIncommingMessages(isChecked, Settings.this);
 
       }
     });
@@ -45,7 +41,7 @@ public class Home extends Activity {
 
       @Override
       public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-        PrefsHelper.setDeleteProcessedMessages(isChecked, Home.this);
+        PrefsHelper.setDeleteProcessedMessages(isChecked, Settings.this);
       }
     });
     replaceTickets.setChecked(PrefsHelper.isReplaceTicket(this));
@@ -53,37 +49,29 @@ public class Home extends Activity {
 
       @Override
       public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-        PrefsHelper.setReplaceTicket(isChecked, Home.this);
+        PrefsHelper.setReplaceTicket(isChecked, Settings.this);
       }
     });
     createCalendarList();
 
-    Button closeButton = (Button) findViewById(R.id.Close);
-    closeButton.setOnClickListener(new View.OnClickListener() {
-
-      @Override
-      public void onClick(final View v) {
-        Home.this.finish();
-      }
-    });
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    final AlertDialog dialog = builder.setTitle(R.string.about_header).setMessage(R.string.about_text)
-        .setCancelable(true).setIcon(R.drawable.sj2cal_bw).create();
-
-    if (PrefsHelper.isShowAbout(getApplicationContext())) {
-      dialog.show();
-      PrefsHelper.setShowAbout(false, getApplicationContext());
-    }
-
-    Button aboutButton = (Button) findViewById(R.id.About);
-    aboutButton.setOnClickListener(new View.OnClickListener() {
-
-      @Override
-      public void onClick(final View v) {
-        dialog.show();
-      }
-    });
+    // AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    // final AlertDialog dialog =
+    // builder.setTitle(R.string.about_header).setMessage(R.string.about_text)
+    // .setCancelable(true).setIcon(R.drawable.sj2cal_bw).create();
+    //
+    // if (PrefsHelper.isShowAbout(getApplicationContext())) {
+    // dialog.show();
+    // PrefsHelper.setShowAbout(false, getApplicationContext());
+    // }
+    //
+    // Button aboutButton = (Button) findViewById(R.id.About);
+    // aboutButton.setOnClickListener(new View.OnClickListener() {
+    //
+    // @Override
+    // public void onClick(final View v) {
+    // dialog.show();
+    // }
+    // });
   }
 
   private void createCalendarList() {
@@ -103,12 +91,12 @@ public class Home extends Activity {
     calendarList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
       @Override
       public void onItemSelected(final AdapterView<?> parent, final View view, final int pos, final long id) {
-        PrefsHelper.setCalendarId(id, Home.this.getApplicationContext());
+        PrefsHelper.setCalendarId(id, Settings.this.getApplicationContext());
       }
 
       @Override
       public void onNothingSelected(final AdapterView<?> parent) {
-        PrefsHelper.setCalendarId(-1, Home.this.getApplicationContext());
+        PrefsHelper.setCalendarId(-1, Settings.this.getApplicationContext());
       }
     });
   }

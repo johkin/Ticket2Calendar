@@ -4,8 +4,9 @@
     <string name="app_name">Sj2Calendar</string>
     <string name="main.scanIncoming">Läs inkommande SMS</string>
     <string name="main.deleteProcessedMsgs">Ta bort bearbetade SMS</string>
-    <string name="close">Stäng</string>
-    <string name="main.about">Om...</string>
+    <string name="menu.exit">Stäng</string>
+    <string name="menu.settings">Inställningar</string>
+    <string name="menu.about">Om...</string>
     <string name="about.header">Om Sj2Calendar</string>
     <string name="about.text">
     Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    

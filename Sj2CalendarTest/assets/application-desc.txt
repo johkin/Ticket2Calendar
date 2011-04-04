@@ -12,6 +12,7 @@ Registrera Alarm-Intents för ankomst, 30 och 60 minuter efter utsatt tid
 
 * Kontroll av försening
 Lyssna på intent CheckDelay
+Kontrollera om det finns nät-access
 Fråga Tåg.Info
 Hämta ordinarie tidigare försenade minuter
 Om antal minuter skiljer från tidigare lagrade information, skicka Intent ChangedArrival

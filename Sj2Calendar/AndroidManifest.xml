@@ -2,16 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="se.acrend.sj2cal" android:versionName="0.9.1"
 	android:versionCode="091" android:installLocation="auto">
-    <application android:label="@string/app_name" android:icon="@drawable/sj2cal"
+	<application android:label="@string/app_name" android:icon="@drawable/sj2cal"
 		android:debuggable="true">
-		<activity android:label="@string/app_name" android:name=".activity.Home">
+		<activity android:label="@string/app_name" android:name=".activity.Settings">
+			<intent-filter>
+				<action android:name="se.acrend.sj2cal.Settings" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".activity.TicketList">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-
-		<receiver android:name="SmsReceiver">
+		<receiver android:name=".receiver.SmsReceiver">
 			<intent-filter android:priority="1000">
 				<action android:name="android.provider.Telephony.SMS_RECEIVED" />
 			</intent-filter>
@@ -21,11 +25,15 @@
 				<action android:name="se.acrend.sj2cal.READ_TAG_INFO" />
 			</intent-filter>
 		</receiver>
+		<provider android:name=".content.TicketProvider"
+			android:authorities="se.acrend.sj2cal"></provider>
 	</application>
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.READ_CALENDAR" />
 	<uses-permission android:name="android.permission.WRITE_CALENDAR" />
 	<uses-permission android:name="android.permission.RECEIVE_SMS" />
 	<uses-sdk android:targetSdkVersion="8" android:minSdkVersion="6"></uses-sdk>
-<supports-screens android:largeScreens="true" android:smallScreens="true" android:resizeable="true" android:normalScreens="true" android:anyDensity="true"></supports-screens>
+	<supports-screens android:largeScreens="true"
+		android:smallScreens="true" android:resizeable="true"
+		android:normalScreens="true" android:anyDensity="true"></supports-screens>
 </manifest> 

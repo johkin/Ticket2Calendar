@@ -1,11 +1,14 @@
-package se.acrend.sj2cal;
+package se.acrend.sj2cal.receiver;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.calendar.CalendarHelper;
+import se.acrend.sj2cal.content.ProviderHelper;
 import se.acrend.sj2cal.model.EventBase;
+import se.acrend.sj2cal.model.SmsTicket;
 import se.acrend.sj2cal.parser.ConfirmationParser;
 import se.acrend.sj2cal.parser.MessageParser;
 import se.acrend.sj2cal.parser.SmsTicketParser;
@@ -66,6 +69,11 @@ public class SmsReceiver extends BroadcastReceiver {
       eventIds = CalendarHelper.findEvents(ticket.getCode(), context);
 
       successfulAddEvent = CalendarHelper.addEvent(ticket, context);
+
+      if (ticket instanceof SmsTicket) {
+        ProviderHelper.addEvent((SmsTicket) ticket, null, context);
+      }
+
       notification.setLatestEventInfo(context, "Lagt till biljett.",
           "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", contentIntent);
     } catch (IllegalArgumentException e) {
