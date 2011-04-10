@@ -51,7 +51,7 @@ public class CalendarHelper {
 
       ContentValues event = new ContentValues();
       event.put("calendar_id", calendarId);
-      event.put("title", "Tågresa " + ticket.getCar() + ", " + ticket.getSeat());
+      event.put("title", "Tï¿½gresa " + ticket.getCar() + ", " + ticket.getSeat());
 
       event.put("description", ticket.toString());
       event.put("eventLocation", ticket.getFrom());
@@ -82,7 +82,8 @@ public class CalendarHelper {
     Uri eventsUri = Uri.parse(getBaseUrl() + "events");
 
     Cursor managedCursor = context.getContentResolver().query(eventsUri, projection,
-        "calendar_id = " + calendarId + " and description like '%" + ticketCode + "%'", null, null);
+        "calendar_id = ? and description like ?", new String[] { Long.toString(calendarId), "%" + ticketCode + "%" },
+        null);
 
     if (managedCursor == null) {
       return Collections.emptyList();
