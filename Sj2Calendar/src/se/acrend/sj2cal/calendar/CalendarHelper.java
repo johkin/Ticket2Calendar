@@ -51,7 +51,7 @@ public class CalendarHelper {
 
       ContentValues event = new ContentValues();
       event.put("calendar_id", calendarId);
-      event.put("title", "T�gresa " + ticket.getCar() + ", " + ticket.getSeat());
+      event.put("title", "Tågresa " + ticket.getCar() + ", " + ticket.getSeat());
 
       event.put("description", ticket.toString());
       event.put("eventLocation", ticket.getFrom());

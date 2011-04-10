@@ -77,18 +77,18 @@ public abstract class EventBase {
   }
 
   public void validate() {
-    ValidatorHelper.notEmpty(from, "Från");
+    ValidatorHelper.notEmpty(from, "FrÃ¥n");
     ValidatorHelper.notEmpty(to, "Till");
     ValidatorHelper.notEmpty(code, "Internetkod");
 
     ValidatorHelper.inRange(car, 0, 50, "Vagn");
-    ValidatorHelper.inRange(seat, 0, 200, "Säte");
+    ValidatorHelper.inRange(seat, 0, 200, "SÃ¤te");
 
-    ValidatorHelper.notEmpty(departure, "Avgång");
+    ValidatorHelper.notEmpty(departure, "AvgÃ¥ng");
     ValidatorHelper.notEmpty(arrival, "Ankomst");
 
     if (departure.after(arrival)) {
-      throw new IllegalArgumentException("Avgång kan inte vara efter ankomst.");
+      throw new IllegalArgumentException("Avgï¿½ng kan inte vara efter ankomst.");
     }
   }
 

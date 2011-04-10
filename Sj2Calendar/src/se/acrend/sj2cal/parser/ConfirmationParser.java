@@ -8,9 +8,9 @@ import se.acrend.sj2cal.model.Confirmation;
 
 public class ConfirmationParser extends MessageParserBase implements MessageParser {
 
-  // * SJ * BKD3723G0002 Datum: 110114 Avg: Norrköping C 16.24
+  // * SJ * BKD3723G0002 Datum: 110114 Avg: Norrkï¿½ping C 16.24
   // Ank: Stockholm C 17.39 Vagn: 2 Plats: 25
-  // Internet ombord X2000/Dubbeldäckare Kod: BKD3723G0002
+  // Internet ombord X2000/Dubbeldï¿½ckare Kod: BKD3723G0002
 
   static final String PATTERN = "\\* SJ \\* (.{12}) Datum: (\\d{6}) Avg: (.+) (\\d{1,2}\\.\\d{2}) "
       + "Ank: (.+) (\\d{1,2}\\.\\d{2}) Vagn: (\\d+) Plats: (\\d+).*";
@@ -38,9 +38,9 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
 
     ticket.setCode(findValue(message, "\\* SJ \\* (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
     String date = findValue(message, "Datum: (\\d{6})", "datum");
-    String from = findValue(message, "Avg: (.+) \\d{1,2}\\.\\d{2} Ank", "avgångsort");
+    String from = findValue(message, "Avg: (.+) \\d{1,2}\\.\\d{2} Ank", "avgÃ¥ngsort");
     ticket.setFrom(from);
-    String depTime = findValue(message, "Avg: .+ (\\d{1,2}\\.\\d{2}) Ank", "avgångstid");
+    String depTime = findValue(message, "Avg: .+ (\\d{1,2}\\.\\d{2}) Ank", "avgÃ¥ngstid");
     String to = findValue(message, "Ank: (.+) \\d{1,2}\\.", "ankomstort");
     String arrTime = findValue(message, "Ank: .+ (\\d{1,2}\\.\\d{2})", "ankomsttid");
     String car = findValue(message, "Vagn: (\\d{1,2})", "vagn");
@@ -51,7 +51,7 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
       departure.setTime(format.parse(date + depTime));
       ticket.setDeparture(departure);
     } catch (ParseException e) {
-      throw new IllegalArgumentException("Kunde inte tolka avgångsdatum.", e);
+      throw new IllegalArgumentException("Kunde inte tolka avgÃ¥ngsdatum.", e);
     }
     ticket.setTo(to);
     try {
