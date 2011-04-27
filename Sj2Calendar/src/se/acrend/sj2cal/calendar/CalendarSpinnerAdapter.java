@@ -49,6 +49,10 @@ public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
     String account = cursor.getString(accountCol);
     int colorValue = cursor.getInt(colorCol);
 
+    if (name == null || name.trim().length() == 0) {
+      name = "<" + account + ">";
+    }
+
     View colorBar = v.findViewById(R.id.color);
     if (colorBar != null) {
       colorBar.setBackgroundDrawable(getColorChip(colorValue));

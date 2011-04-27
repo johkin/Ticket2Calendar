@@ -4,7 +4,11 @@ import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.calendar.CalendarHelper;
 import se.acrend.sj2cal.util.PrefsHelper;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -54,24 +58,39 @@ public class Settings extends Activity {
     });
     createCalendarList();
 
-    // AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    // final AlertDialog dialog =
-    // builder.setTitle(R.string.about_header).setMessage(R.string.about_text)
-    // .setCancelable(true).setIcon(R.drawable.sj2cal_bw).create();
-    //
-    // if (PrefsHelper.isShowAbout(getApplicationContext())) {
-    // dialog.show();
-    // PrefsHelper.setShowAbout(false, getApplicationContext());
-    // }
-    //
-    // Button aboutButton = (Button) findViewById(R.id.About);
-    // aboutButton.setOnClickListener(new View.OnClickListener() {
-    //
-    // @Override
-    // public void onClick(final View v) {
-    // dialog.show();
-    // }
-    // });
+    if (PrefsHelper.isShowAbout(getApplicationContext())) {
+      showHelp();
+    }
+  }
+
+  private void showHelp() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    final AlertDialog dialog = builder.setTitle(R.string.about_header).setMessage(R.string.about_text)
+        .setCancelable(true).setIcon(R.drawable.sj2cal_bw).create();
+
+    dialog.show();
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(final Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.options_menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(final MenuItem item) {
+    // Handle item selection
+    switch (item.getItemId()) {
+    case R.id.exit:
+      this.finish();
+      return true;
+    case R.id.about:
+      showHelp();
+      return true;
+    default:
+      return super.onOptionsItemSelected(item);
+    }
   }
 
   private void createCalendarList() {

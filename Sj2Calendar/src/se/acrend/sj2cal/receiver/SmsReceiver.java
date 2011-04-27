@@ -6,9 +6,7 @@ import java.util.List;
 
 import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.calendar.CalendarHelper;
-import se.acrend.sj2cal.content.ProviderHelper;
 import se.acrend.sj2cal.model.EventBase;
-import se.acrend.sj2cal.model.SmsTicket;
 import se.acrend.sj2cal.parser.ConfirmationParser;
 import se.acrend.sj2cal.parser.MessageParser;
 import se.acrend.sj2cal.parser.SmsTicketParser;
@@ -21,7 +19,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 public class SmsReceiver extends BroadcastReceiver {
 
@@ -53,6 +50,17 @@ public class SmsReceiver extends BroadcastReceiver {
       return;
     }
 
+    List<Long> eventIds = Collections.emptyList();
+
+    EventBase ticket = parser.parse(msgBody);
+
+    eventIds = CalendarHelper.findEvents(ticket.getCode(), context);
+
+    successfulAddEvent = CalendarHelper.addEvent(ticket, context);
+
+    NotificationManager notificationManager = (NotificationManager) context
+        .getSystemService(Context.NOTIFICATION_SERVICE);
+
     Notification notification = new Notification();
     notification.icon = R.drawable.sj2cal_bw;
     notification.when = System.currentTimeMillis();
@@ -61,34 +69,10 @@ public class SmsReceiver extends BroadcastReceiver {
     Intent notificationIntent = new Intent("se.acrend.sj2cal.OpenReceivedTickets");
     PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
-    List<Long> eventIds = Collections.emptyList();
+    notification.setLatestEventInfo(context, "Lagt till biljett.",
+        "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", contentIntent);
 
-    try {
-      EventBase ticket = parser.parse(msgBody);
-
-      eventIds = CalendarHelper.findEvents(ticket.getCode(), context);
-
-      successfulAddEvent = CalendarHelper.addEvent(ticket, context);
-
-      if (ticket instanceof SmsTicket) {
-        ProviderHelper.addEvent((SmsTicket) ticket, null, context);
-      }
-
-      notification.setLatestEventInfo(context, "Lagt till biljett.",
-          "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", contentIntent);
-    } catch (IllegalArgumentException e) {
-      Log.e("Text Parse", "Fel vid parsning", e);
-      notification.setLatestEventInfo(context, "Fel vid mottagning av biljett.",
-          "Kunde inte hantera biljett, kontrollera meddelande i inkorgen.", contentIntent);
-    }
-
-    try {
-      NotificationManager notificationManager = (NotificationManager) context
-          .getSystemService(Context.NOTIFICATION_SERVICE);
-      notificationManager.notify(1, notification);
-    } catch (Exception e) {
-      Log.e("Notification", "Kunde inte lägga till notifiering", e);
-    }
+    notificationManager.notify(1, notification);
 
     if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
       for (Long id : eventIds) {

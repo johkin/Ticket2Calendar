@@ -18,7 +18,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   // Avg. Norrköping C 16.24
   // Ank. Stockholm C 17.39
   // Tåg: 538
-  // VU, 1 klass Kan �terbetalas
+  // VU, 1 klass Kan återbetalas
   // Vagn 2, plats 30
   // Personlig biljett giltig med ID
   // Internet/Bilj.nr. SPG9352F0002
@@ -64,8 +64,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     ticket.setTo(to);
     ticket.setArrival(arrival);
 
-    // TODO Sätt tillbaka Tåg
-    String train = findValue(message, "Tag: (\\d*)", "tågnr");
+    String train = findValue(message, "T[å|a]g: (\\d*)", "tågnr");
     ticket.setTrain(Integer.parseInt(train));
 
     String car = findValue(message, "Vagn (\\d*),", "vagn");
@@ -77,6 +76,8 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     ticket.setCode(findValue(message, "Bilj.nr. (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
 
     ticket.setMessage(message);
+
+    ticket.validate();
 
     return ticket;
   }

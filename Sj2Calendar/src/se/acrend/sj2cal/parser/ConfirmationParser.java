@@ -8,9 +8,9 @@ import se.acrend.sj2cal.model.Confirmation;
 
 public class ConfirmationParser extends MessageParserBase implements MessageParser {
 
-  // * SJ * BKD3723G0002 Datum: 110114 Avg: Norrk�ping C 16.24
+  // * SJ * BKD3723G0002 Datum: 110114 Avg: Norrköping C 16.24
   // Ank: Stockholm C 17.39 Vagn: 2 Plats: 25
-  // Internet ombord X2000/Dubbeld�ckare Kod: BKD3723G0002
+  // Internet ombord X2000/Dubbeldäckare Kod: BKD3723G0002
 
   private final SimpleDateFormat format = new SimpleDateFormat("yyMMddHH.mm");
 
@@ -48,7 +48,7 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
       departure.setTime(format.parse(date + depTime));
       ticket.setDeparture(departure);
     } catch (ParseException e) {
-      throw new IllegalArgumentException("Kunde inte tolka avg�ngsdatum.", e);
+      throw new IllegalArgumentException("Kunde inte tolka avgångsdatum.", e);
     }
     ticket.setTo(to);
     try {
@@ -63,6 +63,8 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
     }
     ticket.setCar(Integer.parseInt(car));
     ticket.setSeat(Integer.parseInt(seat));
+
+    ticket.validate();
 
     return ticket;
   }

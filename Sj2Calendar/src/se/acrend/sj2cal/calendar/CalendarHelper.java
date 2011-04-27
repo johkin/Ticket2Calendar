@@ -11,7 +11,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
@@ -46,30 +45,26 @@ public class CalendarHelper {
   }
 
   public static boolean addEvent(final EventBase ticket, final Context context) {
-    try {
-      long calendarId = PrefsHelper.getCalendarId(context);
-      if (calendarId == -1) {
-        return false;
-      }
-      ContentValues event = new ContentValues();
-      event.put("calendar_id", calendarId);
-      event.put("title", "Tågresa " + ticket.getCar() + ", " + ticket.getSeat());
-
-      event.put("description", ticket.toString());
-      event.put("eventLocation", ticket.getFrom());
-      event.put("dtstart", ticket.getDeparture().getTimeInMillis());
-      event.put("dtend", ticket.getArrival().getTimeInMillis());
-      event.put("eventStatus", 1);
-      event.put("visibility", 0);
-
-      ticket.updateEventInformation(event);
-
-      Uri eventsUri = Uri.parse(getBaseUrl() + "events");
-      context.getContentResolver().insert(eventsUri, event);
-    } catch (IllegalArgumentException e) {
-      Log.e("Cal Event", "Fel vid kalender.", e);
+    long calendarId = PrefsHelper.getCalendarId(context);
+    if (calendarId == -1) {
       return false;
     }
+    ContentValues event = new ContentValues();
+    event.put("calendar_id", calendarId);
+    event.put("title", "Tågresa " + ticket.getCar() + ", " + ticket.getSeat());
+
+    event.put("description", ticket.toString());
+    event.put("eventLocation", ticket.getFrom());
+    event.put("dtstart", ticket.getDeparture().getTimeInMillis());
+    event.put("dtend", ticket.getArrival().getTimeInMillis());
+    event.put("eventStatus", 1);
+    event.put("visibility", 0);
+
+    ticket.updateEventInformation(event);
+
+    Uri eventsUri = Uri.parse(getBaseUrl() + "events");
+    context.getContentResolver().insert(eventsUri, event);
+
     return true;
   }
 
@@ -84,7 +79,8 @@ public class CalendarHelper {
     Uri eventsUri = Uri.parse(getBaseUrl() + "events");
 
     Cursor managedCursor = context.getContentResolver().query(eventsUri, projection,
-        "calendar_id = " + calendarId + " and description like '%" + ticketCode + "%'", null, null);
+        "calendar_id = ? and description like ?", new String[] { Long.toString(calendarId), "%" + ticketCode + "%" },
+        null);
 
     if (managedCursor == null) {
       return Collections.emptyList();

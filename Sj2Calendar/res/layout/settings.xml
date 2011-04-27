@@ -13,17 +13,6 @@
     android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
 	<CheckBox android:id="@+id/DeleteProcessedMsgs" android:text="@string/main.deleteProcessedMsgs"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
-<!-- 
-	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:layout_gravity="bottom">
-		<Button android:text="@string/close" android:id="@+id/Close"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_gravity="center|bottom"></Button>
-		<Button android:text="@string/main.about" android:id="@+id/About"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_gravity="center|bottom"></Button>
-	</LinearLayout>
+
 	
-	 -->
 </LinearLayout>
