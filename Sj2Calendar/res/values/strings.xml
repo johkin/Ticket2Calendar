@@ -10,7 +10,8 @@
     <string name="about.header">Om Sj2Calendar</string>
     <string name="about.text">
     Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    
-    Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\'.\n
+    Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
+    eller registreras på http://getsatisfaction.com/acrend/products/acrend_sj2calendar.\n
     Sj2Calendar används på egen risk, vi tar inget ansvar för försvunna eller felaktiga biljetter.\n
     \n
     Instruktioner\n
@@ -26,4 +27,5 @@
     kvar i inkorgen. Man kan även skicka mobilbiljetten igen från sj.se.
     </string>
 <string name="main.replaceTickets">Ersätt kalenderposter för samma biljettnummer</string>
+<string name="main.chooseCalendar">Välj kalender...</string>
 </resources>

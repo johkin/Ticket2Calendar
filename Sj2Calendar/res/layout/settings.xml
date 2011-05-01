@@ -4,7 +4,7 @@
 	android:layout_height="fill_parent">
 
 	<Spinner android:id="@+id/CalendarList" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content" android:prompt="@string/main.chooseCalendar"/>
 
 	<CheckBox android:id="@+id/ScanIncoming"
 		android:layout_height="wrap_content" android:text="@string/main.scanIncoming"
