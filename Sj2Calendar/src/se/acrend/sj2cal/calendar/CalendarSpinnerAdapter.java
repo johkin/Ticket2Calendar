@@ -27,15 +27,19 @@ public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
   }
 
   @Override
-  public View newView(final Context context, final Cursor c, final ViewGroup parent) {
-    final LayoutInflater inflater = LayoutInflater.from(context);
-    View v = inflater.inflate(R.layout.calendars_item, parent, false);
+  public Object getItem(final int position) {
+    Cursor cursor = getCursor();
 
-    return v;
+    cursor.moveToPosition(position);
+    String name = cursor.getString(nameCol);
+    if (name == null) {
+      name = "<" + cursor.getString(accountCol) + ">";
+    }
+    return name;
   }
 
   @Override
-  public View newDropDownView(final Context context, final Cursor cursor, final ViewGroup parent) {
+  public View newView(final Context context, final Cursor c, final ViewGroup parent) {
     final LayoutInflater inflater = LayoutInflater.from(context);
     View v = inflater.inflate(R.layout.calendars_dropdown_item, parent, false);
 

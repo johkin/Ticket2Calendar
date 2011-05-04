@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import se.acrend.sj2cal.model.EventBase;
-import se.acrend.sj2cal.util.PrefsHelper;
+import se.acrend.sj2cal.preference.PrefsHelper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.widget.SpinnerAdapter;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 public class CalendarHelper {
@@ -26,7 +26,7 @@ public class CalendarHelper {
     }
   }
 
-  public static SpinnerAdapter getCalendarList(final Context context) {
+  public static ListAdapter getCalendarList(final Context context) {
 
     String[] projection = new String[] { "_id", "name", "ownerAccount", "color" };
     Uri calendars = Uri.parse(getBaseUrl() + "calendars");
@@ -34,7 +34,7 @@ public class CalendarHelper {
     Cursor managedCursor = context.getContentResolver().query(calendars, projection, "selected=1 and access_level=700",
         null, null);
 
-    SpinnerAdapter adapter = null;
+    ListAdapter adapter = null;
 
     if (managedCursor != null && managedCursor.moveToFirst()) {
       adapter = new CalendarSpinnerAdapter(context, managedCursor);

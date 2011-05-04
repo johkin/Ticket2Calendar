@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">Sj2Calendar</string>
-    <string name="main.scanIncoming">Läs inkommande SMS</string>
-    <string name="main.deleteProcessedMsgs">Ta bort bearbetade SMS</string>
     <string name="menu.exit">Stäng</string>
-    <string name="menu.settings">Inställningar</string>
+    <string name="menu.preferences">Inställningar</string>
     <string name="menu.about">Om...</string>
     <string name="about.header">Om Sj2Calendar</string>
     <string name="about.text">
     Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
-    eller registreras på http://getsatisfaction.com/acrend/products/acrend_sj2calendar.\n
-    Sj2Calendar används på egen risk, vi tar inget ansvar för försvunna eller felaktiga biljetter.\n
+    eller registreras på getSatisfaction genom länken i inställningarna.\n
+    Sj2Calendar används på egen risk, Acrend tar inget ansvar för försvunna eller felaktiga biljetter.\n
     \n
     Instruktioner\n
     \t1. Välj vilken kalender du vill att biljetterna ska läggas i.\n
@@ -26,6 +24,17 @@
     Vid eventuella fel, som att applikationen inte kan tyda meddelandet från SJ, kommer meddelandet att ligga 
     kvar i inkorgen. Man kan även skicka mobilbiljetten igen från sj.se.
     </string>
-<string name="main.replaceTickets">Ersätt kalenderposter för samma biljettnummer</string>
-<string name="main.chooseCalendar">Välj kalender...</string>
+
+<string name="prefs.category.sms">SMS</string>
+<string name="prefs.category.sms.processIncomingMessages">Läs inkommande SMS</string>
+<string name="prefs.category.sms.processIncomingMessages.summary">Tolkar inkommande SMS och lägger till information i vald kalender.</string>
+<string name="prefs.category.sms.deleteProcessedMessage">Ta bort bearbetade SMS</string>
+<string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
+<string name="prefs.category.calendar">Kalender</string>
+<string name="prefs.category.calendar.selected_calendar">Välj kalender</string>
+<string name="prefs.category.calendar.replaceTicket">Ersätt biljetter</string>
+<string name="prefs.category.calendar.replaceTicket.summary">Söker efter existerande kalenderposter och byter ut dem mot ny information för givet biljettnummer.</string>
+<string name="prefs.category.suggestions">Synpunkter</string>
+<string name="prefs.category.suggestions.getSatisfaction.title">Länk till getSatisfaction</string>
+<string name="prefs.category.suggestions.getSatisfaction.summary">Synpunkter och eventuella felrapporter registreras med fördel hos getSatisfaction, klicka här för att komma till sajten.</string>
 </resources>

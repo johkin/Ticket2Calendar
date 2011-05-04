@@ -1,42 +1,22 @@
-package se.acrend.sj2cal.util;
+package se.acrend.sj2cal.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.preference.PreferenceManager;
 
 public class PrefsHelper {
 
   public static SharedPreferences getPrefs(final Context context) {
-    return context.getSharedPreferences("Sj2Calendar", 0);
+    return PreferenceManager.getDefaultSharedPreferences(context);
   }
 
-  public static void setCalendarId(final long id, final Context context) {
+  public static void setShowAbout(final boolean show, final Context context) {
     SharedPreferences prefs = getPrefs(context);
     Editor editor = prefs.edit();
-    editor.putLong("calendarId", id);
-    editor.commit();
-  }
-
-  public static void setDeleteProcessedMessages(final boolean delete, final Context context) {
-    SharedPreferences prefs = getPrefs(context);
-    Editor editor = prefs.edit();
-    editor.putBoolean("deleteProcessedMessage", delete);
-    editor.commit();
-  }
-
-  public static void setReplaceTicket(final boolean replace, final Context context) {
-    SharedPreferences prefs = getPrefs(context);
-    Editor editor = prefs.edit();
-    editor.putBoolean("replaceTicket", replace);
-    editor.commit();
-  }
-
-  public static void setProcessIncommingMessages(final boolean process, final Context context) {
-    SharedPreferences prefs = getPrefs(context);
-    Editor editor = prefs.edit();
-    editor.putBoolean("processIncomingMessages", process);
+    editor.putBoolean("showAbout", show);
     editor.commit();
   }
 
@@ -55,6 +35,11 @@ public class PrefsHelper {
     return prefs.getBoolean("processIncomingMessages", false);
   }
 
+  public static long getCalendarId(final Context context) {
+    SharedPreferences prefs = getPrefs(context);
+    return Long.parseLong(prefs.getString("calendarId", "-1"));
+  }
+
   public static boolean isShowAbout(final Context context) {
     PackageManager manager = context.getPackageManager();
     try {
@@ -63,7 +48,7 @@ public class PrefsHelper {
 
       int versionCode = info.versionCode;
       int storedVersion = prefs.getInt("versionCode", -1);
-      if (storedVersion < versionCode) {
+      if (storedVersion != versionCode) {
         Editor editor = prefs.edit();
         editor.putInt("versionCode", versionCode);
         editor.commit();
@@ -73,10 +58,5 @@ public class PrefsHelper {
     } catch (Exception e) {
       throw new RuntimeException("Kunde inte hämta information för paket: " + context.getPackageName(), e);
     }
-  }
-
-  public static long getCalendarId(final Context context) {
-    SharedPreferences prefs = getPrefs(context);
-    return prefs.getLong("calendarId", -1);
   }
 }

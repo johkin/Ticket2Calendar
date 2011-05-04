@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:padding="10dp">
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:padding="5dp">
+		<ImageView android:src="@drawable/sj2cal_bw"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:id="@+id/aboutHeader" android:text="@string/about.header"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:gravity="center_vertical" style="android.R.style.TextAppearance_Large" />
+	</LinearLayout>
+	<ScrollView android:layout_height="fill_parent"
+    android:layout_width="fill_parent" >
+	<TextView android:text="@string/about.text" android:layout_height="fill_parent"
+    android:layout_width="fill_parent" 
+		android:scrollHorizontally="false" android:scrollbars="vertical"
+		android:id="@+id/aboutText"></TextView>
+  </ScrollView>
+</LinearLayout>

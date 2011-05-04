@@ -10,7 +10,7 @@ import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.parser.ConfirmationParser;
 import se.acrend.sj2cal.parser.MessageParser;
 import se.acrend.sj2cal.parser.SmsTicketParser;
-import se.acrend.sj2cal.util.PrefsHelper;
+import se.acrend.sj2cal.preference.PrefsHelper;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
