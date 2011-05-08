@@ -11,8 +11,8 @@ public abstract class EventBase {
   private String to;
   private Calendar departure;
   private Calendar arrival;
-  private int car;
-  private int seat;
+  private int car = 0;
+  private int seat = 0;
   private String code;
 
   public EventBase() {
@@ -81,8 +81,8 @@ public abstract class EventBase {
     ValidatorHelper.notEmpty(to, "Till");
     ValidatorHelper.notEmpty(code, "Internetkod");
 
-    ValidatorHelper.inRange(car, 0, 50, "Vagn");
-    ValidatorHelper.inRange(seat, 0, 200, "Säte");
+    // ValidatorHelper.inRange(car, 0, 50, "Vagn");
+    // ValidatorHelper.inRange(seat, 0, 200, "Säte");
 
     ValidatorHelper.notEmpty(departure, "Avgång");
     ValidatorHelper.notEmpty(arrival, "Ankomst");

@@ -84,6 +84,23 @@ public class SmsTicketParserTest {
   }
 
   @Test
+  public void testSmsBiljettNoSeat() throws Exception {
+
+    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljettNoSeat.txt"));
+
+    SmsTicket ticket = parser.parse(message);
+    assertEquals("Linköping C", ticket.getFrom());
+    assertEquals(Timestamp.valueOf("2011-04-28 12:00:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals("Södertälje Syd", ticket.getTo());
+    assertEquals(Timestamp.valueOf("2011-04-28 13:33:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(0, ticket.getCar());
+    assertEquals(0, ticket.getSeat());
+    assertEquals("QPB0497Q0001", ticket.getCode());
+    assertEquals(10530, ticket.getTrain());
+    assertEquals(message, ticket.getMessage());
+  }
+
+  @Test
   public void testSupports() throws Exception {
     String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));
 

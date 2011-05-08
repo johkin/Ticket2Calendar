@@ -51,7 +51,17 @@ public class CalendarHelper {
     }
     ContentValues event = new ContentValues();
     event.put("calendar_id", calendarId);
-    event.put("title", "Tågresa " + ticket.getCar() + ", " + ticket.getSeat());
+    String title = "Tågresa";
+    if (ticket.getCar() > 0) {
+      title += " vagn " + ticket.getCar();
+    }
+    if (ticket.getSeat() > 0) {
+      title += ", plats " + ticket.getSeat();
+    }
+    if ("Tågresa".equals(title)) {
+      title += ", utan platsbokning";
+    }
+    event.put("title", title);
 
     event.put("description", ticket.toString());
     event.put("eventLocation", ticket.getFrom());

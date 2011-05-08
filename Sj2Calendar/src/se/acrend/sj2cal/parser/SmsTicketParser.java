@@ -70,8 +70,12 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     String car = findValue(message, "Vagn (\\d*),", "vagn");
     String seat = findValue(message, "plats (\\d*)", "plats");
 
-    ticket.setCar(Integer.parseInt(car));
-    ticket.setSeat(Integer.parseInt(seat));
+    if (car != null && car.length() > 0) {
+      ticket.setCar(Integer.parseInt(car));
+    }
+    if (seat != null && seat.length() > 0) {
+      ticket.setSeat(Integer.parseInt(seat));
+    }
 
     ticket.setCode(findValue(message, "Bilj.nr. (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
 
