@@ -6,6 +6,7 @@ import java.util.List;
 
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.preference.PrefsHelper;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -106,9 +107,10 @@ public class CalendarHelper {
   }
 
   public static boolean removeEvent(final long eventId, final Context context) {
-
-    Uri eventsUri = Uri.parse(getBaseUrl() + "events");
-    int count = context.getContentResolver().delete(eventsUri, "_id = ?", new String[] { Long.toString(eventId) });
+    int count = 0;
+    Uri uri = Uri.parse(getBaseUrl() + "events");
+    Uri eventsUri = ContentUris.withAppendedId(uri, eventId);
+    count = context.getContentResolver().delete(eventsUri, null, null);
     return count > 0;
   }
 }
