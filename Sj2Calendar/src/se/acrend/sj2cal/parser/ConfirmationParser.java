@@ -61,8 +61,12 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
     } catch (ParseException e) {
       throw new IllegalArgumentException("Kunde inte tolka ankomstdatum.", e);
     }
-    ticket.setCar(Integer.parseInt(car));
-    ticket.setSeat(Integer.parseInt(seat));
+    if (car != null && car.length() > 0) {
+      ticket.setCar(Integer.parseInt(car));
+    }
+    if (seat != null && seat.length() > 0) {
+      ticket.setSeat(Integer.parseInt(seat));
+    }
 
     ticket.validate();
 

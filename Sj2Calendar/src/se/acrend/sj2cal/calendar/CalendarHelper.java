@@ -54,7 +54,7 @@ public class CalendarHelper {
     event.put("calendar_id", calendarId);
     String title = "Tågresa";
     if (ticket.getCar() > 0) {
-      title += " vagn " + ticket.getCar();
+      title += ", vagn " + ticket.getCar();
     }
     if (ticket.getSeat() > 0) {
       title += ", plats " + ticket.getSeat();
