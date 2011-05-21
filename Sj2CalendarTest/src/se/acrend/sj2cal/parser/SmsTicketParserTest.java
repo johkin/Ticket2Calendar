@@ -25,14 +25,14 @@ public class SmsTicketParserTest {
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Norrköping C", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2011-01-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2011-05-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
     assertEquals("Stockholm C", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2011-01-11 17:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2011-05-11 17:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
     assertEquals(2, ticket.getCar());
     assertEquals(30, ticket.getSeat());
     assertEquals("SPG9352F0002", ticket.getCode());
     assertEquals(538, ticket.getTrain());
-    assertEquals("http://m.trafikverket.se/TAGTRAFIK/WapPages/TrainShow.aspx?train=20110111,538", ticket.getUrl());
+    assertEquals("http://m.trafikverket.se/TAGTRAFIK/WapPages/TrainShow.aspx?train=20110511,538", ticket.getUrl());
   }
 
   @Test
@@ -105,5 +105,22 @@ public class SmsTicketParserTest {
     String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));
 
     assertEquals(true, parser.supports(message));
+  }
+
+  @Test
+  public void testParseLocale() throws Exception {
+
+    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));
+
+    SmsTicket ticket = parser.parse(message);
+    assertEquals("Norrköping C", ticket.getFrom());
+    assertEquals(Timestamp.valueOf("2011-05-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals("Stockholm C", ticket.getTo());
+    assertEquals(Timestamp.valueOf("2011-05-11 17:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(2, ticket.getCar());
+    assertEquals(30, ticket.getSeat());
+    assertEquals("SPG9352F0002", ticket.getCode());
+    assertEquals(538, ticket.getTrain());
+    assertEquals("http://m.trafikverket.se/TAGTRAFIK/WapPages/TrainShow.aspx?train=20110511,538", ticket.getUrl());
   }
 }
