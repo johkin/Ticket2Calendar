@@ -11,11 +11,12 @@
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:gravity="center_vertical" style="android.R.style.TextAppearance_Large" />
 	</LinearLayout>
+
 	<ScrollView android:layout_height="fill_parent"
-    android:layout_width="fill_parent" >
-	<TextView android:text="@string/about.text" android:layout_height="fill_parent"
-    android:layout_width="fill_parent" 
-		android:scrollHorizontally="false" android:scrollbars="vertical"
-		android:id="@+id/aboutText"></TextView>
-  </ScrollView>
+		android:layout_width="fill_parent">
+			<TextView android:text="@string/about.text"
+				android:layout_height="wrap_content" android:layout_width="fill_parent"
+				android:scrollHorizontally="false" android:scrollbars="vertical"
+				android:id="@+id/aboutText"></TextView>
+	</ScrollView>
 </LinearLayout>

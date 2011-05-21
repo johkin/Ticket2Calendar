@@ -24,7 +24,12 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   // Internet/Bilj.nr. SPG9352F0002
   // 010 624 472 391 895 723 215
 
-  private final SimpleDateFormat format = new SimpleDateFormat("yyyydd MMMHH.mm");
+  private SimpleDateFormat format = null;
+
+  public SmsTicketParser() {
+    super();
+    format = new SimpleDateFormat("yyyydd MMMHH.mm", getLocale());
+  }
 
   /*
    * (non-Javadoc)
@@ -52,18 +57,21 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
 
     String to = findValue(message, "Ank. (.*) \\d{1,2}\\.", "ankomstort");
     String toTime = findValue(message, "Ank. .* (\\d{1,2}\\.\\d{2})", "ankomsttid");
+    try {
+      Calendar departure = createCalendar(date, fromTime);
+      ticket.setFrom(from);
+      ticket.setDeparture(departure);
 
-    Calendar departure = createCalendar(date, fromTime);
-    ticket.setFrom(from);
-    ticket.setDeparture(departure);
+      Calendar arrival = createCalendar(date, toTime);
+      if (arrival.before(departure)) {
+        arrival.add(Calendar.DAY_OF_YEAR, 1);
+      }
 
-    Calendar arrival = createCalendar(date, toTime);
-    if (arrival.before(departure)) {
-      arrival.add(Calendar.DAY_OF_YEAR, 1);
+      ticket.setTo(to);
+      ticket.setArrival(arrival);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Kunde inte tolka datum. Meddelande: " + message, e);
     }
-    ticket.setTo(to);
-    ticket.setArrival(arrival);
-
     String train = findValue(message, "T[å|a]g: (\\d*)", "tågnr");
     ticket.setTrain(Integer.parseInt(train));
 

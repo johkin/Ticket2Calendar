@@ -12,7 +12,12 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
   // Ank: Stockholm C 17.39 Vagn: 2 Plats: 25
   // Internet ombord X2000/Dubbeldäckare Kod: BKD3723G0002
 
-  private final SimpleDateFormat format = new SimpleDateFormat("yyMMddHH.mm");
+  private SimpleDateFormat format = null;
+
+  public ConfirmationParser() {
+    super();
+    format = new SimpleDateFormat("yyMMddHH.mm", getLocale());
+  }
 
   /*
    * (non-Javadoc)

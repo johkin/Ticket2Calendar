@@ -7,6 +7,15 @@
     <string name="menu.about">Om...</string>
     <string name="about.header">Om Sj2Calendar</string>
     <string name="about.text">
+    1.0.3\n
+    \tRättat problem med tolkning av meddelanden när telefonen har annat språk än svenska inställt.\n
+    1.0.2\n
+    \tFix för ersättningsfunktionen, problem på SE Xperia Mini.\n
+    1.0.1\n
+    \tRättning för beställningar utan platsbokning.n
+    1.0.0\n
+    \tAnvänder nya inställningar, tyvärr måste användaren uppdatera inställningarna.\n
+    \n
     Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
     eller registreras på getSatisfaction genom länken i inställningarna.\n
@@ -34,7 +43,7 @@
 <string name="prefs.category.calendar.selected_calendar">Välj kalender</string>
 <string name="prefs.category.calendar.replaceTicket">Ersätt biljetter</string>
 <string name="prefs.category.calendar.replaceTicket.summary">Söker efter existerande kalenderposter och byter ut dem mot ny information för givet biljettnummer.</string>
-<string name="prefs.category.suggestions">Synpunkter</string>
+<string name="prefs.category.suggestions">Synpunkter och felrapporter</string>
 <string name="prefs.category.suggestions.getSatisfaction.title">Länk till getSatisfaction</string>
 <string name="prefs.category.suggestions.getSatisfaction.summary">Synpunkter och eventuella felrapporter registreras med fördel hos getSatisfaction, klicka här för att komma till sajten.</string>
 </resources>
