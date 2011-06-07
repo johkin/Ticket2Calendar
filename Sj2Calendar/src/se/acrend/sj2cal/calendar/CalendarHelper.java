@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import se.acrend.sj2cal.model.Confirmation;
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.preference.PrefsHelper;
 import android.content.ContentUris;
@@ -78,7 +77,7 @@ public class CalendarHelper {
     return true;
   }
 
-  public static List<Long> findEvents(final String ticketCode, final Context context) {
+  public static List<Long> findEvents(final String ticketCode, final String ticketType, final Context context) {
 
     long calendarId = PrefsHelper.getCalendarId(context);
     if (calendarId == -1) {
@@ -90,7 +89,7 @@ public class CalendarHelper {
 
     Cursor managedCursor = context.getContentResolver().query(eventsUri, projection,
         "calendar_id = ? and description like ?",
-        new String[] { Long.toString(calendarId), "%" + ticketCode + "%" + Confirmation.TICKET_TYPE + "%" }, null);
+        new String[] { Long.toString(calendarId), "%" + ticketCode + "%" + ticketType + "%" }, null);
 
     if (managedCursor == null) {
       return Collections.emptyList();

@@ -6,6 +6,7 @@ import java.util.List;
 
 import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.calendar.CalendarHelper;
+import se.acrend.sj2cal.model.Confirmation;
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.parser.ConfirmationParser;
 import se.acrend.sj2cal.parser.MessageParser;
@@ -54,7 +55,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
     EventBase ticket = parser.parse(msgBody);
 
-    eventIds = CalendarHelper.findEvents(ticket.getCode(), context);
+    eventIds = CalendarHelper.findEvents(ticket.getCode(), Confirmation.TICKET_TYPE, context);
 
     successfulAddEvent = CalendarHelper.addEvent(ticket, context);
 
