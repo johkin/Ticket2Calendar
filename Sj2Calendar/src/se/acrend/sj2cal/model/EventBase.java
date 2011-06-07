@@ -3,7 +3,6 @@ package se.acrend.sj2cal.model;
 import java.util.Calendar;
 
 import se.acrend.sj2cal.util.ValidatorHelper;
-import android.content.ContentValues;
 
 public abstract class EventBase {
 
@@ -17,8 +16,6 @@ public abstract class EventBase {
 
   public EventBase() {
   }
-
-  public abstract void updateEventInformation(ContentValues values);
 
   public String getFrom() {
     return from;

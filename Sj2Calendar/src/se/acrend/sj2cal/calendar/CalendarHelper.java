@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import se.acrend.sj2cal.model.Confirmation;
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.preference.PrefsHelper;
 import android.content.ContentUris;
@@ -71,8 +72,6 @@ public class CalendarHelper {
     event.put("eventStatus", 1);
     event.put("visibility", 0);
 
-    ticket.updateEventInformation(event);
-
     Uri eventsUri = Uri.parse(getBaseUrl() + "events");
     context.getContentResolver().insert(eventsUri, event);
 
@@ -90,8 +89,8 @@ public class CalendarHelper {
     Uri eventsUri = Uri.parse(getBaseUrl() + "events");
 
     Cursor managedCursor = context.getContentResolver().query(eventsUri, projection,
-        "calendar_id = ? and description like ?", new String[] { Long.toString(calendarId), "%" + ticketCode + "%" },
-        null);
+        "calendar_id = ? and description like ?",
+        new String[] { Long.toString(calendarId), "%" + ticketCode + "%" + Confirmation.TICKET_TYPE + "%" }, null);
 
     if (managedCursor == null) {
       return Collections.emptyList();
