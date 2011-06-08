@@ -43,8 +43,8 @@
 <string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
 <string name="prefs.category.calendar">Kalender</string>
 <string name="prefs.category.calendar.selected_calendar">Välj kalender</string>
-<string name="prefs.category.calendar.replaceTicket">Ersätt biljetter</string>
-<string name="prefs.category.calendar.replaceTicket.summary">Söker efter existerande kalenderposter och byter ut dem mot ny information för givet biljettnummer.</string>
+<string name="prefs.category.calendar.replaceTicket">Ersätt bekräftelse</string>
+<string name="prefs.category.calendar.replaceTicket.summary">Söker efter existerande bokningsbekräftelser och byter ut dem mot mobilbiljetter för samma biljettnummer.</string>
 <string name="prefs.category.suggestions">Synpunkter och felrapporter</string>
 <string name="prefs.category.suggestions.getSatisfaction.title">Länk till getSatisfaction</string>
 <string name="prefs.category.suggestions.getSatisfaction.summary">Synpunkter och eventuella felrapporter registreras med fördel hos getSatisfaction, klicka här för att komma till sajten.</string>
