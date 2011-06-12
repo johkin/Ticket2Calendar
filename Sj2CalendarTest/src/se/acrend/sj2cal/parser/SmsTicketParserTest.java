@@ -108,6 +108,13 @@ public class SmsTicketParserTest {
   }
 
   @Test
+  public void testSupportsNotSL() throws Exception {
+    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SLBiljett.txt"));
+
+    assertEquals(false, parser.supports(message));
+  }
+
+  @Test
   public void testParseLocale() throws Exception {
 
     String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));

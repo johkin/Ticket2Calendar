@@ -7,6 +7,8 @@
     <string name="menu.about">Om...</string>
     <string name="about.header">Om Sj2Calendar</string>
     <string name="about.text">
+    1.0.5\n
+    \tLagt till kontroll så att applikationen inte försöker tolka SL-biljetter.\n
     1.0.4\n
     \tFunktionen för att ersätta kalenderposter har uppdaterats så att endast bokningsbekräftelser ersätts. Om man får fler Mobilbiletter till samma telefon kommer detta att läggas till som dubbelbokningar i kalendern.\n
     1.0.3\n

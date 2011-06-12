@@ -38,7 +38,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
    */
   @Override
   public boolean supports(final String message) {
-    return message.contains("+'") && message.contains("'+");
+    return message.contains("+'") && message.contains("'+") && message.contains("Tåg:");
   }
 
   /*
