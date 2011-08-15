@@ -1,14 +1,10 @@
 package se.acrend.sj2cal.activity;
 
 import se.acrend.sj2cal.R;
-import se.acrend.sj2cal.preference.PrefsHelper;
+import se.acrend.sj2cal.application.Sj2CalApp;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,20 +18,11 @@ public class Preferences extends PreferenceActivity {
     super.onCreate(savedInstanceState);
 
     addPreferencesFromResource(R.xml.preferences);
-
-    PackageManager packageManager = getPackageManager();
-
-    try {
-      ApplicationInfo applicationInfo = packageManager.getApplicationInfo("com.jb.gosms", PackageManager.GET_META_DATA);
+    Sj2CalApp application = (Sj2CalApp) getApplication();
+    if (application.isGoSmsInstalled()) {
+      this.getPreferenceScreen().setEnabled(false);
       startActivity(new Intent().setClass(this, GoSMS.class));
-    } catch (NameNotFoundException e) {
-      Log.d(TAG, "GoSMS not installed.");
     }
-
-    if (PrefsHelper.isShowAbout(getApplicationContext())) {
-      startActivity(new Intent().setClass(this, About.class));
-    }
-
   }
 
   @Override
