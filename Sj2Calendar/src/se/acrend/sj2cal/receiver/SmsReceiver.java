@@ -36,6 +36,7 @@ public class SmsReceiver extends BroadcastReceiver {
     if (!PrefsHelper.isProcessIncommingMessages(context)) {
       return;
     }
+
     Bundle bundle = intent.getExtras();
 
     boolean successfulAddEvent = false;
@@ -59,21 +60,8 @@ public class SmsReceiver extends BroadcastReceiver {
 
     successfulAddEvent = CalendarHelper.addEvent(ticket, context);
 
-    NotificationManager notificationManager = (NotificationManager) context
-        .getSystemService(Context.NOTIFICATION_SERVICE);
-
-    Notification notification = new Notification();
-    notification.icon = R.drawable.sj2cal_bw;
-    notification.when = System.currentTimeMillis();
-    notification.flags = Notification.FLAG_AUTO_CANCEL;
-    notification.tickerText = "Nya biljetter mottagna.";
-    Intent notificationIntent = new Intent("se.acrend.sj2cal.OpenReceivedTickets");
-    PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-
-    notification.setLatestEventInfo(context, "Lagt till biljett.",
-        "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", contentIntent);
-
-    notificationManager.notify(1, notification);
+    createNotification(context, "Nya biljetter mottagna.", "Lagt till biljett.",
+        "Har lagt till nya biljetter i kalendern. Kontrollera informationen.");
 
     if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
       for (Long id : eventIds) {
@@ -84,6 +72,24 @@ public class SmsReceiver extends BroadcastReceiver {
     if (PrefsHelper.isDeleteProcessedMessages(context) && successfulAddEvent) {
       abortBroadcast();
     }
+  }
+
+  private void createNotification(final Context context, final String tickerText, final String title,
+      final String message) {
+    NotificationManager notificationManager = (NotificationManager) context
+        .getSystemService(Context.NOTIFICATION_SERVICE);
+
+    Notification notification = new Notification();
+    notification.icon = R.drawable.sj2cal_bw;
+    notification.when = System.currentTimeMillis();
+    notification.flags = Notification.FLAG_AUTO_CANCEL;
+    notification.tickerText = tickerText;
+    Intent notificationIntent = new Intent("se.acrend.sj2cal.OpenReceivedTickets");
+    PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+
+    notification.setLatestEventInfo(context, title, message, contentIntent);
+
+    notificationManager.notify(1, notification);
   }
 
   private MessageParser getMessageParser(final String message) {
