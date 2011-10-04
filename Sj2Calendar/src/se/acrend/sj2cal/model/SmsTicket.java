@@ -10,8 +10,8 @@ public class SmsTicket extends EventBase {
 
   public String getUrl() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-    String date = dateFormat.format(this.getDeparture().getTime());
-    return String.format("http://m.trafikverket.se/TAGTRAFIK/WapPages/TrainShow.aspx?train=%s,%d", date, train);
+    String date = dateFormat.format(getDeparture().getTime());
+    return String.format("http://www5.trafikverket.se/taginfo/WapPages/TrainShow.aspx?train=%s,%d", date, train);
   }
 
   @Override
