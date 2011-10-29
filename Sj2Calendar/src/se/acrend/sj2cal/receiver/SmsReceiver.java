@@ -43,8 +43,8 @@ public class SmsReceiver extends BroadcastReceiver {
 
     Object messages[] = (Object[]) bundle.get("pdus");
     String msgBody = "";
-    for (int n = 0; n < messages.length; n++) {
-      SmsMessage message = SmsMessage.createFromPdu((byte[]) messages[n]);
+    for (Object message2 : messages) {
+      SmsMessage message = SmsMessage.createFromPdu((byte[]) message2);
       msgBody += message.getDisplayMessageBody();
     }
     MessageParser parser = getMessageParser(msgBody);
@@ -80,7 +80,7 @@ public class SmsReceiver extends BroadcastReceiver {
         .getSystemService(Context.NOTIFICATION_SERVICE);
 
     Notification notification = new Notification();
-    notification.icon = R.drawable.sj2cal_bw;
+    notification.icon = R.drawable.ticket2calendar_bw;
     notification.when = System.currentTimeMillis();
     notification.flags = Notification.FLAG_AUTO_CANCEL;
     notification.tickerText = tickerText;

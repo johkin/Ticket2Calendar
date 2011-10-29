@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Sj2Calendar</string>
+    <string name="app_name">Ticket2Calendar</string>
     <string name="menu.exit">Stäng</string>
     <string name="menu.preferences">Inställningar</string>
     <string name="menu.about">Om...</string>
     <string name="gosms.header">Go SMS Pro installerad</string>
-    <string name="gosms.text">Du verkar tyvärr ha Go SMS Pro installerad, vilket gör att SJ2Cal inte kan ta emot biljetterna från SJ.\n
-    För att SJ2Cal ska kunna fungera korrekt måste Go SMS Pro avinstalleras eller deaktiveras.\n
+    <string name="gosms.text">Du verkar tyvärr ha Go SMS Pro installerad, vilket gör att Ticket2Calendar inte kan ta emot biljetterna från SJ.\n
+    För att Ticket2Calendar ska kunna fungera korrekt måste Go SMS Pro avinstalleras eller deaktiveras.\n
     Läs mer om problemet genom att klicka på knappen nedan.
     </string>
     <string name="gosms.moreinfo">Mer information</string>
-    <string name="about.header">Om Sj2Calendar</string>
+    <string name="about.header">Om Ticket2Calendar</string>
     <string name="about.text">
+    1.0.8\n
+    \tBytt namn och logga efter juridisk inrådan.\n
     1.0.7\n
     \tRättat länk till Trafikverket.\n
     1.0.6\n
@@ -23,7 +25,7 @@
     Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
     eller registreras på getSatisfaction genom länken i inställningarna.\n
-    Sj2Calendar används på egen risk, Acrend tar inget ansvar för försvunna eller felaktiga biljetter.\n
+    Ticket2Calendar används på egen risk, Acrend tar inget ansvar för försvunna eller felaktiga biljetter.\n
     \n
     Instruktioner\n
     \t1. Välj vilken kalender du vill att biljetterna ska läggas i.\n
