@@ -13,39 +13,35 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.widget.ListAdapter;
-import android.widget.Toast;
 
-public class CalendarHelper {
+public abstract class CalendarHelper {
 
   private static final int level = Build.VERSION.SDK_INT;
 
-  private static String getBaseUrl() {
-    if (level < 8) {
+  private static CalendarHelper instance = null;
+
+  protected String getBaseUrl() {
+    if (level < Build.VERSION_CODES.FROYO) {
       return "content://calendar/";
     } else {
       return "content://com.android.calendar/";
     }
   }
 
-  public static ListAdapter getCalendarList(final Context context) {
-
-    String[] projection = new String[] { "_id", "name", "ownerAccount", "color" };
-    Uri calendars = Uri.parse(getBaseUrl() + "calendars");
-
-    Cursor managedCursor = context.getContentResolver().query(calendars, projection, "selected=1 and access_level=700",
-        null, null);
-
-    ListAdapter adapter = null;
-
-    if (managedCursor != null && managedCursor.moveToFirst()) {
-      adapter = new CalendarSpinnerAdapter(context, managedCursor);
-    } else {
-      Toast.makeText(context, "Hittade ingen kalender", Toast.LENGTH_LONG).show();
+  public static CalendarHelper getInstance() {
+    if (instance == null) {
+      if (level >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+        instance = new CalendarHelperIcs();
+      } else {
+        instance = new CalendarHelperDefault();
+      }
     }
-    return adapter;
+    return instance;
   }
 
-  public static boolean addEvent(final EventBase ticket, final Context context) {
+  public abstract ListAdapter getCalendarList(final Context context);
+
+  public boolean addEvent(final EventBase ticket, final Context context) {
     long calendarId = PrefsHelper.getCalendarId(context);
     if (calendarId == -1) {
       return false;
@@ -77,7 +73,7 @@ public class CalendarHelper {
     return true;
   }
 
-  public static List<Long> findEvents(final String ticketCode, final String ticketType, final Context context) {
+  public List<Long> findEvents(final String ticketCode, final String ticketType, final Context context) {
 
     long calendarId = PrefsHelper.getCalendarId(context);
     if (calendarId == -1) {
@@ -104,7 +100,7 @@ public class CalendarHelper {
     return eventIds;
   }
 
-  public static boolean removeEvent(final long eventId, final Context context) {
+  public boolean removeEvent(final long eventId, final Context context) {
     int count = 0;
     Uri uri = Uri.parse(getBaseUrl() + "events");
     Uri eventsUri = ContentUris.withAppendedId(uri, eventId);

@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Ticket2Calendar</string>
-    <string name="menu.exit">Stäng</string>
-    <string name="menu.preferences">Inställningar</string>
-    <string name="menu.about">Om...</string>
-    <string name="gosms.header">Go SMS Pro installerad</string>
-    <string name="gosms.text">Du verkar tyvärr ha Go SMS Pro installerad, vilket gör att Ticket2Calendar inte kan ta emot biljetterna från SJ.\n
+ <string name="app_name">Ticket2Calendar</string>
+ <string name="menu.exit">Stäng</string>
+ <string name="menu.preferences">Inställningar</string>
+ <string name="menu.about">Om...</string>
+ <string name="gosms.header">Go SMS Pro installerad</string>
+ <string name="gosms.text">u verkar tyvärr ha Go SMS Pro installerad, vilket gör att Ticket2Calendar inte kan ta emot biljetterna från SJ.\n
     För att Ticket2Calendar ska kunna fungera korrekt måste Go SMS Pro avinstalleras eller deaktiveras.\n
-    Läs mer om problemet genom att klicka på knappen nedan.
-    </string>
-    <string name="gosms.moreinfo">Mer information</string>
-    <string name="about.header">Om Ticket2Calendar</string>
-    <string name="about.text">
+    Läs mer om problemet genom att klicka på knappen nedan.</string>
+ <string name="gosms.moreinfo">Mer information</string>
+ <string name="about.header">Om Ticket2Calendar</string>
+ <string name="about.text">1.1.0\n
+    \tUppdatering för Android 4 och rättning av datumhantering runt årsskiftet.\n
     1.0.8\n
-    \tBytt namn och logga efter juridisk inrådan.\n
+    \tBytt namn och logo efter juridisk inrådan.\n
     1.0.7\n
     \tRättat länk till Trafikverket.\n
     1.0.6\n
     \tLagt till varning när Go SMS Pro är installerad.\n
-    1.0.5\n
-    \tLagt till kontroll så att applikationen inte försöker tolka SL-biljetter.\n
     \n
     Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
@@ -37,19 +35,18 @@
     \n
     \n
     Vid eventuella fel, som att applikationen inte kan tyda meddelandet från SJ, kommer meddelandet att ligga 
-    kvar i inkorgen. Man kan även skicka mobilbiljetten igen från www.sj.se.
-    </string>
+    kvar i inkorgen. Man kan även skicka mobilbiljetten igen från www.sj.se.</string>
+ <string name="prefs.category.sms">SMS</string>
+ <string name="prefs.category.sms.processIncomingMessages">Läs inkommande SMS</string>
+ <string name="prefs.category.sms.processIncomingMessages.summary">Tolkar inkommande SMS och lägger till information i vald kalender.</string>
+ <string name="prefs.category.sms.deleteProcessedMessage">Ta bort bearbetade SMS</string>
+ <string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
+ <string name="prefs.category.calendar">Kalender</string>
+ <string name="prefs.category.calendar.selected_calendar">Välj kalender</string>
+ <string name="prefs.category.calendar.replaceTicket">Ersätt bekräftelse</string>
+ <string name="prefs.category.calendar.replaceTicket.summary">Söker efter existerande bokningsbekräftelser och byter ut dem mot mobilbiljetter för samma biljettnummer.</string>
+ <string name="prefs.category.suggestions">Synpunkter och felrapporter</string>
+ <string name="prefs.category.suggestions.getSatisfaction.title">Länk till getSatisfaction</string>
+ <string name="prefs.category.suggestions.getSatisfaction.summary">Synpunkter och eventuella felrapporter registreras med fördel hos getSatisfaction, klicka här för att komma till sajten.</string>
 
-<string name="prefs.category.sms">SMS</string>
-<string name="prefs.category.sms.processIncomingMessages">Läs inkommande SMS</string>
-<string name="prefs.category.sms.processIncomingMessages.summary">Tolkar inkommande SMS och lägger till information i vald kalender.</string>
-<string name="prefs.category.sms.deleteProcessedMessage">Ta bort bearbetade SMS</string>
-<string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
-<string name="prefs.category.calendar">Kalender</string>
-<string name="prefs.category.calendar.selected_calendar">Välj kalender</string>
-<string name="prefs.category.calendar.replaceTicket">Ersätt bekräftelse</string>
-<string name="prefs.category.calendar.replaceTicket.summary">Söker efter existerande bokningsbekräftelser och byter ut dem mot mobilbiljetter för samma biljettnummer.</string>
-<string name="prefs.category.suggestions">Synpunkter och felrapporter</string>
-<string name="prefs.category.suggestions.getSatisfaction.title">Länk till getSatisfaction</string>
-<string name="prefs.category.suggestions.getSatisfaction.summary">Synpunkter och eventuella felrapporter registreras med fördel hos getSatisfaction, klicka här för att komma till sajten.</string>
 </resources>

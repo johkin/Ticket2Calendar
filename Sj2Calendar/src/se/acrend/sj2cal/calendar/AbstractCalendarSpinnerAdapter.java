@@ -11,20 +11,25 @@ import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
-
-  private static final String[] columns = new String[] { "name", "ownerAccount", "color" };
+public abstract class AbstractCalendarSpinnerAdapter extends SimpleCursorAdapter {
 
   private final int nameCol;
   private final int accountCol;
   private final int colorCol;
 
-  public CalendarSpinnerAdapter(final Context context, final Cursor cursor) {
+  public AbstractCalendarSpinnerAdapter(final Context context, final Cursor cursor) {
     super(context, 0, cursor, new String[] {}, new int[] {});
-    nameCol = cursor.getColumnIndex(columns[0]);
-    accountCol = cursor.getColumnIndex(columns[1]);
-    colorCol = cursor.getColumnIndex(columns[2]);
+    nameCol = cursor.getColumnIndex(getColumnNames()[0]);
+    accountCol = cursor.getColumnIndex(getColumnNames()[1]);
+    colorCol = cursor.getColumnIndex(getColumnNames()[2]);
   }
+
+  /**
+   * Ska returnera kolumnnamn för namn, ägarkonto och färg.
+   * 
+   * @return
+   */
+  protected abstract String[] getColumnNames();
 
   @Override
   public Object getItem(final int position) {
@@ -53,7 +58,7 @@ public class CalendarSpinnerAdapter extends SimpleCursorAdapter {
     String account = cursor.getString(accountCol);
     int colorValue = cursor.getInt(colorCol);
 
-    if (name == null || name.trim().length() == 0) {
+    if ((name == null) || (name.trim().length() == 0)) {
       name = "<" + account + ">";
     }
 

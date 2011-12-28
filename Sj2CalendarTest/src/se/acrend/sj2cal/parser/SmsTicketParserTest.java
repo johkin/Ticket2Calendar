@@ -25,14 +25,14 @@ public class SmsTicketParserTest {
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Norrköping C", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2011-05-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-05-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
     assertEquals("Stockholm C", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2011-05-11 17:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-05-11 17:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
     assertEquals(2, ticket.getCar());
     assertEquals(30, ticket.getSeat());
     assertEquals("SPG9352F0002", ticket.getCode());
     assertEquals(538, ticket.getTrain());
-    assertEquals("http://m.trafikverket.se/TAGTRAFIK/WapPages/TrainShow.aspx?train=20110511,538", ticket.getUrl());
+    assertEquals("http://www5.trafikverket.se/taginfo/WapPages/TrainShow.aspx?train=20110511,538", ticket.getUrl());
   }
 
   @Test
@@ -67,15 +67,31 @@ public class SmsTicketParserTest {
   }
 
   @Test
+  public void testParseNextYear() throws Exception {
+    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljettNextYear.txt"));
+
+    SmsTicket ticket = parser.parse(message);
+    assertEquals("Norrköping C", ticket.getFrom());
+    assertEquals(Timestamp.valueOf("2012-01-06 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals("Stockholm C", ticket.getTo());
+    assertEquals(Timestamp.valueOf("2012-01-06 17:51:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(2, ticket.getCar());
+    assertEquals(30, ticket.getSeat());
+    assertEquals("SPG9352F0002", ticket.getCode());
+    assertEquals(538, ticket.getTrain());
+    assertEquals(message, ticket.getMessage());
+  }
+
+  @Test
   public void testSmsBiljett1() throws Exception {
 
     String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett1.txt"));
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Linköping C", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2011-04-28 12:00:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-04-28 12:00:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
     assertEquals("Södertälje Syd", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2011-04-28 13:33:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-04-28 13:33:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
     assertEquals(1, ticket.getCar());
     assertEquals(11, ticket.getSeat());
     assertEquals("QPB0497Q0001", ticket.getCode());
@@ -90,9 +106,9 @@ public class SmsTicketParserTest {
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Linköping C", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2011-04-28 12:00:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-04-28 12:00:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
     assertEquals("Södertälje Syd", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2011-04-28 13:33:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-04-28 13:33:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
     assertEquals(0, ticket.getCar());
     assertEquals(0, ticket.getSeat());
     assertEquals("QPB0497Q0001", ticket.getCode());
@@ -121,13 +137,13 @@ public class SmsTicketParserTest {
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Norrköping C", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2011-05-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-05-11 16:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
     assertEquals("Stockholm C", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2011-05-11 17:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2012-05-11 17:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
     assertEquals(2, ticket.getCar());
     assertEquals(30, ticket.getSeat());
     assertEquals("SPG9352F0002", ticket.getCode());
     assertEquals(538, ticket.getTrain());
-    assertEquals("http://m.trafikverket.se/TAGTRAFIK/WapPages/TrainShow.aspx?train=20110511,538", ticket.getUrl());
+    assertEquals("http://www5.trafikverket.se/taginfo/WapPages/TrainShow.aspx?train=20120511,538", ticket.getUrl());
   }
 }

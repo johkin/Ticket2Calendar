@@ -78,10 +78,10 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     String car = findValue(message, "Vagn (\\d*),", "vagn");
     String seat = findValue(message, "plats (\\d*)", "plats");
 
-    if (car != null && car.length() > 0) {
+    if ((car != null) && (car.length() > 0)) {
       ticket.setCar(Integer.parseInt(car));
     }
-    if (seat != null && seat.length() > 0) {
+    if ((seat != null) && (seat.length() > 0)) {
       ticket.setSeat(Integer.parseInt(seat));
     }
 
@@ -101,7 +101,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     try {
       cal.setTime(format.parse(currentYear + date + time));
       // Om biljetten utfärdades före idag har vi gjort fel, lägg på ett år
-      if (cal.before(now.getTime())) {
+      if (cal.before(now)) {
         cal.add(Calendar.YEAR, 1);
       }
     } catch (ParseException e) {

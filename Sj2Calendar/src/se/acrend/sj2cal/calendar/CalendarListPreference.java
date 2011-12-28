@@ -18,12 +18,12 @@ public class CalendarListPreference extends ListPreference {
 
   public CalendarListPreference(final Context context) {
     super(context);
-    adapter = CalendarHelper.getCalendarList(getContext());
+    adapter = CalendarHelper.getInstance().getCalendarList(getContext());
   }
 
   public CalendarListPreference(final Context context, final AttributeSet attrs) {
     super(context, attrs);
-    adapter = CalendarHelper.getCalendarList(getContext());
+    adapter = CalendarHelper.getInstance().getCalendarList(getContext());
   }
 
   void updateSummary() {

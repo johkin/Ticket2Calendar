@@ -56,16 +56,18 @@ public class SmsReceiver extends BroadcastReceiver {
 
     EventBase ticket = parser.parse(msgBody);
 
-    eventIds = CalendarHelper.findEvents(ticket.getCode(), Confirmation.TICKET_TYPE, context);
+    CalendarHelper calendarHelper = CalendarHelper.getInstance();
 
-    successfulAddEvent = CalendarHelper.addEvent(ticket, context);
+    eventIds = calendarHelper.findEvents(ticket.getCode(), Confirmation.TICKET_TYPE, context);
+
+    successfulAddEvent = CalendarHelper.getInstance().addEvent(ticket, context);
 
     createNotification(context, "Nya biljetter mottagna.", "Lagt till biljett.",
         "Har lagt till nya biljetter i kalendern. Kontrollera informationen.");
 
     if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
       for (Long id : eventIds) {
-        CalendarHelper.removeEvent(id, context);
+        calendarHelper.removeEvent(id, context);
       }
     }
 
