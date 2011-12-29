@@ -6,6 +6,7 @@ import java.util.List;
 
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.preference.PrefsHelper;
+import se.acrend.sj2cal.util.DateUtil;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,10 +42,10 @@ public abstract class CalendarHelper {
 
   public abstract ListAdapter getCalendarList(final Context context);
 
-  public boolean addEvent(final EventBase ticket, final Context context) {
+  public Uri addEvent(final EventBase ticket, final Context context) {
     long calendarId = PrefsHelper.getCalendarId(context);
     if (calendarId == -1) {
-      return false;
+      return null;
     }
     ContentValues event = new ContentValues();
     event.put("calendar_id", calendarId);
@@ -64,13 +65,19 @@ public abstract class CalendarHelper {
     event.put("eventLocation", ticket.getFrom());
     event.put("dtstart", ticket.getDeparture().getTimeInMillis());
     event.put("dtend", ticket.getArrival().getTimeInMillis());
-    event.put("eventStatus", 1);
-    event.put("visibility", 0);
+
+    setEventValues(event);
 
     Uri eventsUri = Uri.parse(getBaseUrl() + "events");
-    context.getContentResolver().insert(eventsUri, event);
+    Uri result = context.getContentResolver().insert(eventsUri, event);
 
-    return true;
+    return result;
+  }
+
+  void setEventValues(final ContentValues event) {
+    event.put("eventStatus", 1);
+    event.put("visibility", 0);
+    event.put("eventTimezone", DateUtil.SWEDISH_TIMEZONE.getID());
   }
 
   public List<Long> findEvents(final String ticketCode, final String ticketType, final Context context) {

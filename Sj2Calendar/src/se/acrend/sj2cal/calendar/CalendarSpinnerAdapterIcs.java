@@ -11,6 +11,10 @@ public class CalendarSpinnerAdapterIcs extends AbstractCalendarSpinnerAdapter {
 
   public CalendarSpinnerAdapterIcs(final Context context, final Cursor cursor) {
     super(context, cursor);
+
+    nameCol = cursor.getColumnIndex(getColumnNames()[0]);
+    accountCol = cursor.getColumnIndex(getColumnNames()[1]);
+    colorCol = cursor.getColumnIndex(getColumnNames()[2]);
   }
 
   @Override

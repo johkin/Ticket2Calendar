@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import se.acrend.sj2cal.model.SmsTicket;
+import se.acrend.sj2cal.util.DateUtil;
 
 public class SmsTicketParser extends MessageParserBase implements MessageParser {
 
@@ -28,7 +29,8 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
 
   public SmsTicketParser() {
     super();
-    format = new SimpleDateFormat("yyyydd MMMHH.mm", getLocale());
+    format = new SimpleDateFormat("yyyydd MMMHH.mm", DateUtil.SWEDISH_LOCALE);
+    format.setTimeZone(DateUtil.SWEDISH_TIMEZONE);
   }
 
   /*

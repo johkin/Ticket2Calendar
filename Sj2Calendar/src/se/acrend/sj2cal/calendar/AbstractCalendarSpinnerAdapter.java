@@ -13,15 +13,12 @@ import android.widget.TextView;
 
 public abstract class AbstractCalendarSpinnerAdapter extends SimpleCursorAdapter {
 
-  private final int nameCol;
-  private final int accountCol;
-  private final int colorCol;
+  protected int nameCol;
+  protected int accountCol;
+  protected int colorCol;
 
   public AbstractCalendarSpinnerAdapter(final Context context, final Cursor cursor) {
     super(context, 0, cursor, new String[] {}, new int[] {});
-    nameCol = cursor.getColumnIndex(getColumnNames()[0]);
-    accountCol = cursor.getColumnIndex(getColumnNames()[1]);
-    colorCol = cursor.getColumnIndex(getColumnNames()[2]);
   }
 
   /**
@@ -100,5 +97,4 @@ public abstract class AbstractCalendarSpinnerAdapter extends SimpleCursorAdapter
     d.setCornerRadii(CORNERS);
     return d;
   }
-
 }

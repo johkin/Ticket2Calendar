@@ -18,6 +18,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
@@ -60,10 +61,14 @@ public class SmsReceiver extends BroadcastReceiver {
 
     eventIds = calendarHelper.findEvents(ticket.getCode(), Confirmation.TICKET_TYPE, context);
 
-    successfulAddEvent = CalendarHelper.getInstance().addEvent(ticket, context);
+    Uri data = CalendarHelper.getInstance().addEvent(ticket, context);
+
+    if (data != null) {
+      successfulAddEvent = true;
+    }
 
     createNotification(context, "Nya biljetter mottagna.", "Lagt till biljett.",
-        "Har lagt till nya biljetter i kalendern. Kontrollera informationen.");
+        "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", data);
 
     if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
       for (Long id : eventIds) {
@@ -77,7 +82,7 @@ public class SmsReceiver extends BroadcastReceiver {
   }
 
   private void createNotification(final Context context, final String tickerText, final String title,
-      final String message) {
+      final String message, final Uri data) {
     NotificationManager notificationManager = (NotificationManager) context
         .getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -86,7 +91,7 @@ public class SmsReceiver extends BroadcastReceiver {
     notification.when = System.currentTimeMillis();
     notification.flags = Notification.FLAG_AUTO_CANCEL;
     notification.tickerText = tickerText;
-    Intent notificationIntent = new Intent("se.acrend.sj2cal.OpenReceivedTickets");
+    Intent notificationIntent = new Intent("DummyAction");
     PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
     notification.setLatestEventInfo(context, title, message, contentIntent);

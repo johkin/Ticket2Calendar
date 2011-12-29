@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import se.acrend.sj2cal.model.Confirmation;
+import se.acrend.sj2cal.util.DateUtil;
 
 public class ConfirmationParser extends MessageParserBase implements MessageParser {
 
@@ -16,7 +17,8 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
 
   public ConfirmationParser() {
     super();
-    format = new SimpleDateFormat("yyMMddHH.mm", getLocale());
+    format = new SimpleDateFormat("yyMMddHH.mm", DateUtil.SWEDISH_LOCALE);
+    format.setTimeZone(DateUtil.SWEDISH_TIMEZONE);
   }
 
   /*

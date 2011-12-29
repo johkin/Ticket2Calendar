@@ -1,5 +1,7 @@
 package se.acrend.sj2cal.calendar;
 
+import se.acrend.sj2cal.util.DateUtil;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -29,6 +31,13 @@ public class CalendarHelperIcs extends CalendarHelper {
       Toast.makeText(context, "Hittade ingen kalender", Toast.LENGTH_LONG).show();
     }
     return adapter;
+  }
+
+  @Override
+  void setEventValues(final ContentValues event) {
+    event.put(CalendarContract.Events.STATUS, CalendarContract.Events.STATUS_CONFIRMED);
+    event.put(CalendarContract.Events.ACCESS_LEVEL, CalendarContract.Events.ACCESS_DEFAULT);
+    event.put(CalendarContract.Events.EVENT_TIMEZONE, DateUtil.SWEDISH_TIMEZONE.getID());
   }
 
 }
