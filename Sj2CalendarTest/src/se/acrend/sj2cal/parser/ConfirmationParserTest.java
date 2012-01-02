@@ -64,7 +64,7 @@ public class ConfirmationParserTest {
   public void testSupports() throws Exception {
     String message = "* SJ * BKD3723G0002 Datum: 110114 Avg: Norrköping C 16.24 Ank: Stockholm C 17.39 Vagn: 2 Plats: 25 Internet ombord X2000/Dubbeldäckare Kod: BKD3723G0002";
 
-    assertEquals(true, parser.supports(message));
+    assertEquals(true, parser.supports("SJ", message));
   }
 
   @Test

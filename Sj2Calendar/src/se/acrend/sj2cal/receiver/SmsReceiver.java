@@ -24,6 +24,8 @@ import android.telephony.SmsMessage;
 
 public class SmsReceiver extends BroadcastReceiver {
 
+  private static final String TAG = "SmsReceiver";
+
   private final List<MessageParser> parsers;
 
   public SmsReceiver() {
@@ -44,11 +46,15 @@ public class SmsReceiver extends BroadcastReceiver {
 
     Object messages[] = (Object[]) bundle.get("pdus");
     String msgBody = "";
+    String sender = null;
     for (Object message2 : messages) {
       SmsMessage message = SmsMessage.createFromPdu((byte[]) message2);
+
+      String displayOriginatingAddress = message.getDisplayOriginatingAddress();
+      sender = displayOriginatingAddress;
       msgBody += message.getDisplayMessageBody();
     }
-    MessageParser parser = getMessageParser(msgBody);
+    MessageParser parser = getMessageParser(sender, msgBody);
     if (parser == null) {
       return;
     }
@@ -99,9 +105,9 @@ public class SmsReceiver extends BroadcastReceiver {
     notificationManager.notify(1, notification);
   }
 
-  private MessageParser getMessageParser(final String message) {
+  private MessageParser getMessageParser(final String sender, final String message) {
     for (MessageParser parser : parsers) {
-      if (parser.supports(message)) {
+      if (parser.supports(sender, message)) {
         return parser;
       }
     }

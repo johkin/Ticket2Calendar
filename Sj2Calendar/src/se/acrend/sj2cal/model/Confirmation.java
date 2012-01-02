@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class Confirmation extends EventBase {
 
-  public static final String TICKET_TYPE = "SJ2Cal.Bokningsbekräftelse";
+  public static final String TICKET_TYPE = "Ticket2Cal.Bokningsbekräftelse";
 
   @Override
   public String toString() {
