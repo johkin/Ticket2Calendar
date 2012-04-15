@@ -120,14 +120,14 @@ public class SmsTicketParserTest {
   public void testSupports() throws Exception {
     String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));
 
-    assertEquals(true, parser.supports(message));
+    assertEquals(true, parser.supports("SJ Biljett", message));
   }
 
   @Test
   public void testSupportsNotSL() throws Exception {
     String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SLBiljett.txt"));
 
-    assertEquals(false, parser.supports(message));
+    assertEquals(false, parser.supports("SJ Biljett", message));
   }
 
   @Test

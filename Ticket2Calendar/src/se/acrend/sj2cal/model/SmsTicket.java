@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class SmsTicket extends EventBase {
 
-  public static final String TICKET_TYPE = "SJ2Cal.Mobilbiljett";
+  public static final String TICKET_TYPE = "Ticket2Cal.Mobilbiljett";
   private int train;
   private String message;
 

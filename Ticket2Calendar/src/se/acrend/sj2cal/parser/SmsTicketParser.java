@@ -39,8 +39,8 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
    * @see se.acrend.sj2cal.parser.MessageParser#supports(java.lang.String)
    */
   @Override
-  public boolean supports(final String message) {
-    return message.contains("+'") && message.contains("'+") && message.contains("Tåg:");
+  public boolean supports(final String sender, final String message) {
+    return "SJ Biljett".equalsIgnoreCase(sender);
   }
 
   /*

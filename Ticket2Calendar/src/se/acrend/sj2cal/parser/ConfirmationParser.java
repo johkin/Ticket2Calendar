@@ -27,7 +27,7 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
    * @see se.acrend.sj2cal.parser.MessageParser#supports(java.lang.String)
    */
   @Override
-  public boolean supports(final String message) {
+  public boolean supports(final String sender, final String message) {
     return message.contains("* SJ *");
   }
 
