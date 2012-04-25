@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Sj2CalendarTest_Trunk</name>
+	<name>Ticket2CalendarTest</name>
 	<comment></comment>
 	<projects>
-		<project>Sj2Calendar_Trunk</project>
+		<project>Ticket2Calendar_Trunk</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
