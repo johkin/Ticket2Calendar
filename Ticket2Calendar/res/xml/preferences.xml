@@ -1,37 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-	<PreferenceCategory android:title="@string/prefs.category.sms">
+ <PreferenceCategory android:title="@string/prefs.category.sms" >
+  <CheckBoxPreference
+   android:key="processIncomingMessages"
+   android:summary="@string/prefs.category.sms.processIncomingMessages.summary"
+   android:title="@string/prefs.category.sms.processIncomingMessages" />
+  <CheckBoxPreference
+   android:key="deleteProcessedMessage"
+   android:summary="@string/prefs.category.sms.deleteProcessedMessage.summary"
+   android:title="@string/prefs.category.sms.deleteProcessedMessage" />
+ </PreferenceCategory>
+ <PreferenceCategory
+  android:summary="@string/prefs.category.notify.summary"
+  android:title="@string/prefs.category.notify.title" >
+  <CheckBoxPreference
+   android:defaultValue="true"
+   android:key="notifyVibration"
+   android:summary="@string/prefs.category.notify.vibration.summary"
+   android:title="@string/prefs.category.notify.vibration.title" />
 
-		<CheckBoxPreference android:key="processIncomingMessages"
-			android:title="@string/prefs.category.sms.processIncomingMessages" 
-			android:summary="@string/prefs.category.sms.processIncomingMessages.summary"/>
-		<CheckBoxPreference android:key="deleteProcessedMessage"
-			android:title="@string/prefs.category.sms.deleteProcessedMessage" 
-			android:summary="@string/prefs.category.sms.deleteProcessedMessage.summary" />
+  <RingtonePreference
+   android:key="notifySound"
+   android:ringtoneType="notification"
+   android:showDefault="true"
+   android:showSilent="true"
+   android:summary="@string/prefs.category.notify.sound.summary"
+   android:title="@string/prefs.category.notify.sound.title" />
+ </PreferenceCategory>
+ <PreferenceCategory android:title="@string/prefs.category.calendar" >
+  <se.acrend.sj2cal.calendar.CalendarListPreference
+   android:defaultValue="-1"
+   android:dialogTitle="@string/prefs.category.calendar.selected_calendar"
+   android:key="calendarId"
+   android:title="@string/prefs.category.calendar.selected_calendar" />
 
-	</PreferenceCategory>
-
-	<PreferenceCategory android:title="@string/prefs.category.calendar">
-
-		<se.acrend.sj2cal.calendar.CalendarListPreference
-			android:key="calendarId" android:title="@string/prefs.category.calendar.selected_calendar"
-			android:dialogTitle="@string/prefs.category.calendar.selected_calendar"
-			android:defaultValue="-1" />
-
-		<CheckBoxPreference android:key="replaceTicket"
-			android:title="@string/prefs.category.calendar.replaceTicket" 
-			android:summary="@string/prefs.category.calendar.replaceTicket.summary"/>
-
-	</PreferenceCategory>
-
-	<PreferenceCategory android:title="@string/prefs.category.suggestions">
-    <se.acrend.sj2cal.preference.LinkPreference 
-    android:title="@string/prefs.category.suggestions.getSatisfaction.title"
-    android:summary="@string/prefs.category.suggestions.getSatisfaction.summary"
-    android:value="http://getsatisfaction.com/acrend/products/acrend_sj2calendar"/>
-
-
-	</PreferenceCategory>
+  <CheckBoxPreference
+   android:key="replaceTicket"
+   android:summary="@string/prefs.category.calendar.replaceTicket.summary"
+   android:title="@string/prefs.category.calendar.replaceTicket" />
+ </PreferenceCategory>
+ <PreferenceCategory android:title="@string/prefs.category.suggestions" >
+  <se.acrend.sj2cal.preference.LinkPreference
+   android:summary="@string/prefs.category.suggestions.getSatisfaction.summary"
+   android:title="@string/prefs.category.suggestions.getSatisfaction.title"
+   android:value="http://getsatisfaction.com/acrend/products/acrend_sj2calendar" />
+ </PreferenceCategory>
 
 </PreferenceScreen>
