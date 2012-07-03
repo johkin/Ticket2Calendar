@@ -45,8 +45,15 @@
  <string name="prefs.category.calendar.selected_calendar">Välj kalender</string>
  <string name="prefs.category.calendar.replaceTicket">Ersätt bekräftelse</string>
  <string name="prefs.category.calendar.replaceTicket.summary">Söker efter existerande bokningsbekräftelser och byter ut dem mot mobilbiljetter för samma biljettnummer.</string>
- <string name="prefs.category.suggestions">Synpunkter och felrapporter</string>
- <string name="prefs.category.suggestions.getSatisfaction.title">Länk till getSatisfaction</string>
- <string name="prefs.category.suggestions.getSatisfaction.summary">Synpunkter och eventuella felrapporter registreras med fördel hos getSatisfaction, klicka här för att komma till sajten.</string>
-
+ <string name="prefs.category.help">Synpunkter och felrapporter</string>
+ <string name="prefs.category.help.issues.title">Länk till ärendehantering</string>
+ <string name="prefs.category.help.issues.summary">Synpunkter och eventuella felrapporter registreras med fördel hos GitHub\'s ärendehantering, klicka här för att komma till sajten.</string>
+ <string name="prefs.category.help.wiki.title">Länk till wiki</string>
+ <string name="prefs.category.help.wiki.summary">Wikisajten innehåller mer information om hur applikationen fungerar, klicka här för att komma till wiki\'n.</string>
+ <string name="prefs.category.notify.summary">Ger möjlghet att ställa in hur notifieringar om nya biljetter ska visas.</string>
+ <string name="prefs.category.notify.title">Notifieringar</string>
+ <string name="prefs.category.notify.vibration.summary">Använda vibration för meddelanden.</string>
+ <string name="prefs.category.notify.vibration.title">Vibration</string>
+ <string name="prefs.category.notify.sound.summary">Välj vilket ljud som ska användas, alternativt inget ljud.</string>
+ <string name="prefs.category.notify.sound.title">Ljud</string>
 </resources>

@@ -40,11 +40,15 @@
    android:summary="@string/prefs.category.calendar.replaceTicket.summary"
    android:title="@string/prefs.category.calendar.replaceTicket" />
  </PreferenceCategory>
- <PreferenceCategory android:title="@string/prefs.category.suggestions" >
+ <PreferenceCategory android:title="@string/prefs.category.help" >
   <se.acrend.sj2cal.preference.LinkPreference
-   android:summary="@string/prefs.category.suggestions.getSatisfaction.summary"
-   android:title="@string/prefs.category.suggestions.getSatisfaction.title"
-   android:value="http://getsatisfaction.com/acrend/products/acrend_sj2calendar" />
+   android:summary="@string/prefs.category.help.issues.summary"
+   android:title="@string/prefs.category.help.issues.title"
+   android:value="https://github.com/johkin/Ticket2Calendar/issues" />
+  <se.acrend.sj2cal.preference.LinkPreference
+   android:summary="@string/prefs.category.help.wiki.summary"
+   android:title="@string/prefs.category.help.wiki.title"
+   android:value="https://github.com/johkin/Ticket2Calendar/wiki/Ticket-2-Calendar" />
  </PreferenceCategory>
 
 </PreferenceScreen>
