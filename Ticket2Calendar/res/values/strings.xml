@@ -4,14 +4,17 @@
  <string name="app_name">Ticket2Calendar</string>
  <string name="menu.exit">Stäng</string>
  <string name="menu.preferences">Inställningar</string>
- <string name="menu.about">Om...</string>
+ <string name="menu.about">Om&#8230;</string>
  <string name="gosms.header">Go SMS Pro installerad</string>
- <string name="gosms.text">u verkar tyvärr ha Go SMS Pro installerad, vilket gör att Ticket2Calendar inte kan ta emot biljetterna från SJ.\n
+ <string name="gosms.text">Du verkar tyvärr ha Go SMS Pro installerad, vilket gör att Ticket2Calendar inte kan ta emot biljetterna från SJ.\n
     För att Ticket2Calendar ska kunna fungera korrekt måste Go SMS Pro avinstalleras eller deaktiveras.\n
     Läs mer om problemet genom att klicka på knappen nedan.</string>
  <string name="gosms.moreinfo">Mer information</string>
  <string name="about.header">Om Ticket2Calendar</string>
- <string name="about.text">1.1.1\n
+ <string name="about.text">1.2.0\n
+    \tLagt till möjlighet att välja ljud eller vibration för notifiering.\n
+    \tLagt till möjlighet att välja ljud eller vibration för notifiering.\n
+    1.1.1\n
     \tUppdatering av sms-tolkning efter ändring av SJ.\n
   1.1.0\n
     \tUppdatering för Android 4 och rättning av datumhantering runt årsskiftet.\n
@@ -52,7 +55,7 @@
  <string name="prefs.category.help.wiki.summary">Wikisajten innehåller mer information om hur applikationen fungerar, klicka här för att komma till wiki\'n.</string>
  <string name="prefs.category.notify.summary">Ger möjlghet att ställa in hur notifieringar om nya biljetter ska visas.</string>
  <string name="prefs.category.notify.title">Notifieringar</string>
- <string name="prefs.category.notify.vibration.summary">Använda vibration för meddelanden.</string>
+ <string name="prefs.category.notify.vibration.summary">Använd vibration för meddelanden.</string>
  <string name="prefs.category.notify.vibration.title">Vibration</string>
  <string name="prefs.category.notify.sound.summary">Välj vilket ljud som ska användas, alternativt inget ljud.</string>
  <string name="prefs.category.notify.sound.title">Ljud</string>

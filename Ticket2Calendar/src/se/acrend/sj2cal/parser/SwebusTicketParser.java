@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import se.acrend.sj2cal.BuildConfig;
 import se.acrend.sj2cal.model.SwebusTicket;
 import se.acrend.sj2cal.util.DateUtil;
 
@@ -31,6 +32,9 @@ public class SwebusTicketParser extends MessageParserBase implements MessagePars
    */
   @Override
   public boolean supports(final String sender, final String message) {
+	  if (BuildConfig.DEBUG){
+		  return message.contains("Välkommen ombord!");
+	  }
     return "Swebus".equalsIgnoreCase(sender);
   }
 

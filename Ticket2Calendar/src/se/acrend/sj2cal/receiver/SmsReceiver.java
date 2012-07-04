@@ -97,7 +97,17 @@ public class SmsReceiver extends BroadcastReceiver {
     notification.when = System.currentTimeMillis();
     notification.flags = Notification.FLAG_AUTO_CANCEL;
     notification.tickerText = tickerText;
-    Intent notificationIntent = new Intent("DummyAction");
+    String value = PrefsHelper.getNotificationSound(context);
+    if (value.trim().length() > 0) {
+      notification.sound = Uri.parse(value);
+    }
+    notification.defaults = Notification.DEFAULT_LIGHTS;
+    if (PrefsHelper.isNotificationVibration(context)) {
+      notification.defaults |= Notification.DEFAULT_VIBRATE;
+    }
+    
+    Intent notificationIntent = new Intent(Intent.ACTION_VIEW, data);
+    
     PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
     notification.setLatestEventInfo(context, title, message, contentIntent);
