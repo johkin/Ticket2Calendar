@@ -24,103 +24,118 @@ import android.telephony.SmsMessage;
 
 public class SmsReceiver extends BroadcastReceiver {
 
-  private static final String TAG = "SmsReceiver";
+	private static final String TAG = "SmsReceiver";
 
-  private final List<MessageParser> parsers;
+	private final List<MessageParser> parsers;
 
-  public SmsReceiver() {
-    parsers = new ArrayList<MessageParser>();
-    parsers.add(new ConfirmationParser());
-    parsers.add(new SmsTicketParser());
-  }
+	public SmsReceiver() {
+		parsers = new ArrayList<MessageParser>();
+		parsers.add(new ConfirmationParser());
+		parsers.add(new SmsTicketParser());
+	}
 
-  @Override
-  public void onReceive(final Context context, final Intent intent) {
-    if (!PrefsHelper.isProcessIncommingMessages(context)) {
-      return;
-    }
+	@Override
+	public void onReceive(final Context context, final Intent intent) {
+		if (!PrefsHelper.isProcessIncommingMessages(context)) {
+			return;
+		}
 
-    Bundle bundle = intent.getExtras();
+		Bundle bundle = intent.getExtras();
 
-    boolean successfulAddEvent = false;
+		boolean successfulAddEvent = false;
 
-    Object messages[] = (Object[]) bundle.get("pdus");
-    String msgBody = "";
-    String sender = null;
-    for (Object message2 : messages) {
-      SmsMessage message = SmsMessage.createFromPdu((byte[]) message2);
+		Object messages[] = (Object[]) bundle.get("pdus");
+		String msgBody = "";
+		String sender = null;
+		for (Object message2 : messages) {
+			SmsMessage message = SmsMessage.createFromPdu((byte[]) message2);
 
-      String displayOriginatingAddress = message.getDisplayOriginatingAddress();
-      sender = displayOriginatingAddress;
-      msgBody += message.getDisplayMessageBody();
-    }
-    MessageParser parser = getMessageParser(sender, msgBody);
-    if (parser == null) {
-      return;
-    }
+			String displayOriginatingAddress = message
+					.getDisplayOriginatingAddress();
+			sender = displayOriginatingAddress;
+			msgBody += message.getDisplayMessageBody();
+		}
+		MessageParser parser = getMessageParser(sender, msgBody);
+		if (parser == null) {
+			return;
+		}
 
-    List<Long> eventIds = Collections.emptyList();
+		List<Long> eventIds = Collections.emptyList();
 
-    EventBase ticket = parser.parse(msgBody);
+		EventBase ticket = parser.parse(msgBody);
 
-    CalendarHelper calendarHelper = CalendarHelper.getInstance();
+		CalendarHelper calendarHelper = CalendarHelper.getInstance();
 
-    eventIds = calendarHelper.findEvents(ticket.getCode(), Confirmation.TICKET_TYPE, context);
+		eventIds = calendarHelper.findEvents(ticket.getCode(),
+				Confirmation.TICKET_TYPE, context);
 
-    Uri data = CalendarHelper.getInstance().addEvent(ticket, context);
+		Uri data = CalendarHelper.getInstance().addEvent(ticket, context);
 
-    if (data != null) {
-      successfulAddEvent = true;
-    }
+		if (data != null) {
+			successfulAddEvent = true;
+		}
 
-    createNotification(context, "Nya biljetter mottagna.", "Lagt till biljett.",
-        "Har lagt till nya biljetter i kalendern. Kontrollera informationen.", data);
+		createNotification(
+				context,
+				"Nya biljetter mottagna.",
+				"Lagt till biljett.",
+				"Har lagt till nya biljetter i kalendern. Kontrollera informationen.",
+				data, ticket);
 
-    if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
-      for (Long id : eventIds) {
-        calendarHelper.removeEvent(id, context);
-      }
-    }
+		if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
+			for (Long id : eventIds) {
+				calendarHelper.removeEvent(id, context);
+			}
+		}
 
-    if (PrefsHelper.isDeleteProcessedMessages(context) && successfulAddEvent) {
-      abortBroadcast();
-    }
-  }
+		if (PrefsHelper.isDeleteProcessedMessages(context)
+				&& successfulAddEvent) {
+			abortBroadcast();
+		}
+	}
 
-  private void createNotification(final Context context, final String tickerText, final String title,
-      final String message, final Uri data) {
-    NotificationManager notificationManager = (NotificationManager) context
-        .getSystemService(Context.NOTIFICATION_SERVICE);
+	private void createNotification(final Context context,
+			final String tickerText, final String title, final String message,
+			final Uri data, final EventBase ticket) {
+		NotificationManager notificationManager = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
 
-    Notification notification = new Notification();
-    notification.icon = R.drawable.ticket2calendar_bw;
-    notification.when = System.currentTimeMillis();
-    notification.flags = Notification.FLAG_AUTO_CANCEL;
-    notification.tickerText = tickerText;
-    String value = PrefsHelper.getNotificationSound(context);
-    if (value.trim().length() > 0) {
-      notification.sound = Uri.parse(value);
-    }
-    notification.defaults = Notification.DEFAULT_LIGHTS;
-    if (PrefsHelper.isNotificationVibration(context)) {
-      notification.defaults |= Notification.DEFAULT_VIBRATE;
-    }
-    
-    Intent notificationIntent = new Intent(Intent.ACTION_VIEW, data);
-    
-    PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+		Notification notification = new Notification();
+		notification.icon = R.drawable.ticket2calendar_bw;
+		notification.when = System.currentTimeMillis();
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		notification.tickerText = tickerText;
+		String value = PrefsHelper.getNotificationSound(context);
+		if (value.trim().length() > 0) {
+			notification.sound = Uri.parse(value);
+		}
+		notification.defaults = Notification.DEFAULT_LIGHTS;
+		if (PrefsHelper.isNotificationVibration(context)) {
+			notification.defaults |= Notification.DEFAULT_VIBRATE;
+		}
 
-    notification.setLatestEventInfo(context, title, message, contentIntent);
+		Intent notificationIntent = new Intent(Intent.ACTION_VIEW, data);
+		notificationIntent.putExtra("beginTime", ticket.getDeparture()
+				.getTimeInMillis());
+		notificationIntent.putExtra("endTime", ticket.getArrival()
+				.getTimeInMillis());
+		notificationIntent.putExtra("attendeeStatus", 1);
 
-    notificationManager.notify(1, notification);
-  }
+		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+				notificationIntent, 0);
 
-  private MessageParser getMessageParser(final String sender, final String message) {
-    for (MessageParser parser : parsers) {
-      if (parser.supports(sender, message)) {
-        return parser;
-      }
-    }
-    return null;
-  }
+		notification.setLatestEventInfo(context, title, message, contentIntent);
+
+		notificationManager.notify(1, notification);
+	}
+
+	private MessageParser getMessageParser(final String sender,
+			final String message) {
+		for (MessageParser parser : parsers) {
+			if (parser.supports(sender, message)) {
+				return parser;
+			}
+		}
+		return null;
+	}
 }

@@ -15,7 +15,7 @@
   android:summary="@string/prefs.category.notify.summary"
   android:title="@string/prefs.category.notify.title" >
   <CheckBoxPreference
-   android:defaultValue="true"
+   android:defaultValue="false"
    android:key="notifyVibration"
    android:summary="@string/prefs.category.notify.vibration.summary"
    android:title="@string/prefs.category.notify.vibration.title" />
