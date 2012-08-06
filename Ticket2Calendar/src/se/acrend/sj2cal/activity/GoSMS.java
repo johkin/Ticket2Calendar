@@ -27,7 +27,7 @@ public class GoSMS extends Activity {
       @Override
       public void onClick(final View v) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri
-            .parse("http://getsatisfaction.com/acrend/topics/gosms_biljetten_hamnar_inte_i_kalendern")));
+            .parse("https://github.com/johkin/Ticket2Calendar/wiki/GoSMS")));
       }
     });
   }
