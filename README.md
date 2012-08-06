@@ -1,6 +1,6 @@
 Ticket2Calendar is an Android app used to collect ticket/event information from a SMS and put it in a calendar instance.
 
-Currently it supports Swedens train company SJ, and there are (untested) code to support Swebus tickets.
+Currently it supports Swedens train company SJ and Swebus tickets.
 
 ## How to use it?
 
