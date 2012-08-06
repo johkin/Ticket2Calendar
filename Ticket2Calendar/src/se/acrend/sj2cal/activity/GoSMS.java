@@ -54,7 +54,7 @@ public class GoSMS extends Activity {
       return true;
     case R.id.about:
       startActivity(new Intent(Intent.ACTION_VIEW,
-          Uri.parse("http://getsatisfaction.com/acrend/topics/gosms_biljetten_hamnar_inte_i_kalendern")));
+          Uri.parse("https://github.com/johkin/Ticket2Calendar/wiki/GoSMS")));
       return true;
     default:
       return super.onOptionsItemSelected(item);
