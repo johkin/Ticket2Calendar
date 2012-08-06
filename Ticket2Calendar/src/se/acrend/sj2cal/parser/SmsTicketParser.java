@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import se.acrend.sj2cal.BuildConfig;
 import se.acrend.sj2cal.model.SmsTicket;
+import se.acrend.sj2cal.preference.PreferencesInstance;
 import se.acrend.sj2cal.util.DateUtil;
 
 public class SmsTicketParser extends MessageParserBase implements MessageParser {
@@ -28,8 +29,11 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
 
 	private SimpleDateFormat format = null;
 
-	public SmsTicketParser() {
+	private PreferencesInstance preferencesInstance;
+
+	public SmsTicketParser(PreferencesInstance preferencesInstance) {
 		super();
+		this.preferencesInstance = preferencesInstance;
 		format = new SimpleDateFormat("yyyydd MMMHH.mm",
 				DateUtil.SWEDISH_LOCALE);
 		format.setTimeZone(DateUtil.SWEDISH_TIMEZONE);
@@ -46,7 +50,10 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
 			return message.contains("+'") && message.contains("'+")
 					&& message.contains("Tåg:");
 		}
-		return "SJ Biljett".equalsIgnoreCase(sender);
+		if (preferencesInstance.isParseSj()) {
+			return "SJ Biljett".equalsIgnoreCase(sender);
+		}
+		return false;
 	}
 
 	/*

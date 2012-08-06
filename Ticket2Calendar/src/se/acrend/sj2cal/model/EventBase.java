@@ -72,14 +72,13 @@ public abstract class EventBase {
   public void setCode(final String code) {
     this.code = code;
   }
+  
+  public abstract String getTitle();
 
   public void validate() {
     ValidatorHelper.notEmpty(from, "Från");
     ValidatorHelper.notEmpty(to, "Till");
     ValidatorHelper.notEmpty(code, "Internetkod");
-
-    // ValidatorHelper.inRange(car, 0, 50, "Vagn");
-    // ValidatorHelper.inRange(seat, 0, 200, "Säte");
 
     ValidatorHelper.notEmpty(departure, "Avgång");
     ValidatorHelper.notEmpty(arrival, "Ankomst");

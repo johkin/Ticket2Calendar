@@ -16,7 +16,7 @@ public class SwebusTicketParserTest {
 
   @Before
   public void setUp() throws Exception {
-    parser = new SwebusTicketParser();
+    parser = new SwebusTicketParser(new TestPreferencesInstance());
   }
 
   @Test

@@ -51,6 +51,20 @@ public class PrefsHelper {
 		SharedPreferences prefs = getPrefs(context);
 		return prefs.getBoolean("notifyVibration", true);
 	}
+	
+	public static boolean isParseSj(final Context context) {
+		SharedPreferences prefs = getPrefs(context);
+		return prefs.getBoolean("parseSJ", true);
+	}
+	
+	public static boolean isParseSwebus(final Context context) {
+		SharedPreferences prefs = getPrefs(context);
+		return prefs.getBoolean("parseSwebus", true);
+	}
+	
+	public static PreferencesInstance getInstance(final Context context) {
+		return new DefaultPreferencesInstance(context);
+	}
 
 	public static boolean isShowAbout(final Context context) {
 		PackageManager manager = context.getPackageManager();
@@ -73,5 +87,27 @@ public class PrefsHelper {
 					"Kunde inte hämta information för paket: "
 							+ context.getPackageName(), e);
 		}
+	}
+	
+	static class DefaultPreferencesInstance implements PreferencesInstance {
+
+		private final Context context;
+		
+		public DefaultPreferencesInstance(Context context) {
+			this.context = context;
+		}
+
+		@Override
+		public boolean isParseSj() {
+			return PrefsHelper.isParseSj(context);
+		}
+
+		@Override
+		public boolean isParseSwebus() {
+			return PrefsHelper.isParseSj(context);
+		}
+		
+		
+		
 	}
 }

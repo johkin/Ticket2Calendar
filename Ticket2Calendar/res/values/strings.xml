@@ -13,17 +13,13 @@
  <string name="about.header">Om Ticket2Calendar</string>
  <string name="about.text">1.2.0\n
     \tLagt till möjlighet att välja ljud eller vibration för notifiering.\n
-    \tLagt till möjlighet att välja ljud eller vibration för notifiering.\n
+    \tLagt till experimentellt stöd för Swebus-biljetter.\n
     1.1.1\n
     \tUppdatering av sms-tolkning efter ändring av SJ.\n
-  1.1.0\n
+    1.1.0\n
     \tUppdatering för Android 4 och rättning av datumhantering runt årsskiftet.\n
-    1.0.8\n
-    \tBytt namn och logo efter juridisk inrådan.\n
-    1.0.7\n
-    \tRättat länk till Trafikverket.\n
     \n
-    Applikationen har utvecklats för eget bruk, utan koppling till SJ.\n    
+    Applikationen har utvecklats för eget bruk, utan koppling till SJ eller Swebus.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
     eller registreras på getSatisfaction genom länken i inställningarna.\n
     Ticket2Calendar används på egen risk, Acrend tar inget ansvar för försvunna eller felaktiga biljetter.\n
@@ -31,17 +27,23 @@
     Instruktioner\n
     \t1. Välj vilken kalender du vill att biljetterna ska läggas i.\n
     \t2. För att aktivera funktionen, välj "Läs inkommande SMS".\n
-    \t3. I vissa fall får man både en bekräftelse på sin beställning och senare en mobilbiljett.\n 
+    \t3. Välj vilka typer av biljetter du vill hantera, SJ och/eller Swebus.\n
+    \t4. I vissa fall får man både en bekräftelse på sin beställning och senare en mobilbiljett.\n 
     \t\tFör att inte få dubletter av kalenderposter, välj "Ersätt kalenderposter för samma biljettnummer".\n
-    \t4. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS".\n 
+    \t5. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS".\n 
     \t\tApplikationen kommer då att ta bort meddelandet från inkorgen.\n
     \n
     \n
-    Vid eventuella fel, som att applikationen inte kan tyda meddelandet från SJ, kommer meddelandet att ligga 
+    Vid eventuella fel, som att applikationen inte kan tyda meddelandet, kommer det att ligga 
     kvar i inkorgen. Man kan även skicka mobilbiljetten igen från www.sj.se.</string>
  <string name="prefs.category.sms">SMS</string>
  <string name="prefs.category.sms.processIncomingMessages">Läs inkommande SMS</string>
  <string name="prefs.category.sms.processIncomingMessages.summary">Tolkar inkommande SMS och lägger till information i vald kalender.</string>
+ <string name="prefs.category.sms.parsers">Välj biljett-typer</string>
+ <string name="prefs.category.sms.parsers.sj">SJ</string>
+ <string name="prefs.category.sms.parsers.sj.summary">Hanterar bekräftelser och biljetter från SJ.</string>
+ <string name="prefs.category.sms.parsers.swebus">Swebus</string>
+ <string name="prefs.category.sms.parsers.swebus.summary">Hanterar biljetter från Swebus. OBS! Experimentellt stöd, testa funktionen innan du kryssar i "Ta bort bearbetade SMS".</string>
  <string name="prefs.category.sms.deleteProcessedMessage">Ta bort bearbetade SMS</string>
  <string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
  <string name="prefs.category.calendar">Kalender</string>

@@ -11,6 +11,8 @@ import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.parser.ConfirmationParser;
 import se.acrend.sj2cal.parser.MessageParser;
 import se.acrend.sj2cal.parser.SmsTicketParser;
+import se.acrend.sj2cal.parser.SwebusTicketParser;
+import se.acrend.sj2cal.preference.PreferencesInstance;
 import se.acrend.sj2cal.preference.PrefsHelper;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -26,16 +28,11 @@ public class SmsReceiver extends BroadcastReceiver {
 
 	private static final String TAG = "SmsReceiver";
 
-	private final List<MessageParser> parsers;
-
-	public SmsReceiver() {
-		parsers = new ArrayList<MessageParser>();
-		parsers.add(new ConfirmationParser());
-		parsers.add(new SmsTicketParser());
-	}
+	private List<MessageParser> parsers;
 
 	@Override
 	public void onReceive(final Context context, final Intent intent) {
+		initParsers(context);
 		if (!PrefsHelper.isProcessIncommingMessages(context)) {
 			return;
 		}
@@ -77,9 +74,9 @@ public class SmsReceiver extends BroadcastReceiver {
 
 		createNotification(
 				context,
-				"Nya biljetter mottagna.",
+				"Ny biljett mottagen.",
 				"Lagt till biljett.",
-				"Har lagt till nya biljetter i kalendern. Kontrollera informationen.",
+				"Har lagt till ny biljett i kalendern. Kontrollera informationen.",
 				data, ticket);
 
 		if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
@@ -92,6 +89,19 @@ public class SmsReceiver extends BroadcastReceiver {
 				&& successfulAddEvent) {
 			abortBroadcast();
 		}
+	}
+
+	private void initParsers(Context context) {
+		if (parsers == null || parsers.isEmpty()) {
+			
+			PreferencesInstance preferencesInstance = PrefsHelper.getInstance(context);
+			
+			parsers = new ArrayList<MessageParser>();
+			parsers.add(new ConfirmationParser(preferencesInstance));
+			parsers.add(new SmsTicketParser(preferencesInstance));
+			parsers.add(new SwebusTicketParser(preferencesInstance));
+		}
+
 	}
 
 	private void createNotification(final Context context,
