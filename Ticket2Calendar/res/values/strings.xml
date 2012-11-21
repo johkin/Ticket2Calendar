@@ -11,13 +11,13 @@
     Läs mer om problemet genom att klicka på knappen nedan.</string>
  <string name="gosms.moreinfo">Mer information</string>
  <string name="about.header">Om Ticket2Calendar</string>
- <string name="about.text">1.2.0\n
+ <string name="about.text">1.2.2\n
+     \tUppgradering för Android 4.2.\n
+     1.2.1\n
+     \tRättning av länk till Github.\n
+     1.2.0\n
     \tLagt till möjlighet att välja ljud eller vibration för notifiering.\n
     \tLagt till experimentellt stöd för Swebus-biljetter.\n
-    1.1.1\n
-    \tUppdatering av sms-tolkning efter ändring av SJ.\n
-    1.1.0\n
-    \tUppdatering för Android 4 och rättning av datumhantering runt årsskiftet.\n
     \n
     Applikationen har utvecklats för eget bruk, utan koppling till SJ eller Swebus.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
@@ -30,8 +30,7 @@
     \t3. Välj vilka typer av biljetter du vill hantera, SJ och/eller Swebus.\n
     \t4. I vissa fall får man både en bekräftelse på sin beställning och senare en mobilbiljett.\n 
     \t\tFör att inte få dubletter av kalenderposter, välj "Ersätt kalenderposter för samma biljettnummer".\n
-    \t5. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS".\n 
-    \t\tApplikationen kommer då att ta bort meddelandet från inkorgen.\n
+    \t5. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS". Applikationen kommer då att ta bort meddelandet från inkorgen.\n
     \n
     \n
     Vid eventuella fel, som att applikationen inte kan tyda meddelandet, kommer det att ligga 
@@ -43,7 +42,7 @@
  <string name="prefs.category.sms.parsers.sj">SJ</string>
  <string name="prefs.category.sms.parsers.sj.summary">Hanterar bekräftelser och biljetter från SJ.</string>
  <string name="prefs.category.sms.parsers.swebus">Swebus</string>
- <string name="prefs.category.sms.parsers.swebus.summary">Hanterar biljetter från Swebus. OBS! Experimentellt stöd, testa funktionen innan du kryssar i "Ta bort bearbetade SMS".</string>
+ <string name="prefs.category.sms.parsers.swebus.summary">Hanterar biljetter från Swebus.</string>
  <string name="prefs.category.sms.deleteProcessedMessage">Ta bort bearbetade SMS</string>
  <string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
  <string name="prefs.category.calendar">Kalender</string>
