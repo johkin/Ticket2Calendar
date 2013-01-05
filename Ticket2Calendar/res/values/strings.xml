@@ -43,7 +43,9 @@
  <string name="prefs.category.sms.parsers.sj">SJ</string>
  <string name="prefs.category.sms.parsers.sj.summary">Hanterar bekräftelser och biljetter från SJ.</string>
  <string name="prefs.category.sms.parsers.swebus">Swebus</string>
- <string name="prefs.category.sms.parsers.swebus.summary">Hanterar biljetter från Swebus. OBS! Experimentellt stöd, testa funktionen innan du kryssar i "Ta bort bearbetade SMS".</string>
+ <string name="prefs.category.sms.parsers.swebus.summary">Hanterar biljetter från Swebus.</string>
+ <string name="prefs.category.sms.parsers.oresund">Öresundståg</string>
+ <string name="prefs.category.sms.parsers.oresund.summary">Hanterar biljetter från Öresundståg.</string>
  <string name="prefs.category.sms.deleteProcessedMessage">Ta bort bearbetade SMS</string>
  <string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
  <string name="prefs.category.calendar">Kalender</string>

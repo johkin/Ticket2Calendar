@@ -18,10 +18,15 @@
                 android:summary="@string/prefs.category.sms.parsers.sj.summary"
                 android:title="@string/prefs.category.sms.parsers.sj" />
             <CheckBoxPreference
-                android:defaultValue="false"
+                android:defaultValue="true"
                 android:key="parseSwebus"
                 android:summary="@string/prefs.category.sms.parsers.swebus.summary"
                 android:title="@string/prefs.category.sms.parsers.swebus" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="parseOresund"
+                android:summary="@string/prefs.category.sms.parsers.oresund.summary"
+                android:title="@string/prefs.category.sms.parsers.oresund" />
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
@@ -61,7 +66,7 @@
         <se.acrend.sj2cal.preference.LinkPreference
             android:summary="@string/prefs.category.help.wiki.summary"
             android:title="@string/prefs.category.help.wiki.title"
-            android:value="https://github.com/johkin/Ticket2Calendar/wiki/Ticket-2-Calendar" />
+            android:value="https://github.com/johkin/Ticket2Calendar/wiki" />
     </PreferenceCategory>
 
 </PreferenceScreen>

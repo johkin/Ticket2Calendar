@@ -10,6 +10,7 @@ import se.acrend.sj2cal.model.Confirmation;
 import se.acrend.sj2cal.model.EventBase;
 import se.acrend.sj2cal.parser.ConfirmationParser;
 import se.acrend.sj2cal.parser.MessageParser;
+import se.acrend.sj2cal.parser.OresundsTicketParser;
 import se.acrend.sj2cal.parser.SmsTicketParser;
 import se.acrend.sj2cal.parser.SwebusTicketParser;
 import se.acrend.sj2cal.preference.PreferencesInstance;
@@ -100,6 +101,7 @@ public class SmsReceiver extends BroadcastReceiver {
 			parsers.add(new ConfirmationParser(preferencesInstance));
 			parsers.add(new SmsTicketParser(preferencesInstance));
 			parsers.add(new SwebusTicketParser(preferencesInstance));
+			parsers.add(new OresundsTicketParser(preferencesInstance));
 		}
 
 	}

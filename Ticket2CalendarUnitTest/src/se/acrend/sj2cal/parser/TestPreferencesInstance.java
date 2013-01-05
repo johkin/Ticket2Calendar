@@ -14,4 +14,8 @@ public class TestPreferencesInstance implements PreferencesInstance {
 		return true;
 	}
 
+	@Override
+	public boolean isParseOresund() {
+		return true;
+	}
 }

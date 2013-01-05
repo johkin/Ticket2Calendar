@@ -9,5 +9,7 @@ public interface PreferencesInstance {
 	boolean isParseSj();
 
 	boolean isParseSwebus();
+	
+	boolean isParseOresund();
 
 }

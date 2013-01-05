@@ -61,6 +61,10 @@ public class PrefsHelper {
 		SharedPreferences prefs = getPrefs(context);
 		return prefs.getBoolean("parseSwebus", true);
 	}
+	public static boolean isParseOresund(Context context) {
+		SharedPreferences prefs = getPrefs(context);
+		return prefs.getBoolean("parseOresund", true);
+	}
 	
 	public static PreferencesInstance getInstance(final Context context) {
 		return new DefaultPreferencesInstance(context);
@@ -106,6 +110,13 @@ public class PrefsHelper {
 		public boolean isParseSwebus() {
 			return PrefsHelper.isParseSj(context);
 		}
+
+		@Override
+		public boolean isParseOresund() {
+			return PrefsHelper.isParseOresund(context);
+		}
+		
+		
 		
 		
 		
