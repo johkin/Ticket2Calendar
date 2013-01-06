@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:padding="10dp">
-	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:padding="5dp">
-		<ImageView android:src="@drawable/ticket2calendar_bw"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" />
-		<TextView android:id="@+id/aboutHeader" android:text="@string/about.header"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:gravity="center_vertical" style="android.R.style.TextAppearance_Large" android:layout_gravity="center_vertical" />
-	</LinearLayout>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
 
-	<ScrollView android:layout_height="fill_parent"
-		android:layout_width="fill_parent">
-			<TextView android:text="@string/about.text"
-				android:layout_height="wrap_content" android:layout_width="fill_parent"
-				android:scrollHorizontally="false" android:scrollbars="vertical"
-				android:id="@+id/aboutText"></TextView>
-	</ScrollView>
+    <TextView
+        android:id="@+id/aboutHeader"
+        style="android.R.style.TextAppearance_Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawableLeft="@drawable/ticket2calendar_bw"
+        android:gravity="center_vertical"
+        android:text="@string/about.header" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/aboutText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollHorizontally="false"
+                android:scrollbars="vertical"
+                android:text="@string/about.text" />
+
+            <Button
+                android:id="@+id/aboutClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/menu.exit" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
