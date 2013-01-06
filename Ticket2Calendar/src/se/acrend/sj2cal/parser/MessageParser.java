@@ -4,8 +4,10 @@ import se.acrend.sj2cal.model.EventBase;
 
 public interface MessageParser {
 
-  boolean supports(String sender, String message);
+  String getParserName();
 
-  EventBase parse(String message);
+  boolean supports(final String sender, final String message);
+
+  EventBase parse(final String message);
 
 }

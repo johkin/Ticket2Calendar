@@ -1,5 +1,7 @@
 package se.acrend.sj2cal.activity;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.application.Sj2CalApp;
 import android.content.Intent;
@@ -13,6 +15,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class Preferences extends PreferenceActivity {
+  
+  @Override
+  public void onStart() {
+    super.onStart();
+    EasyTracker.getInstance().activityStart(this);
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    EasyTracker.getInstance().activityStop(this);
+  }
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
