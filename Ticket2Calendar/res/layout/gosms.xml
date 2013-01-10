@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:padding="10dp">
-	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:padding="5dp">
-		<ImageView android:src="@drawable/stat_sys_warning"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_gravity="bottom" />
-		<TextView android:id="@+id/aboutHeader" android:text="@string/gosms.header"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:gravity="center_vertical" style="android.R.style.TextAppearance_Large" />
-	</LinearLayout>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
 
-	<TextView android:text="@string/gosms.text"
-		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:scrollHorizontally="false" android:scrollbars="vertical"
-		android:id="@+id/aboutText"></TextView>
+    <TextView
+        android:id="@+id/goSmsHeader"
+        style="android.R.style.TextAppearance_Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/stat_sys_warning"
+        android:gravity="center_vertical"
+        android:text="@string/gosms.header" />
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-	<Button android:id="@+id/linkButton" android:text="@string/gosms.moreinfo"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/aboutText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollHorizontally="false"
+                android:scrollbars="vertical"
+                android:text="@string/gosms.text" >
+            </TextView>
+
+            <Button
+                android:id="@+id/linkButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/gosms.moreinfo" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

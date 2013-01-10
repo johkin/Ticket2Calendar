@@ -8,10 +8,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 
-public class Sj2CalApp extends Application {
+public class Ticket2CalApp extends Application {
 
   private static final String COM_JB_GOSMS = "com.jb.gosms";
-  private static final String SJ_2_CAL = "se.acrend.sj2cal";
 
   private static final String TAG = "Sj2CalApp";
 

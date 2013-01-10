@@ -1,13 +1,14 @@
 package se.acrend.sj2cal.activity;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 import se.acrend.sj2cal.R;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class About extends Activity {
 
@@ -28,31 +29,19 @@ public class About extends Activity {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.about);
-  }
 
-  @Override
-  public void onAttachedToWindow() {
-    super.onAttachedToWindow();
-
-    openOptionsMenu();
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(final Menu menu) {
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.close_menu, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(final MenuItem item) {
-    switch (item.getItemId()) {
-    case R.id.exit:
-      this.finish();
-      return true;
-    default:
-      return super.onOptionsItemSelected(item);
+    TextView header = (TextView) findViewById(R.id.aboutHeader);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+      header.setVisibility(View.GONE);
     }
-  }
 
+    Button close = (Button) findViewById(R.id.aboutClose);
+    close.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(final View v) {
+        About.this.finish();
+      }
+    });
+  }
 }

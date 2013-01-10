@@ -3,7 +3,7 @@ package se.acrend.sj2cal.activity;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import se.acrend.sj2cal.R;
-import se.acrend.sj2cal.application.Sj2CalApp;
+import se.acrend.sj2cal.application.Ticket2CalApp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -49,7 +49,7 @@ public class Preferences extends PreferenceActivity {
 
     enableProcessIncoming(processIncoming, calendarId.getValue());
 
-    Sj2CalApp application = (Sj2CalApp) getApplication();
+    Ticket2CalApp application = (Ticket2CalApp) getApplication();
     if (application.isGoSmsInstalled()) {
       startActivity(new Intent().setClass(this, GoSMS.class));
     }
