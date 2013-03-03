@@ -6,3 +6,5 @@
 /Ticket2Calendar/.settings
 
 /Ticket2CalendarUnitTest/bin
+.gradle
+/Ticket2Calendar/build

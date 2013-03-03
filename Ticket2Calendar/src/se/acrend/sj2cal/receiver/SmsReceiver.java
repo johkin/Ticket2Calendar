@@ -15,6 +15,7 @@ import se.acrend.sj2cal.parser.SmsTicketParser;
 import se.acrend.sj2cal.parser.SwebusTicketParser;
 import se.acrend.sj2cal.preference.PreferencesInstance;
 import se.acrend.sj2cal.preference.PrefsHelper;
+import se.acrend.sj2cal.service.StatisticsService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -25,9 +26,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.Tracker;
-
 public class SmsReceiver extends BroadcastReceiver {
 
   private static final String TAG = "SmsReceiver";
@@ -36,73 +34,74 @@ public class SmsReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(final Context context, final Intent intent) {
-    EasyTracker easyTracker = EasyTracker.getInstance();
-    easyTracker.setContext(context);
-    Tracker tracker = EasyTracker.getTracker();
-    try {
-      initParsers(context);
+    initParsers(context);
 
-      if (!PrefsHelper.isProcessIncommingMessages(context)) {
-        return;
-      }
+    if (!PrefsHelper.isProcessIncommingMessages(context)) {
+      return;
+    }
 
-      Bundle bundle = intent.getExtras();
+    Bundle bundle = intent.getExtras();
 
-      boolean successfulAddEvent = false;
+    boolean successfulAddEvent = false;
 
-      Object messages[] = (Object[]) bundle.get("pdus");
-      String msgBody = "";
-      String sender = null;
-      for (Object message2 : messages) {
-        SmsMessage message = SmsMessage.createFromPdu((byte[]) message2);
+    Object messages[] = (Object[]) bundle.get("pdus");
+    String msgBody = "";
+    String sender = null;
+    for (Object message2 : messages) {
+      SmsMessage message = SmsMessage.createFromPdu((byte[]) message2);
 
-        String displayOriginatingAddress = message.getDisplayOriginatingAddress();
-        sender = displayOriginatingAddress;
-        msgBody += message.getDisplayMessageBody();
-      }
-      MessageParser parser = getMessageParser(sender, msgBody);
-      if (parser == null) {
-        return;
-      }
+      String displayOriginatingAddress = message.getDisplayOriginatingAddress();
+      sender = displayOriginatingAddress;
+      msgBody += message.getDisplayMessageBody();
+    }
+    MessageParser parser = getMessageParser(sender, msgBody);
+    if (parser == null) {
+      return;
+    }
 
-      List<Long> eventIds = Collections.emptyList();
+    List<Long> eventIds = Collections.emptyList();
 
-      EventBase ticket = parser.parse(msgBody);
+    EventBase ticket = parser.parse(msgBody);
 
-      tracker.trackEvent("Sms", "parse", parser.getParserName(), null);
+    trackEvent(context, "parse", parser.getParserName());
 
-      CalendarHelper calendarHelper = CalendarHelper.getInstance();
+    CalendarHelper calendarHelper = CalendarHelper.getInstance();
 
-      eventIds = calendarHelper.findEvents(ticket.getCode(), Confirmation.TICKET_TYPE, context);
+    eventIds = calendarHelper.findEvents(ticket.getCode(), Confirmation.TICKET_TYPE, context);
 
-      Uri data = CalendarHelper.getInstance().addEvent(ticket, context);
+    Uri data = calendarHelper.addEvent(ticket, context);
 
-      if (data != null) {
-        successfulAddEvent = true;
-      }
+    if (data != null) {
+      successfulAddEvent = true;
+    }
 
-      createNotification(context, "Ny biljett mottagen.", "Lagt till biljett.",
-          "Har lagt till ny biljett i kalendern. Kontrollera informationen.", data, ticket);
+    createNotification(context, "Ny biljett mottagen.", "Lagt till biljett.",
+        "Har lagt till ny biljett i kalendern. Kontrollera informationen.", data, ticket);
 
-      if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
-        tracker.trackEvent("Sms", "replace ticket", null, null);
-        for (Long id : eventIds) {
-          calendarHelper.removeEvent(id, context);
-        }
-      }
-
-      if (PrefsHelper.isDeleteProcessedMessages(context) && successfulAddEvent) {
-        tracker.trackEvent("Sms", "delete processed", null, null);
-        abortBroadcast();
-      }
-    } finally {
-      if (tracker != null) {
-        tracker.close();
-      }
-      if (easyTracker != null) {
-        easyTracker.dispatch();
+    if (PrefsHelper.isReplaceTicket(context) && successfulAddEvent) {
+      trackEvent(context, "replace ticket", null);
+      for (Long id : eventIds) {
+        calendarHelper.removeEvent(id, context);
       }
     }
+
+    if (PrefsHelper.isDeleteProcessedMessages(context) && successfulAddEvent) {
+      trackEvent(context, "delete processed", null);
+      abortBroadcast();
+    }
+
+  }
+
+  void trackEvent(final Context context, final String action, final String label) {
+    Intent intent = new Intent(context, StatisticsService.class);
+
+    intent.putExtra("category", "SMS");
+    intent.putExtra("action", action);
+    if (label != null) {
+    	intent.putExtra("label", label);
+    }
+
+    context.startService(intent);
   }
 
   private void initParsers(final Context context) {
