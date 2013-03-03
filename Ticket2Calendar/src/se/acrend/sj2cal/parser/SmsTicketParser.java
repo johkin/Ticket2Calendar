@@ -30,11 +30,11 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   private SimpleDateFormat format = null;
 
   private final PreferencesInstance preferencesInstance;
-
+  
   public SmsTicketParser(final PreferencesInstance preferencesInstance) {
     super();
     this.preferencesInstance = preferencesInstance;
-    format = new SimpleDateFormat("yyyydd MMMHH.mm", DateUtil.SWEDISH_LOCALE);
+    format = new SimpleDateFormat("yyyydd MMMHHmm", DateUtil.SWEDISH_LOCALE);
     format.setTimeZone(DateUtil.SWEDISH_TIMEZONE);
   }
 
@@ -70,11 +70,11 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
 
     String date = findValue(message, "(\\d{1,2} \\D{3}) kl .*", "datum");
 
-    String from = findValue(message, "Avg. (.*) \\d{1,2}\\.", "avreseort");
-    String fromTime = findValue(message, "Avg. .* (\\d{1,2}\\.\\d{2})", "avgångstid");
+    String from = findValue(message, "Avg. (.*) \\d{1,2}[\\.:]", "avreseort");
+    String fromTime = findValue(message, "Avg. .* (\\d{1,2}[\\.:]\\d{2})", "avgångstid");
 
-    String to = findValue(message, "Ank. (.*) \\d{1,2}\\.", "ankomstort");
-    String toTime = findValue(message, "Ank. .* (\\d{1,2}\\.\\d{2})", "ankomsttid");
+    String to = findValue(message, "Ank. (.*) \\d{1,2}[\\.:]", "ankomstort");
+    String toTime = findValue(message, "Ank. .* (\\d{1,2}[\\.:]\\d{2})", "ankomsttid");
     try {
       Calendar departure = createCalendar(date, fromTime);
       ticket.setFrom(from);
@@ -113,16 +113,12 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   }
 
   private Calendar createCalendar(final String date, final String time) {
-    Calendar cal = Calendar.getInstance();
-    Calendar now = Calendar.getInstance();
+    Calendar cal = getTimeSource().getCalendar();
+    Calendar now = getTimeSource().getCalendar();
     int currentYear = now.get(Calendar.YEAR);
     try {
-      cal.setTime(format.parse(currentYear + date + time));
-      // Om biljetten utfärdades före idag har vi gjort fel, lägg på ett
-      // år
-      if (cal.before(now)) {
-        cal.add(Calendar.YEAR, 1);
-      }
+    	String timeWithoutDelimiter = time.replace(":", "").replace(".", "");
+      cal.setTime(format.parse(currentYear + date + timeWithoutDelimiter));
     } catch (ParseException e) {
       throw new IllegalArgumentException("Kunde inte tolka datum.", e);
     }
