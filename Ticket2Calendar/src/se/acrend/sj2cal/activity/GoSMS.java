@@ -10,23 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 public class GoSMS extends Activity {
 
   private Button linkButton;
-
-  @Override
-  public void onStart() {
-    super.onStart();
-    EasyTracker.getInstance().activityStart(this);
-  }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-    EasyTracker.getInstance().activityStop(this);
-  }
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {

@@ -1,13 +1,11 @@
 package se.acrend.sj2cal.activity;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
 import se.acrend.sj2cal.R;
 import se.acrend.sj2cal.application.Ticket2CalApp;
+import se.acrend.sj2cal.calendar.CalendarListPreference;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.Menu;
@@ -15,18 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class Preferences extends PreferenceActivity {
-  
-  @Override
-  public void onStart() {
-    super.onStart();
-    EasyTracker.getInstance().activityStart(this);
-  }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-    EasyTracker.getInstance().activityStop(this);
-  }
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -36,7 +22,8 @@ public class Preferences extends PreferenceActivity {
 
     final CheckBoxPreference processIncoming = (CheckBoxPreference) getPreferenceScreen().findPreference(
         "processIncomingMessages");
-    ListPreference calendarId = (ListPreference) getPreferenceScreen().findPreference("calendarId");
+    CalendarListPreference calendarId = (CalendarListPreference) getPreferenceScreen().findPreference("calendarId");
+    startManagingCursor(calendarId.getCursor());
     calendarId.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
       @Override
