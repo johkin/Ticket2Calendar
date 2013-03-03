@@ -3,16 +3,17 @@ package se.acrend.sj2cal.calendar;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ListAdapter;
+import android.widget.CursorAdapter;
 
 public class CalendarListPreference extends ListPreference {
 
   private static final String TAG = "CalendarListPreference";
 
-  private final ListAdapter adapter;
+  private final CursorAdapter adapter;
 
   private long calendarId = -1;
 
@@ -71,5 +72,9 @@ public class CalendarListPreference extends ListPreference {
       setValue(strVal);
       updateSummary();
     }
+  }
+
+  public Cursor getCursor() {
+    return adapter.getCursor();
   }
 }

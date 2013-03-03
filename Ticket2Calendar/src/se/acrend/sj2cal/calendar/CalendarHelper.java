@@ -13,7 +13,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
-import android.widget.ListAdapter;
+import android.widget.CursorAdapter;
 
 public abstract class CalendarHelper {
 
@@ -40,7 +40,7 @@ public abstract class CalendarHelper {
     return instance;
   }
 
-  public abstract ListAdapter getCalendarList(final Context context);
+  public abstract CursorAdapter getCalendarList(final Context context);
 
   public Uri addEvent(final EventBase ticket, final Context context) {
     long calendarId = PrefsHelper.getCalendarId(context);
@@ -49,7 +49,7 @@ public abstract class CalendarHelper {
     }
     ContentValues event = new ContentValues();
     event.put("calendar_id", calendarId);
-    
+
     event.put("title", ticket.getTitle());
 
     event.put("description", ticket.toString());
@@ -94,6 +94,8 @@ public abstract class CalendarHelper {
     while (managedCursor.moveToNext()) {
       eventIds.add(managedCursor.getLong(colIndex));
     }
+
+    managedCursor.close();
 
     return eventIds;
   }

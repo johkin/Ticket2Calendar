@@ -7,13 +7,13 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.CalendarContract;
-import android.widget.ListAdapter;
+import android.widget.CursorAdapter;
 import android.widget.Toast;
 
 public class CalendarHelperIcs extends CalendarHelper {
 
   @Override
-  public ListAdapter getCalendarList(final Context context) {
+  public CursorAdapter getCalendarList(final Context context) {
 
     String[] projection = new String[] { BaseColumns._ID, CalendarContract.Calendars.NAME,
         CalendarContract.Calendars.OWNER_ACCOUNT, CalendarContract.Calendars.CALENDAR_COLOR };
@@ -23,7 +23,7 @@ public class CalendarHelperIcs extends CalendarHelper {
         CalendarContract.Calendars.VISIBLE + "=1 and " + CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL + "=700",
         null, null);
 
-    ListAdapter adapter = null;
+    CursorAdapter adapter = null;
 
     if ((managedCursor != null) && managedCursor.moveToFirst()) {
       adapter = new CalendarSpinnerAdapterIcs(context, managedCursor);
