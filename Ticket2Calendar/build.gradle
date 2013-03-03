@@ -1,0 +1,56 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:0.3'
+	}
+}
+apply plugin: 'android'
+
+dependencies {
+	compile 'lib/libGoogleAnalyticsV2.jar'
+}
+
+android {
+	
+	sourceSets {
+		main {
+			manifest{
+				srcFile 'AndroidManifest.xml'
+			}
+			java {
+				srcDir 'src'
+				exclude 'some/unwanted/package/**'
+			}
+			res {
+				srcDir 'res'
+			}
+			assets {
+				srcDir 'assets'
+			}
+			resources {
+				srcDir 'src'
+			}
+		}
+	}
+	
+	target = 'android-17'
+	defaultConfig {
+        versionCode = 130
+        versionName = '1.3.0'
+    }
+	
+	buildTypes {
+		debug {
+			packageNameSuffix = ".debug"
+			buildConfig "private final static boolean STAGING = false;"
+		}
+		release {
+			buildConfig "private final static boolean STAGING = false;"
+		}
+	}
+}
+task createWrapper(type: Wrapper) {
+	
+}
