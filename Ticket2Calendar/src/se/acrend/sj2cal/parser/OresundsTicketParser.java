@@ -65,13 +65,13 @@ public class OresundsTicketParser extends MessageParserBase implements MessagePa
   public SmsTicket parse(final String message) {
     SmsTicket ticket = new SmsTicket();
 
-    String date = findValue(message, "(\\d{1,2} \\D{3}) kl .*", "datum");
+    String date = findValue(message, "(\\d{1,2} \\D{3}) \\d{1,2}:\\d{2}", "datum");
 
-    String from = findValue(message, "Avg: (.*) \\d{1,2}\\:", "avreseort");
-    String fromTime = findValue(message, "Avg: .* (\\d{1,2}\\:\\d{2})", "avgångstid");
+    String from = findValue(message, "Avg (.*) \\d{1,2}\\:", "avreseort");
+    String fromTime = findValue(message, "Avg .* (\\d{1,2}\\:\\d{2})", "avgångstid");
 
-    String to = findValue(message, "Ank: (.*) \\d{1,2}\\:", "ankomstort");
-    String toTime = findValue(message, "Ank: .* (\\d{1,2}\\:\\d{2})", "ankomsttid");
+    String to = findValue(message, "Ank (.*) \\d{1,2}\\:", "ankomstort");
+    String toTime = findValue(message, "Ank .* (\\d{1,2}\\:\\d{2})", "ankomsttid");
     try {
       Calendar departure = createCalendar(date, fromTime);
       ticket.setFrom(from);
@@ -90,8 +90,8 @@ public class OresundsTicketParser extends MessageParserBase implements MessagePa
     String train = findValue(message, "[Ö|O]-T[å|a]g, T[å|a]g (\\d*)", "tågnr");
     ticket.setTrain(Integer.parseInt(train));
 
-    String car = findValue(message, "Vagn: (\\d*),", "vagn");
-    String seat = findValue(message, "Plats: (\\d*)", "plats");
+    String car = findValue(message, "Vagn (\\d*)", "vagn");
+    String seat = findValue(message, "Plats (\\d*)", "plats");
 
     if ((car != null) && (car.length() > 0)) {
       ticket.setCar(Integer.parseInt(car));
@@ -100,7 +100,7 @@ public class OresundsTicketParser extends MessageParserBase implements MessagePa
       ticket.setSeat(Integer.parseInt(seat));
     }
 
-    ticket.setCode(findValue(message, "Bilj. Nr (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
+    ticket.setCode(findValue(message, "Biljnr (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
 
     ticket.setMessage(message);
 

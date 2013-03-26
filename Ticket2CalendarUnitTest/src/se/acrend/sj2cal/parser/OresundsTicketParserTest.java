@@ -25,14 +25,14 @@ public class OresundsTicketParserTest {
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Helsingborg C", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2013-12-19 17:53:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
+    assertEquals(Timestamp.valueOf("2014-03-20 16:53:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
     assertEquals("Göteborg C", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2013-12-19 20:15:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
-    assertEquals(14, ticket.getCar());
-    assertEquals(246, ticket.getSeat());
-    assertEquals("PMX5728X0002", ticket.getCode());
-    assertEquals(1074, ticket.getTrain());
-    assertEquals("http://www5.trafikverket.se/taginfo/WapPages/TrainShow.aspx?train=20131219,1074", ticket.getUrl());
+    assertEquals(Timestamp.valueOf("2014-03-20 19:15:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
+    assertEquals(11, ticket.getCar());
+    assertEquals(62, ticket.getSeat());
+    assertEquals("CML1778O0002", ticket.getCode());
+    assertEquals(1068, ticket.getTrain());
+    assertEquals("http://www5.trafikverket.se/taginfo/WapPages/TrainShow.aspx?train=20140320,1068", ticket.getUrl());
   }
 
 }

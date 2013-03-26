@@ -1,12 +1,11 @@
-19 dec kl 17:53
-FÖRKÖPT ENKEL
+20 mar 16:53 FÖRKÖPT ENKEL
 MIKAEL WALLIN, Vuxen
-Ö-Tåg, Tåg 1074
-Avg: Helsingborg C 17:53
-Ank: Göteborg C 20:15
+Ö-Tåg, Tåg 1068
+Avg Helsingborg C 16:53
+Ank Göteborg C 19:15
 Slutdest: Göteborg C
-2 Klass
-Vagn: 14, Plats: 246
-Resan kan inte ombokas/återbetalas
-Biljetten visas med giltig id-handling
-Bilj. Nr PMX5728X0002
+2 Kl
+Vagn 11 Plats 62
+Kan ej ombokas/återbetalas
+Bilj. visas med giltig ID-handling
+Biljnr CML1778O0002
