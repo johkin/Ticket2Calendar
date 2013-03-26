@@ -12,15 +12,13 @@
  <string name="gosms.moreinfo">Mer information</string>
  <string name="about.header">Om Ticket2Calendar</string>
  <string name="about.text">
+     1.3.2\n
+     \tUppdatering för Öresundståg.\n
      1.3.1\n
      \tMindre rättning av statistik.\n
      1.3.0\n
      \tLagt till stöd för Öresundståg.\n
      \tLagt till analysverktyg för att förbättra kvalitet efter användning.\n
-     1.2.2\n
-     \tUppgradering för Android 4.2.\n
-     1.2.1\n
-     \tRättning av länk till Github.\n
     \n
     Applikationen har utvecklats för eget bruk, utan koppling till SJ eller Swebus.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
