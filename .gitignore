@@ -8,3 +8,7 @@
 /Ticket2CalendarUnitTest/bin
 .gradle
 /Ticket2Calendar/build
+/.idea
+/*.iml
+/Ticket2CalendarUnitTest/build
+*.iml

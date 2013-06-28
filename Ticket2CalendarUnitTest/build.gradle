@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testCompile project(':Ticket2Calendar')
+    testCompile 'junit:junit:4.11'
+    testCompile 'commons-io:commons-io:2.4'
+
+}
+
+compileTestJava.dependsOn ':Ticket2Calendar:compileDebug'
+compileTestJava.classpath += files("${project(':Ticket2Calendar').buildDir}/classes/debug")
+compileTestJava.options.encoding = 'UTF-8'
+
+println "${project(':Ticket2Calendar').buildDir}/classes/debug"
+test.classpath += files("${project(':Ticket2Calendar').buildDir}/classes/debug")
+test.defaultCharacterEncoding = 'UTF-8'
