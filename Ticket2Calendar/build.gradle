@@ -8,25 +8,27 @@ buildscript {
 }
 apply plugin: 'android'
 
-//sourceSets {
-//    localTest {
-//        java.srcDir file('src/test/java')
-//        resources.srcDir file('src/test/resources')
-//    }
-//}
-
 repositories {
     mavenCentral()
 }
 
-//configurations {
-//    localTest {
-//        extendsFrom compile
-//    }
-//}
-
 dependencies {
 	compile files('libs/libGoogleAnalyticsV2.jar')
+}
+
+task addSignProperties {
+    def fileName ='signconfig.properties'
+    def propFile = file(fileName)
+    if (propFile.exists()) {
+        def p = new Properties();
+        p.load(new FileInputStream(propFile))
+        p.propertyNames().each { name ->
+            project.ext.set(name, p.getProperty(name))
+        }
+    } else {
+        logger.quiet "To sign the application, add a properties-file '$fileName' with the " +
+                "keys storePassword and keyPassword."
+    }
 }
 
 android {
@@ -69,16 +71,3 @@ android {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-
-//task localTest(type: Test, dependsOn: assemble) {
-//    testClassesDir = sourceSets.localTest.output.classesDir
-//
-////    sourceSets.localTest.compileClasspath += files("$buildDir/classes/debug")
-////    sourceSets.localTest.runtimeClasspath += files("$buildDir/classes/debug")
-//    sourceSets.localTest.compileClasspath += android.sourceSets.debug.output.dirs
-//    sourceSets.localTest.runtimeClasspath += android.sourceSets.debug.output.dirs
-//
-//    classpath = android.sourceSets.localTest.runtimeClasspath
-//}
-//
-//check.dependsOn localTest
