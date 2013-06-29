@@ -1,73 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/prefs.category.calendar" >
+    <PreferenceCategory android:title="@string/prefs.category.calendar">
         <se.acrend.sj2cal.calendar.CalendarListPreference
-            android:defaultValue="-1"
-            android:dialogTitle="@string/prefs.category.calendar.selected_calendar"
-            android:key="calendarId"
-            android:title="@string/prefs.category.calendar.selected_calendar" />
+                android:defaultValue="-1"
+                android:dialogTitle="@string/prefs.category.calendar.selected_calendar"
+                android:key="calendarId"
+                android:title="@string/prefs.category.calendar.selected_calendar"/>
 
         <CheckBoxPreference
-            android:key="replaceTicket"
-            android:summary="@string/prefs.category.calendar.replaceTicket.summary"
-            android:title="@string/prefs.category.calendar.replaceTicket" />
+                android:key="replaceTicket"
+                android:summary="@string/prefs.category.calendar.replaceTicket.summary"
+                android:title="@string/prefs.category.calendar.replaceTicket"/>
     </PreferenceCategory>
-    
-    <PreferenceCategory android:title="@string/prefs.category.sms" >
-        <CheckBoxPreference
-            android:key="processIncomingMessages"
-            android:summary="@string/prefs.category.sms.processIncomingMessages.summary"
-            android:title="@string/prefs.category.sms.processIncomingMessages" />
-        <CheckBoxPreference
-            android:key="deleteProcessedMessage"
-            android:summary="@string/prefs.category.sms.deleteProcessedMessage.summary"
-            android:title="@string/prefs.category.sms.deleteProcessedMessage" />
 
-        <PreferenceScreen android:title="@string/prefs.category.sms.parsers" >
+    <PreferenceCategory android:title="@string/prefs.category.sms">
+        <CheckBoxPreference
+                android:key="processIncomingMessages"
+                android:summary="@string/prefs.category.sms.processIncomingMessages.summary"
+                android:title="@string/prefs.category.sms.processIncomingMessages"/>
+        <CheckBoxPreference
+                android:key="deleteProcessedMessage"
+                android:summary="@string/prefs.category.sms.deleteProcessedMessage.summary"
+                android:title="@string/prefs.category.sms.deleteProcessedMessage"/>
+
+        <PreferenceScreen android:title="@string/prefs.category.sms.parsers">
             <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="parseSJ"
-                android:summary="@string/prefs.category.sms.parsers.sj.summary"
-                android:title="@string/prefs.category.sms.parsers.sj" />
+                    android:defaultValue="true"
+                    android:key="parseSJ"
+                    android:summary="@string/prefs.category.sms.parsers.sj.summary"
+                    android:title="@string/prefs.category.sms.parsers.sj"/>
             <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="parseSwebus"
-                android:summary="@string/prefs.category.sms.parsers.swebus.summary"
-                android:title="@string/prefs.category.sms.parsers.swebus" />
+                    android:defaultValue="true"
+                    android:key="parseSwebus"
+                    android:summary="@string/prefs.category.sms.parsers.swebus.summary"
+                    android:title="@string/prefs.category.sms.parsers.swebus"/>
             <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="parseOresund"
-                android:summary="@string/prefs.category.sms.parsers.oresund.summary"
-                android:title="@string/prefs.category.sms.parsers.oresund" />
+                    android:defaultValue="true"
+                    android:key="parseOresund"
+                    android:summary="@string/prefs.category.sms.parsers.oresund.summary"
+                    android:title="@string/prefs.category.sms.parsers.oresund"/>
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
-        android:summary="@string/prefs.category.notify.summary"
-        android:title="@string/prefs.category.notify.title" >
+            android:summary="@string/prefs.category.notify.summary"
+            android:title="@string/prefs.category.notify.title">
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="notifyVibration"
-            android:summary="@string/prefs.category.notify.vibration.summary"
-            android:title="@string/prefs.category.notify.vibration.title" />
+                android:defaultValue="false"
+                android:key="notifyVibration"
+                android:summary="@string/prefs.category.notify.vibration.summary"
+                android:title="@string/prefs.category.notify.vibration.title"/>
 
         <RingtonePreference
-            android:key="notifySound"
-            android:ringtoneType="notification"
-            android:showDefault="true"
-            android:showSilent="true"
-            android:summary="@string/prefs.category.notify.sound.summary"
-            android:title="@string/prefs.category.notify.sound.title" />
+                android:key="notifySound"
+                android:ringtoneType="notification"
+                android:showDefault="true"
+                android:showSilent="true"
+                android:summary="@string/prefs.category.notify.sound.summary"
+                android:title="@string/prefs.category.notify.sound.title"/>
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/prefs.category.help" >
-        <se.acrend.sj2cal.preference.LinkPreference
-            android:summary="@string/prefs.category.help.issues.summary"
-            android:title="@string/prefs.category.help.issues.title"
-            android:value="https://github.com/johkin/Ticket2Calendar/issues" />
-        <se.acrend.sj2cal.preference.LinkPreference
-            android:summary="@string/prefs.category.help.wiki.summary"
-            android:title="@string/prefs.category.help.wiki.title"
-            android:value="https://github.com/johkin/Ticket2Calendar/wiki" />
+    <PreferenceCategory android:title="@string/prefs.category.help">
+        <Preference
+                android:summary="@string/prefs.category.help.issues.summary"
+                android:title="@string/prefs.category.help.issues.title">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://github.com/johkin/Ticket2Calendar/issues"/>
+        </Preference>
+        <Preference
+                android:summary="@string/prefs.category.help.wiki.summary"
+                android:title="@string/prefs.category.help.wiki.title">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://github.com/johkin/Ticket2Calendar/wiki"/>
+        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>
