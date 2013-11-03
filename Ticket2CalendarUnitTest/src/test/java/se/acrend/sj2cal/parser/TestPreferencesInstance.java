@@ -9,7 +9,12 @@ public class TestPreferencesInstance implements PreferencesInstance {
 		return true;
 	}
 
-	@Override
+    @Override
+    public boolean isParseResPlus() {
+        return true;
+    }
+
+    @Override
 	public boolean isParseSwebus() {
 		return true;
 	}

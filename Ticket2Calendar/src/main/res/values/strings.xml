@@ -12,13 +12,13 @@
  <string name="gosms.moreinfo">Mer information</string>
  <string name="about.header">Om Ticket2Calendar</string>
  <string name="about.text">
+     1.3.4\n
+     \tLagt till ny biljettyp, ResPlus.\n
+     1.3.3\n
+     \tUppdatering för Android 4.3.\n
      1.3.2\n
      \tUppdatering för Öresundståg.\n
      1.3.1\n
-     \tMindre rättning av statistik.\n
-     1.3.0\n
-     \tLagt till stöd för Öresundståg.\n
-     \tLagt till analysverktyg för att förbättra kvalitet efter användning.\n
     \n
     Applikationen har utvecklats för eget bruk, utan koppling till SJ eller Swebus.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 
@@ -28,7 +28,7 @@
     Instruktioner\n
     \t1. Välj vilken kalender du vill att biljetterna ska läggas i.\n
     \t2. För att aktivera funktionen, välj "Läs inkommande SMS".\n
-    \t3. Välj vilka typer av biljetter du vill hantera, SJ, Swebus eller Öresundståg.\n
+    \t3. Välj vilka typer av biljetter du vill hantera, SJ, Swebus, Öresundståg eller ResPlus.\n
     \t4. I vissa fall får man både en bekräftelse på sin beställning och senare en mobilbiljett.\n 
     \t\tFör att inte få dubletter av kalenderposter, välj "Ersätt kalenderposter för samma biljettnummer".\n
     \t5. Om du känner dig trygg med att applikationen fungerar, välj "Ta bort bearbetade SMS". Applikationen kommer då att ta bort meddelandet från inkorgen.\n
@@ -46,6 +46,8 @@
  <string name="prefs.category.sms.parsers.swebus.summary">Hanterar biljetter från Swebus.</string>
  <string name="prefs.category.sms.parsers.oresund">Öresundståg</string>
  <string name="prefs.category.sms.parsers.oresund.summary">Hanterar biljetter från Öresundståg.</string>
+ <string name="prefs.category.sms.parsers.resplus">ResPlus</string>
+ <string name="prefs.category.sms.parsers.resplus.summary">Hanterar biljetter från ResPlus.</string>
  <string name="prefs.category.sms.deleteProcessedMessage">Ta bort bearbetade SMS</string>
  <string name="prefs.category.sms.deleteProcessedMessage.summary">Tar bort de SMS som har lagts till i kalendern, så att du slipper rensa själv.</string>
  <string name="prefs.category.calendar">Kalender</string>

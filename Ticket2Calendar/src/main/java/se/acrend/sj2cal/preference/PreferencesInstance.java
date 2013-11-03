@@ -8,6 +8,8 @@ public interface PreferencesInstance {
 
 	boolean isParseSj();
 
+    boolean isParseResPlus();
+
 	boolean isParseSwebus();
 	
 	boolean isParseOresund();

@@ -40,6 +40,11 @@
                     android:key="parseOresund"
                     android:summary="@string/prefs.category.sms.parsers.oresund.summary"
                     android:title="@string/prefs.category.sms.parsers.oresund"/>
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="parseResPlus"
+                android:summary="@string/prefs.category.sms.parsers.resplus.summary"
+                android:title="@string/prefs.category.sms.parsers.resplus"/>
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
