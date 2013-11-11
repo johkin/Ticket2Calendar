@@ -5,10 +5,20 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 
+import java.io.InterruptedIOException;
+
+import static android.os.Build.VERSION;
+import static android.os.Build.VERSION_CODES;
+
 public class PrefsHelper {
+
+    public static boolean isKitkat() {
+        return VERSION.SDK_INT >= VERSION_CODES.KITKAT;
+    }
 
     public static SharedPreferences getPrefs(final Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
@@ -22,6 +32,9 @@ public class PrefsHelper {
     }
 
     public static boolean isDeleteProcessedMessages(final Context context) {
+        if (isKitkat()) {
+            return false;
+        }
         SharedPreferences prefs = getPrefs(context);
         return prefs.getBoolean("deleteProcessedMessage", false);
     }
@@ -42,11 +55,17 @@ public class PrefsHelper {
     }
 
     public static String getNotificationSound(final Context context) {
+        if (isKitkat()) {
+            return "";
+        }
         SharedPreferences prefs = getPrefs(context);
         return prefs.getString("notifySound", Settings.System.DEFAULT_NOTIFICATION_URI.toString());
     }
 
     public static boolean isNotificationVibration(final Context context) {
+        if (isKitkat()) {
+            return false;
+        }
         SharedPreferences prefs = getPrefs(context);
         return prefs.getBoolean("notifyVibration", false);
     }
@@ -115,7 +134,7 @@ public class PrefsHelper {
 
         @Override
         public boolean isParseSwebus() {
-            return PrefsHelper.isParseSj(context);
+            return PrefsHelper.isParseSwebus(context);
         }
 
         @Override
