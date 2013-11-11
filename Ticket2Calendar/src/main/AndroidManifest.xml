@@ -1,59 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
- android:installLocation="auto"
- package="se.acrend.sj2cal">
- 
- <uses-permission android:name="android.permission.READ_CALENDAR" />
- <uses-permission android:name="android.permission.WRITE_CALENDAR" />
- <uses-permission android:name="android.permission.RECEIVE_SMS" />
- <uses-permission android:name="android.permission.VIBRATE" />
- <uses-permission android:name="android.permission.INTERNET" />
- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    package="se.acrend.sj2cal"
+    android:installLocation="auto" >
 
- <uses-sdk
-  android:minSdkVersion="6"
-  android:targetSdkVersion="11" >
- </uses-sdk>
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-  <supports-screens
-  android:anyDensity="true"
-  android:largeScreens="true"
-  android:normalScreens="true"
-  android:resizeable="true"
-  android:smallScreens="true" >
- </supports-screens>
- 
- <application
-  android:name="se.acrend.sj2cal.application.Ticket2CalApp"
-  android:icon="@drawable/ic_launcher"
-  android:label="@string/app_name" 
-  android:allowBackup="true">
-  <activity
-   android:name=".activity.Preferences"
-   android:label="@string/app_name" >
-   <intent-filter>
-    <action android:name="android.intent.action.MAIN" />
+    <uses-sdk
+        android:minSdkVersion="6"
+        android:targetSdkVersion="11" >
+    </uses-sdk>
 
-    <category android:name="android.intent.category.LAUNCHER" />
-   </intent-filter>
-  </activity>
-  <activity
-   android:name=".activity.About"
-   android:label="@string/app_name" >
-  </activity>
-  <activity
-   android:name=".activity.GoSMS"
-   android:label="@string/app_name" >
-  </activity>
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" >
+    </supports-screens>
 
-  <receiver android:name=".receiver.SmsReceiver" >
-   <intent-filter android:priority="1000" >
-    <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-   </intent-filter>
-  </receiver>
-  
-  <service android:name=".service.StatisticsService" />
-  
- </application>
+    <application
+        android:name="se.acrend.sj2cal.application.Ticket2CalApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name="se.acrend.sj2cal.activity.Preferences"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="se.acrend.sj2cal.activity.About"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="se.acrend.sj2cal.activity.GoSMS"
+            android:label="@string/app_name" >
+        </activity>
+
+        <receiver android:name="se.acrend.sj2cal.receiver.SmsReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="se.acrend.sj2cal.service.StatisticsService" />
+    </application>
 
 </manifest>
