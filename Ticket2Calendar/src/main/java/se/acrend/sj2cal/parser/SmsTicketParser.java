@@ -54,7 +54,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
       return message.contains("+'") && message.contains("'+") && message.contains("Tåg:");
     }
     if (preferencesInstance.isParseSj()) {
-      return "SJ Biljett".equalsIgnoreCase(sender);
+      return "SJ Biljett".equalsIgnoreCase(sender) || sender.startsWith("SJBILJ");
     }
     return false;
   }
