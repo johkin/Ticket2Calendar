@@ -1,6 +1,6 @@
 package se.acrend.sj2cal.calendar;
 
-import se.acrend.sj2cal.util.DateUtil;
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,13 +10,16 @@ import android.provider.CalendarContract;
 import android.widget.CursorAdapter;
 import android.widget.Toast;
 
+import se.acrend.sj2cal.util.DateUtil;
+
+@TargetApi(14)
 public class CalendarHelperIcs extends CalendarHelper {
 
   @Override
   public CursorAdapter getCalendarList(final Context context) {
 
-    String[] projection = new String[] { BaseColumns._ID, CalendarContract.Calendars.NAME,
-        CalendarContract.Calendars.OWNER_ACCOUNT, CalendarContract.Calendars.CALENDAR_COLOR };
+    String[] projection = new String[]{BaseColumns._ID, CalendarContract.Calendars.NAME,
+        CalendarContract.Calendars.OWNER_ACCOUNT, CalendarContract.Calendars.CALENDAR_COLOR};
     Uri calendars = Uri.parse(getBaseUrl() + "calendars");
 
     Cursor managedCursor = context.getContentResolver().query(calendars, projection,
