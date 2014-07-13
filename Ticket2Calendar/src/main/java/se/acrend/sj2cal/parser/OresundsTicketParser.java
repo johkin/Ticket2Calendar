@@ -110,8 +110,8 @@ public class OresundsTicketParser extends MessageParserBase implements MessagePa
   }
 
   private Calendar createCalendar(final String date, final String time) {
-    Calendar cal = Calendar.getInstance();
-    Calendar now = Calendar.getInstance();
+    Calendar cal = getTimeSource().getCalendar();
+    Calendar now = getTimeSource().getCalendar();
     int currentYear = now.get(Calendar.YEAR);
     try {
       cal.setTime(format.parse(currentYear + date + time));

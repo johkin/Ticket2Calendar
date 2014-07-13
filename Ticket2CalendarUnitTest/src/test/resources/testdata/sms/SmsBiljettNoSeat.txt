@@ -1,4 +1,4 @@
-28 apr kl 12:00
+28/04 kl 12:00
 +'530259736'+
 +'620475937'+
 +'307664327'+
@@ -7,9 +7,9 @@
 PATRICK MOLLBRINK
 Avg. Linköping C 12.00
 Ank. Södertälje Syd 13.33
-Tåg: 10530
+Tåg 10530
 VU, 1 klass Kan inte ombokas/återbetalas
-Vagn , plats 
+Vagn  Pl
 Personlig biljett giltig med ID
-Internet/Bilj.nr. QPB0497Q0001
+Bilj.nr QPB0497Q0001
 025 876 558 807 259 690 268

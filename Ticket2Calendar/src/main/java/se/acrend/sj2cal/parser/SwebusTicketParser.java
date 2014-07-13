@@ -95,7 +95,7 @@ public class SwebusTicketParser extends MessageParserBase implements MessagePars
   }
 
   private Calendar createCalendar(final String date, final String time) {
-    Calendar cal = Calendar.getInstance();
+    Calendar cal = getTimeSource().getCalendar();
     try {
       cal.setTime(format.parse(date + time));
     } catch (ParseException e) {

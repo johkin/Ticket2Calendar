@@ -63,7 +63,7 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
     String seat = findValue(message, "Plats: (\\d{1,3})", "plats");
 
     try {
-      Calendar departure = Calendar.getInstance();
+      Calendar departure = getTimeSource().getCalendar();
       departure.setTime(format.parse(date + depTime));
       ticket.setDeparture(departure);
     } catch (ParseException e) {
@@ -71,7 +71,7 @@ public class ConfirmationParser extends MessageParserBase implements MessagePars
     }
     ticket.setTo(to);
     try {
-      Calendar arrival = Calendar.getInstance();
+      Calendar arrival = getTimeSource().getCalendar();
       arrival.setTime(format.parse(date + arrTime));
       if (arrival.before(ticket.getDeparture())) {
         arrival.add(Calendar.DAY_OF_YEAR, 1);

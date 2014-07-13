@@ -1,14 +1,16 @@
 package se.acrend.sj2cal.parser;
 
-import static org.junit.Assert.assertEquals;
-
-import java.sql.Timestamp;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import se.acrend.sj2cal.model.SwebusTicket;
+import se.acrend.sj2cal.util.TimeSource;
+
+import static org.junit.Assert.assertEquals;
 
 public class SwebusTicketParserTest {
 
@@ -17,6 +19,17 @@ public class SwebusTicketParserTest {
   @Before
   public void setUp() throws Exception {
     parser = new SwebusTicketParser(new TestPreferencesInstance());
+
+    parser.setTimeSource(new TimeSource() {
+
+      @Override
+      public Calendar getCalendar() {
+        Calendar now = Calendar.getInstance();
+        now.setTime(Timestamp.valueOf("2013-02-18 11:10:0.000"));
+        return now;
+      }
+
+    });
   }
 
   @Test

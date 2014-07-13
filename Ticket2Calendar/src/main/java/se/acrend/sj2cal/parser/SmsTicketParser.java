@@ -34,7 +34,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   public SmsTicketParser(final PreferencesInstance preferencesInstance) {
     super();
     this.preferencesInstance = preferencesInstance;
-    format = new SimpleDateFormat("yyyydd MMMHHmm", DateUtil.SWEDISH_LOCALE);
+    format = new SimpleDateFormat("yyyyddMMHHmm", DateUtil.SWEDISH_LOCALE);
     format.setTimeZone(DateUtil.SWEDISH_TIMEZONE);
   }
 
@@ -51,7 +51,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   @Override
   public boolean supports(final String sender, final String message) {
     if (BuildConfig.DEBUG) {
-      return message.contains("+'") && message.contains("'+") && message.contains("Tåg:");
+      return message.contains("+'") && message.contains("'+") && message.contains("Tåg");
     }
     if (preferencesInstance.isParseSj()) {
       return "SJ Biljett".equalsIgnoreCase(sender) || sender.startsWith("SJBILJ");
@@ -68,7 +68,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   public SmsTicket parse(final String message) {
     SmsTicket ticket = new SmsTicket();
 
-    String date = findValue(message, "(\\d{1,2} \\D{3}) kl .*", "datum");
+    String date = findValue(message, "(\\d{1,2}/\\d{2}) kl .*", "datum");
 
     String from = findValue(message, "Avg. (.*) \\d{1,2}[\\.:]", "avreseort");
     String fromTime = findValue(message, "Avg. .* (\\d{1,2}[\\.:]\\d{2})", "avgångstid");
@@ -90,11 +90,11 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("Kunde inte tolka datum. Meddelande: " + message, e);
     }
-    String train = findValue(message, "T[å|a]g: (\\d*)", "tågnr");
+    String train = findValue(message, "T[å|a]g (\\d*)", "tågnr");
     ticket.setTrain(Integer.parseInt(train));
 
-    String car = findValue(message, "Vagn (\\d*),", "vagn");
-    String seat = findValue(message, "plats (\\d*)", "plats");
+    String car = findValue(message, "Vagn (\\d*)", "vagn", false);
+    String seat = findValue(message, "Pl (\\d*)", "plats", false);
 
     if ((car != null) && (car.length() > 0)) {
       ticket.setCar(Integer.parseInt(car));
@@ -103,7 +103,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
       ticket.setSeat(Integer.parseInt(seat));
     }
 
-    ticket.setCode(findValue(message, "Bilj.nr. (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
+    ticket.setCode(findValue(message, "Bilj.nr (\\D{3}\\d{4}\\D\\d{4})", "Biljettkod"));
 
     ticket.setMessage(message);
 
@@ -117,8 +117,9 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     Calendar now = getTimeSource().getCalendar();
     int currentYear = now.get(Calendar.YEAR);
     try {
-    	String timeWithoutDelimiter = time.replace(":", "").replace(".", "");
-      cal.setTime(format.parse(currentYear + date + timeWithoutDelimiter));
+      String timeWithoutDelimiter = time.replace(":", "").replace(".", "");
+      String dateWithoutDelimiter = date.replace("/", "");
+      cal.setTime(format.parse(currentYear + dateWithoutDelimiter + timeWithoutDelimiter));
     } catch (ParseException e) {
       throw new IllegalArgumentException("Kunde inte tolka datum.", e);
     }
