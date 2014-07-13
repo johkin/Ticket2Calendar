@@ -10,10 +10,10 @@ dependencies {
 
 }
 
-compileTestJava.dependsOn ':Ticket2Calendar:compileDebug'
-compileTestJava.classpath += files("${project(':Ticket2Calendar').buildDir}/classes/debug")
+compileTestJava.dependsOn project(':Ticket2Calendar').tasks['compileDebugJava']
+compileTestJava.classpath += files("${project(':Ticket2Calendar').buildDir}/intermediates/classes/debug")
 compileTestJava.options.encoding = 'UTF-8'
 
 println "${project(':Ticket2Calendar').buildDir}/classes/debug"
-test.classpath += files("${project(':Ticket2Calendar').buildDir}/classes/debug")
+test.classpath += files("${project(':Ticket2Calendar').buildDir}/intermediates/classes/debug")
 test.defaultCharacterEncoding = 'UTF-8'
