@@ -12,14 +12,14 @@
  <string name="gosms.moreinfo">Mer information</string>
  <string name="about.header">Om Ticket2Calendar</string>
  <string name="about.text">
+     1.3.7\n
+     \tRättat hantering av SJ-biljetter, nytt format igen.\n
      1.3.6\n
      \tRättat hantering av SJ-biljetter, nytt format och ny avsändare.\n
      1.3.5\n
      \tRättat hantering av SJ-biljetter, ny avsändare.\n
      \tFörberett logik för Android Kitkat.\n
      \tUppdaterat hantering av statistik.\n
-     1.3.4\n
-     \tLagt till ny biljettyp, ResPlus.\n
     \n
     Applikationen har utvecklats för eget bruk, utan koppling till SJ eller Swebus.\n    
     Synpunkter, förslag på förbättringar eller felrapporter skickas till \'android.support@acrend.se\', 

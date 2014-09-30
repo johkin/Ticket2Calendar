@@ -11,21 +11,24 @@ import se.acrend.sj2cal.util.DateUtil;
 
 public class SmsTicketParser extends MessageParserBase implements MessageParser {
 
-  // 11 jan kl 16:24
-  // +'220572436'+
-  // +'903765246'+
-  // +'373740923'+
-  // +'692092924'+
-  // ÅRSKORT GULD
-  // JOHAN KINDGREN
-  // Avg. Norrköping C 16.24
-  // Ank. Stockholm C 17.39
-  // Tåg: 538
-  // VU, 1 klass Kan återbetalas
-  // Vagn 2, plats 30
-  // Personlig biljett giltig med ID
-  // Internet/Bilj.nr. SPG9352F0002
-  // 010 624 472 391 895 723 215
+//  25 jun
+//  Falun C - Stockholm C
+//  Avg 06.10 - Ank 08.44
+//  SJ, tåg 661
+//  Vagn 2
+//  Plats 28
+//  2 klass
+//  STEFAN JOHANSSON
+//  Vuxen
+//  Årskort Silver
+//  Kan återbetalas
+//  Bilj.nr BMS4899S0001
+//  Personlig biljett ID krävs
+//  +'915012676'+
+//  +'539701260'+
+//  +'376933123'+
+//  +'799333295'+
+//  217 540 525 434 872 476 932
 
   private SimpleDateFormat format = null;
 
@@ -34,7 +37,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   public SmsTicketParser(final PreferencesInstance preferencesInstance) {
     super();
     this.preferencesInstance = preferencesInstance;
-    format = new SimpleDateFormat("yyyyddMMHHmm", DateUtil.SWEDISH_LOCALE);
+    format = new SimpleDateFormat("yyyydd MMMHHmm", DateUtil.SWEDISH_LOCALE);
     format.setTimeZone(DateUtil.SWEDISH_TIMEZONE);
   }
 
@@ -51,7 +54,7 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   @Override
   public boolean supports(final String sender, final String message) {
     if (BuildConfig.DEBUG) {
-      return message.contains("+'") && message.contains("'+") && message.contains("Tåg");
+      return message.contains("+'") && message.contains("'+") && message.contains("tåg");
     }
     if (preferencesInstance.isParseSj()) {
       return "SJ Biljett".equalsIgnoreCase(sender) || sender.startsWith("SJBILJ");
@@ -68,13 +71,14 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
   public SmsTicket parse(final String message) {
     SmsTicket ticket = new SmsTicket();
 
-    String date = findValue(message, "(\\d{1,2}/\\d{2}) kl .*", "datum");
+    String date = findValue(message, "^(\\d{1,2} \\D{3})$", "datum");
 
-    String from = findValue(message, "Avg. (.*) \\d{1,2}[\\.:]", "avreseort");
-    String fromTime = findValue(message, "Avg. .* (\\d{1,2}[\\.:]\\d{2})", "avgångstid");
+    String from = findValue(message, "^(.*) - .*$", "avreseort");
+    String to = findValue(message, "^.* - (.*)$", "ankomstort");
 
-    String to = findValue(message, "Ank. (.*) \\d{1,2}[\\.:]", "ankomstort");
-    String toTime = findValue(message, "Ank. .* (\\d{1,2}[\\.:]\\d{2})", "ankomsttid");
+    String fromTime = findValue(message, "^Avg (\\d{1,2}[\\.:]\\d{2})", "avgångstid");
+
+    String toTime = findValue(message, "Ank (\\d{1,2}[\\.:]\\d{2})$", "ankomsttid");
     try {
       Calendar departure = createCalendar(date, fromTime);
       ticket.setFrom(from);
@@ -90,11 +94,11 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("Kunde inte tolka datum. Meddelande: " + message, e);
     }
-    String train = findValue(message, "T[å|a]g (\\d*)", "tågnr");
+    String train = findValue(message, "t[å|a]g (\\d*)$", "tågnr");
     ticket.setTrain(Integer.parseInt(train));
 
-    String car = findValue(message, "Vagn (\\d*)", "vagn", false);
-    String seat = findValue(message, "Pl (\\d*)", "plats", false);
+    String car = findValue(message, "Vagn (\\d*)$", "vagn", false);
+    String seat = findValue(message, "Plats (\\d*)$", "plats", false);
 
     if ((car != null) && (car.length() > 0)) {
       ticket.setCar(Integer.parseInt(car));
@@ -119,7 +123,8 @@ public class SmsTicketParser extends MessageParserBase implements MessageParser 
     try {
       String timeWithoutDelimiter = time.replace(":", "").replace(".", "");
       String dateWithoutDelimiter = date.replace("/", "");
-      cal.setTime(format.parse(currentYear + dateWithoutDelimiter + timeWithoutDelimiter));
+      String complete = currentYear + dateWithoutDelimiter + timeWithoutDelimiter;
+      cal.setTime(format.parse(complete));
     } catch (ParseException e) {
       throw new IllegalArgumentException("Kunde inte tolka datum.", e);
     }

@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.android.tools.build:gradle:0.13.+'
     }
 }
 apply plugin: 'com.android.application'
@@ -55,8 +55,8 @@ android {
     }
 
     defaultConfig {
-        versionCode = 136
-        versionName = '1.3.6'
+        versionCode = 137
+        versionName = '1.3.7'
     }
 
     if (project.hasProperty('storePassword') &&
