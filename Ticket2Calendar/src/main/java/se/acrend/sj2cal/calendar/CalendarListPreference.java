@@ -13,18 +13,16 @@ public class CalendarListPreference extends ListPreference {
 
   private static final String TAG = "CalendarListPreference";
 
-  private final CursorAdapter adapter;
+  private CursorAdapter adapter;
 
   private long calendarId = -1;
 
   public CalendarListPreference(final Context context) {
     super(context);
-    adapter = CalendarHelper.getInstance().getCalendarList(getContext());
   }
 
-  public CalendarListPreference(final Context context, final AttributeSet attrs) {
+  public CalendarListPreference(Context context, AttributeSet attrs) {
     super(context, attrs);
-    adapter = CalendarHelper.getInstance().getCalendarList(getContext());
   }
 
   void updateSummary() {
@@ -35,9 +33,9 @@ public class CalendarListPreference extends ListPreference {
     }
     String summary = "<Ingen kalender vald>";
     if (calendarId != -1) {
-      for (int pos = 0; pos < adapter.getCount(); pos++) {
-        if (adapter.getItemId(pos) == calendarId) {
-          summary = (String) adapter.getItem(pos);
+      for (int pos = 0; pos < getAdapter().getCount(); pos++) {
+        if (getAdapter().getItemId(pos) == calendarId) {
+          summary = (String) getAdapter().getItem(pos);
         }
       }
     }
@@ -52,11 +50,11 @@ public class CalendarListPreference extends ListPreference {
 
   @Override
   protected void onPrepareDialogBuilder(final Builder builder) {
-    builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+    builder.setSingleChoiceItems(getAdapter(), -1, new DialogInterface.OnClickListener() {
 
       @Override
       public void onClick(final DialogInterface dialog, final int which) {
-        calendarId = adapter.getItemId(which);
+        calendarId = getAdapter().getItemId(which);
         CalendarListPreference.this.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
         dialog.dismiss();
       }
@@ -74,7 +72,18 @@ public class CalendarListPreference extends ListPreference {
     }
   }
 
+  protected CursorAdapter getAdapter() {
+    if (adapter == null) {
+      adapter = CalendarHelper.getInstance().getCalendarList(getContext());
+    }
+    return adapter;
+  }
+
+
   public Cursor getCursor() {
-    return adapter.getCursor();
+    if (getAdapter() != null) {
+      return getAdapter().getCursor();
+    }
+    return null;
   }
 }

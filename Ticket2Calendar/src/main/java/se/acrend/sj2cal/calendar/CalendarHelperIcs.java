@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.CalendarContract;
+import android.util.Log;
 import android.widget.CursorAdapter;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import se.acrend.sj2cal.util.DateUtil;
 
 @TargetApi(14)
 public class CalendarHelperIcs extends CalendarHelper {
+
+  public static final String TAG = "CalendarHelperICS";
 
   @Override
   public CursorAdapter getCalendarList(final Context context) {
@@ -30,8 +33,10 @@ public class CalendarHelperIcs extends CalendarHelper {
 
     if ((managedCursor != null) && managedCursor.moveToFirst()) {
       adapter = new CalendarSpinnerAdapterIcs(context, managedCursor);
+      Log.d(TAG, "Hittade kalender");
     } else {
       Toast.makeText(context, "Hittade ingen kalender", Toast.LENGTH_LONG).show();
+      Log.d(TAG, "Hittade ingen kalender");
     }
     return adapter;
   }

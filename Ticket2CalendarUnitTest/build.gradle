@@ -8,6 +8,7 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'commons-io:commons-io:2.4'
     testCompile 'org.codehaus.groovy:groovy-all:2.4.0-beta-3'
+    compile project(':Ticket2Calendar')
 }
 
 compileTestJava.dependsOn project(':Ticket2Calendar').tasks['compileDebugJava']
