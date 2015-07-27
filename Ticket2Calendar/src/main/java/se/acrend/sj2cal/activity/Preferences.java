@@ -1,10 +1,7 @@
 package se.acrend.sj2cal.activity;
 
-import se.acrend.sj2cal.BuildConfig;
-import se.acrend.sj2cal.R;
-import se.acrend.sj2cal.application.Ticket2CalApp;
-import se.acrend.sj2cal.calendar.CalendarListPreference;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -15,6 +12,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import se.acrend.sj2cal.R;
+import se.acrend.sj2cal.application.Ticket2CalApp;
+import se.acrend.sj2cal.calendar.CalendarListPreference;
+
 public class Preferences extends PreferenceActivity {
 
   @Override
@@ -24,8 +25,8 @@ public class Preferences extends PreferenceActivity {
     addPreferencesFromResource(R.xml.preferences);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        removePreferenceForKey("deleteProcessedMessage");
         removePreferenceForKey("notification");
+      removePreferenceForKey("deleteProcessedMessage");
     } else {
         Ticket2CalApp application = (Ticket2CalApp) getApplication();
         if (application.isGoSmsInstalled()) {
@@ -36,7 +37,11 @@ public class Preferences extends PreferenceActivity {
     final CheckBoxPreference processIncoming = (CheckBoxPreference) getPreferenceScreen().findPreference(
         "processIncomingMessages");
     CalendarListPreference calendarId = (CalendarListPreference) getPreferenceScreen().findPreference("calendarId");
-    startManagingCursor(calendarId.getCursor());
+
+    Cursor cursor = calendarId.getCursor();
+    if (cursor != null) {
+      startManagingCursor(cursor);
+    }
     calendarId.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
       @Override

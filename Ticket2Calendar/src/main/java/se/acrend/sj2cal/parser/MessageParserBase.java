@@ -20,7 +20,7 @@ public class MessageParserBase {
 
   protected String findValue(final String message, final String patternStr, final String fieldName, final boolean required) {
 
-    Pattern pattern = Pattern.compile(patternStr);
+    Pattern pattern = Pattern.compile(patternStr, Pattern.MULTILINE);
     Matcher matcher = pattern.matcher(message);
     if (!matcher.find() || matcher.groupCount() != 1) {
       if (required) {

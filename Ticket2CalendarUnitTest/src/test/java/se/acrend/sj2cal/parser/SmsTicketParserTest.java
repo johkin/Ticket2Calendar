@@ -2,12 +2,16 @@ package se.acrend.sj2cal.parser;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
+import groovy.lang.Binding;
+import groovy.lang.GString;
+import groovy.lang.GroovyShell;
 import se.acrend.sj2cal.model.SmsTicket;
 import se.acrend.sj2cal.util.TimeSource;
 
@@ -32,12 +36,36 @@ public class SmsTicketParserTest {
       }
 
     });
+  }
 
+  String readTemplate(Map values) throws Exception {
+    Binding binding = new Binding(values);
+    GroovyShell shell = new GroovyShell(binding);
+
+    String template = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SjTicketTemplate.groovy"));
+
+    shell.evaluate(template);
+
+    GString result = (GString) binding.getVariable("result");
+
+    return result.toString();
   }
 
   @Test
   public void testParse() throws Exception {
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));
+    Map<String, String> values = new HashMap<String, String>();
+
+    values.put("date", "25 jun");
+    values.put("from", "Falun C");
+    values.put("to", "Stockholm C");
+    values.put("departure", "06.11");
+    values.put("arrival", "08.44");
+    values.put("train", "661");
+    values.put("car", "2");
+    values.put("seat", "28");
+    values.put("code", "BMS4899S0001");
+
+    String message = readTemplate(values);
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Falun C", ticket.getFrom());
@@ -65,7 +93,19 @@ public class SmsTicketParserTest {
 
     });
 
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljettNextDay.txt"));
+    Map<String, String> values = new HashMap<String, String>();
+
+    values.put("date", "29 jun");
+    values.put("from", "Kiruna stn");
+    values.put("to", "Örnsköldsvik C");
+    values.put("departure", "15.46");
+    values.put("arrival", "01.00");
+    values.put("train", "93");
+    values.put("car", "16");
+    values.put("seat", "81");
+    values.put("code", "CET0845K0001");
+
+    String message = readTemplate(values);
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Kiruna stn", ticket.getFrom());
@@ -92,42 +132,25 @@ public class SmsTicketParserTest {
 
     });
 
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljettNewYear.txt"));
+    Map<String, String> values = new HashMap<String, String>();
+
+    values.put("date", "31 dec");
+    values.put("from", "Norrköping C");
+    values.put("to", "Stockholm C");
+    values.put("departure", "23.55");
+    values.put("arrival", "01.39");
+    values.put("train", "538");
+    values.put("car", "2");
+    values.put("seat", "30");
+    values.put("code", "SPG9352F0002");
+
+    String message = readTemplate(values);
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Norrköping C", ticket.getFrom());
     assertEquals(Timestamp.valueOf("2012-12-31 23:55:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
     assertEquals("Stockholm C", ticket.getTo());
     assertEquals(Timestamp.valueOf("2013-01-01 01:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
-    assertEquals(2, ticket.getCar());
-    assertEquals(30, ticket.getSeat());
-    assertEquals("SPG9352F0002", ticket.getCode());
-    assertEquals(538, ticket.getTrain());
-    assertEquals(message, ticket.getMessage());
-  }
-
-  @Test
-  @Ignore
-  public void testParseNextYear() throws Exception {
-
-    parser.setTimeSource(new TimeSource() {
-
-      @Override
-      public Calendar getCalendar() {
-        Calendar now = Calendar.getInstance();
-        now.setTime(Timestamp.valueOf("2013-05-05 11:10:0.000"));
-        return now;
-      }
-
-    });
-
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljettN extYear.txt"));
-
-    SmsTicket ticket = parser.parse(message);
-    assertEquals("Stockholm C", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2014-03-05 15:24:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
-    assertEquals("Kumla stn", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2014-03-05 17:30:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
     assertEquals(2, ticket.getCar());
     assertEquals(30, ticket.getSeat());
     assertEquals("SPG9352F0002", ticket.getCode());
@@ -149,24 +172,19 @@ public class SmsTicketParserTest {
 
     });
 
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett1.txt"));
+    Map<String, String> values = new HashMap<String, String>();
 
-    SmsTicket ticket = parser.parse(message);
-    assertEquals("Arvika stn", ticket.getFrom());
-    assertEquals(Timestamp.valueOf("2013-06-25 05:41:00"), new Timestamp(ticket.getDeparture().getTimeInMillis()));
-    assertEquals("Stockholm C", ticket.getTo());
-    assertEquals(Timestamp.valueOf("2013-06-25 08:39:00"), new Timestamp(ticket.getArrival().getTimeInMillis()));
-    assertEquals(7, ticket.getCar());
-    assertEquals(42, ticket.getSeat());
-    assertEquals("ALP2817O0001", ticket.getCode());
-    assertEquals(620, ticket.getTrain());
-    assertEquals(message, ticket.getMessage());
-  }
+    values.put("date", "25 jun");
+    values.put("from", "Arvika stn");
+    values.put("to", "Stockholm C");
+    values.put("departure", "05.41");
+    values.put("arrival", "08.39");
+    values.put("train", "620");
+    values.put("car", "7");
+    values.put("seat", "42");
+    values.put("code", "ALP2817O0001");
 
-  @Test
-  public void testSmsBiljettWithColons() throws Exception {
-
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett1.txt"));
+    String message = readTemplate(values);
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Arvika stn", ticket.getFrom());
@@ -183,7 +201,19 @@ public class SmsTicketParserTest {
   @Test
   public void testSmsBiljettNoSeat() throws Exception {
 
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljettNoSeat.txt"));
+    Map<String, String> values = new HashMap<String, String>();
+
+    values.put("date", "28 apr");
+    values.put("from", "Linköping C");
+    values.put("to", "Södertälje Syd");
+    values.put("departure", "12.00");
+    values.put("arrival", "13.33");
+    values.put("train", "10530");
+    values.put("car", "");
+    values.put("seat", "");
+    values.put("code", "QPB0497Q0001");
+
+    String message = readTemplate(values);
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Linköping C", ticket.getFrom());
@@ -199,7 +229,19 @@ public class SmsTicketParserTest {
 
   @Test
   public void testSupports() throws Exception {
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));
+    Map<String, String> values = new HashMap<String, String>();
+
+    values.put("date", "28 apr");
+    values.put("from", "Linköping C");
+    values.put("to", "Södertälje Syd");
+    values.put("departure", "12.00");
+    values.put("arrival", "13.33");
+    values.put("train", "10530");
+    values.put("car", "");
+    values.put("seat", "");
+    values.put("code", "QPB0497Q0001");
+
+    String message = readTemplate(values);
 
     assertEquals(true, parser.supports("SJ Biljett", message));
     assertEquals(true, parser.supports("SJBILJ", message));
@@ -216,7 +258,19 @@ public class SmsTicketParserTest {
   @Test
   public void testParseLocale() throws Exception {
 
-    String message = IOUtils.toString(this.getClass().getResourceAsStream("/testdata/sms/SmsBiljett.txt"));
+    Map<String, String> values = new HashMap<String, String>();
+
+    values.put("date", "25 jun");
+    values.put("from", "Falun C");
+    values.put("to", "Stockholm C");
+    values.put("departure", "06.11");
+    values.put("arrival", "08.44");
+    values.put("train", "661");
+    values.put("car", "2");
+    values.put("seat", "28");
+    values.put("code", "BMS4899S0001");
+
+    String message = readTemplate(values);
 
     SmsTicket ticket = parser.parse(message);
     assertEquals("Falun C", ticket.getFrom());

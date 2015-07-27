@@ -3,15 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp"
+    android:id="@+id/layout">
 
-    <TextView
+  <TextView
         android:id="@+id/aboutHeader"
         style="android.R.style.TextAppearance_Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:drawableLeft="@drawable/ticket2calendar_bw"
+        android:drawableLeft="@drawable/ticket2calendar"
         android:gravity="center_vertical"
         android:text="@string/about.header" />
 
