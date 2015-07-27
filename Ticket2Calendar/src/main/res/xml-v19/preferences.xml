@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/prefs.category.calendar">
+        <se.acrend.sj2cal.calendar.CalendarListPreference
+                android:defaultValue="-1"
+                android:dialogTitle="@string/prefs.category.calendar.selected_calendar"
+                android:key="calendarId"
+                android:title="@string/prefs.category.calendar.selected_calendar"/>
+
+        <CheckBoxPreference
+                android:key="replaceTicket"
+                android:summary="@string/prefs.category.calendar.replaceTicket.summary"
+                android:title="@string/prefs.category.calendar.replaceTicket"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefs.category.sms">
+        <CheckBoxPreference
+                android:key="processIncomingMessages"
+                android:summary="@string/prefs.category.sms.processIncomingMessages.summary"
+                android:title="@string/prefs.category.sms.processIncomingMessages"/>
+
+        <PreferenceScreen android:title="@string/prefs.category.sms.parsers">
+            <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="parseSJ"
+                    android:summary="@string/prefs.category.sms.parsers.sj.summary"
+                    android:title="@string/prefs.category.sms.parsers.sj"/>
+            <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="parseSwebus"
+                    android:summary="@string/prefs.category.sms.parsers.swebus.summary"
+                    android:title="@string/prefs.category.sms.parsers.swebus"/>
+            <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="parseOresund"
+                    android:summary="@string/prefs.category.sms.parsers.oresund.summary"
+                    android:title="@string/prefs.category.sms.parsers.oresund"/>
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="parseResPlus"
+                android:summary="@string/prefs.category.sms.parsers.resplus.summary"
+                android:title="@string/prefs.category.sms.parsers.resplus"/>
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/prefs.category.help">
+        <Preference
+                android:summary="@string/prefs.category.help.issues.summary"
+                android:title="@string/prefs.category.help.issues.title">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://github.com/johkin/Ticket2Calendar/issues"/>
+        </Preference>
+        <Preference
+                android:summary="@string/prefs.category.help.wiki.summary"
+                android:title="@string/prefs.category.help.wiki.title">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://github.com/johkin/Ticket2Calendar/wiki"/>
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
